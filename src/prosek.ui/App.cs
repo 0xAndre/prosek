@@ -1,4 +1,5 @@
 using prosek.models;
+using prosek.ui.shared;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms.VisualStyles;
@@ -7,7 +8,7 @@ namespace prosek.ui
 {
     public partial class App : Form
     {
-        public delegate void FunctionDelegate();
+        
         public App()
         {
             InitializeComponent();
@@ -57,14 +58,26 @@ namespace prosek.ui
                 {
                     continue;
                 }
-                
             }
         }
 
         private void App_Load(object sender, EventArgs e)
         {
-            // var topNode = new TreeNode($"Processes ({processView.Nodes.Count})");
-            // processView.Nodes.Add(topNode);
+            int i = 0;
+
+            foreach (Process p in Store.processs)
+            {
+                toolStripProgressBar.Value = ((i++ + 1) * 100 / Store.processs.Count);
+                try
+                {
+                    processView.Nodes.Add($"({p.Id}) {p?.MainModule?.FileName}");
+                    toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+            }
         }
     }
 }
