@@ -40,6 +40,7 @@
             toolStripStatusLabel = new ToolStripStatusLabel();
             splitControl = new SplitContainer();
             processView = new TreeView();
+            toolStripProgressBar = new ToolStripProgressBar();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -107,7 +108,7 @@
             // 
             // statusStrip1
             // 
-            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel });
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel, toolStripProgressBar });
             statusStrip1.Location = new Point(0, 712);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Size = new Size(1278, 22);
@@ -141,6 +142,11 @@
             processView.Name = "processView";
             processView.Size = new Size(426, 663);
             processView.TabIndex = 0;
+            // 
+            // toolStripProgressBar
+            // 
+            toolStripProgressBar.Name = "toolStripProgressBar";
+            toolStripProgressBar.Size = new Size(100, 16);
             // 
             // App
             // 
@@ -182,5 +188,6 @@
         private ToolStripStatusLabel toolStripStatusLabel;
         private SplitContainer splitControl;
         private TreeView processView;
+        private ToolStripProgressBar toolStripProgressBar;
     }
 }

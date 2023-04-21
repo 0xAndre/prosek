@@ -1,4 +1,3 @@
-using prosek.application;
 using prosek.models;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -35,20 +34,31 @@ namespace prosek.ui
 
         private void toolMenuPlay_Click(object sender, EventArgs e)
         {
-            processView.BeginInvoke(new FunctionDelegate(FillTree));
-
+            FillTree();
         }
 
         private void FillTree()
         {
-            Processes processes = new Processes();
+            processView.Nodes.Clear();
+
+            var currentProcess = Process.GetProcesses().GroupBy(p => p.ProcessName).Select(g => g.First()).ToList();
             
-            foreach (var proc in processes.GetAll())
+            int i = 0;
+
+            foreach (Process p in currentProcess)
             {
-                processView.Nodes.Add(proc.Path);
-                toolStripStatusLabel.Text = $"Processes ({processView.Nodes.Count})";
+                toolStripProgressBar.Value = ((i++ + 1) * 100 / currentProcess.Count);
+                try
+                {
+                    processView.Nodes.Add($"({p.Id}) {p?.MainModule?.FileName}");
+                    toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
+                }
+                catch (Exception) 
+                {
+                    continue;
+                }
+                
             }
-           
         }
 
         private void App_Load(object sender, EventArgs e)
