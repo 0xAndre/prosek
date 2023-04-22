@@ -8,7 +8,7 @@ namespace prosek.ui
 {
     public partial class App : Form
     {
-        
+
         public App()
         {
             InitializeComponent();
@@ -43,7 +43,7 @@ namespace prosek.ui
             processView.Nodes.Clear();
 
             var currentProcess = Process.GetProcesses().GroupBy(p => p.ProcessName).Select(g => g.First()).ToList();
-            
+
             int i = 0;
 
             foreach (Process p in currentProcess)
@@ -54,7 +54,7 @@ namespace prosek.ui
                     processView.Nodes.Add($"({p.Id}) {p?.MainModule?.FileName}");
                     toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
                 }
-                catch (Exception) 
+                catch (Exception)
                 {
                     continue;
                 }
@@ -78,6 +78,11 @@ namespace prosek.ui
                     continue;
                 }
             }
+        }
+
+        private void processView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            MessageBox.Show(processView.SelectedNode.Text);
         }
     }
 }

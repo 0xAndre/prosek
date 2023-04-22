@@ -38,9 +38,9 @@
             toolMenuPlay = new ToolStripButton();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel = new ToolStripStatusLabel();
+            toolStripProgressBar = new ToolStripProgressBar();
             splitControl = new SplitContainer();
             processView = new TreeView();
-            toolStripProgressBar = new ToolStripProgressBar();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -82,7 +82,7 @@
             menuBar.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, optionsToolStripMenuItem });
             menuBar.Location = new Point(0, 0);
             menuBar.Name = "menuBar";
-            menuBar.Size = new Size(1278, 24);
+            menuBar.Size = new Size(1449, 24);
             menuBar.TabIndex = 0;
             menuBar.Text = "menuBar";
             // 
@@ -92,7 +92,7 @@
             toolMenu.Items.AddRange(new ToolStripItem[] { toolMenuPlay });
             toolMenu.Location = new Point(0, 24);
             toolMenu.Name = "toolMenu";
-            toolMenu.Size = new Size(1278, 25);
+            toolMenu.Size = new Size(1449, 25);
             toolMenu.TabIndex = 1;
             toolMenu.Text = "toolMenu";
             // 
@@ -109,9 +109,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel, toolStripProgressBar });
-            statusStrip1.Location = new Point(0, 712);
+            statusStrip1.Location = new Point(0, 867);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1278, 22);
+            statusStrip1.Size = new Size(1449, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -122,6 +122,11 @@
             toolStripStatusLabel.Text = "Prosek";
             toolStripStatusLabel.Click += toolStripStatusLabel1_Click;
             // 
+            // toolStripProgressBar
+            // 
+            toolStripProgressBar.Name = "toolStripProgressBar";
+            toolStripProgressBar.Size = new Size(100, 16);
+            // 
             // splitControl
             // 
             splitControl.Dock = DockStyle.Fill;
@@ -131,8 +136,8 @@
             // splitControl.Panel1
             // 
             splitControl.Panel1.Controls.Add(processView);
-            splitControl.Size = new Size(1278, 663);
-            splitControl.SplitterDistance = 426;
+            splitControl.Size = new Size(1449, 818);
+            splitControl.SplitterDistance = 483;
             splitControl.TabIndex = 3;
             // 
             // processView
@@ -140,19 +145,15 @@
             processView.Dock = DockStyle.Fill;
             processView.Location = new Point(0, 0);
             processView.Name = "processView";
-            processView.Size = new Size(426, 663);
+            processView.Size = new Size(483, 818);
             processView.TabIndex = 0;
-            // 
-            // toolStripProgressBar
-            // 
-            toolStripProgressBar.Name = "toolStripProgressBar";
-            toolStripProgressBar.Size = new Size(100, 16);
+            processView.AfterSelect += processView_AfterSelect;
             // 
             // App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1278, 734);
+            ClientSize = new Size(1449, 889);
             Controls.Add(splitControl);
             Controls.Add(statusStrip1);
             Controls.Add(toolMenu);
