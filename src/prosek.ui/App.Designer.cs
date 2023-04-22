@@ -41,12 +41,17 @@
             toolStripProgressBar = new ToolStripProgressBar();
             splitControl = new SplitContainer();
             processView = new TreeView();
+            tabControl = new TabControl();
+            tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitControl).BeginInit();
             splitControl.Panel1.SuspendLayout();
+            splitControl.Panel2.SuspendLayout();
             splitControl.SuspendLayout();
+            tabControl.SuspendLayout();
             SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -136,6 +141,10 @@
             // splitControl.Panel1
             // 
             splitControl.Panel1.Controls.Add(processView);
+            // 
+            // splitControl.Panel2
+            // 
+            splitControl.Panel2.Controls.Add(tabControl);
             splitControl.Size = new Size(1449, 818);
             splitControl.SplitterDistance = 483;
             splitControl.TabIndex = 3;
@@ -148,6 +157,37 @@
             processView.Size = new Size(483, 818);
             processView.TabIndex = 0;
             processView.AfterSelect += processView_AfterSelect;
+            // 
+            // tabControl
+            //
+            tabControl.Dock = DockStyle.Fill;
+            tabControl.Controls.Add(tabPage1);
+            tabControl.Controls.Add(tabPage2);
+            tabControl.Location = new Point(3, 0);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(959, 818);
+            tabControl.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(951, 790);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "Detection";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(951, 790);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Relations";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // App
             // 
@@ -170,8 +210,10 @@
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             splitControl.Panel1.ResumeLayout(false);
+            splitControl.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitControl).EndInit();
             splitControl.ResumeLayout(false);
+            tabControl.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -190,5 +232,8 @@
         private SplitContainer splitControl;
         private TreeView processView;
         private ToolStripProgressBar toolStripProgressBar;
+        private TabControl tabControl;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
     }
 }

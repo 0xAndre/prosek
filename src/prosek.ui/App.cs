@@ -40,6 +40,7 @@ namespace prosek.ui
 
         private void FillTree()
         {
+            toolStripProgressBar.Visible = true;
             processView.Nodes.Clear();
 
             var currentProcess = Process.GetProcesses().GroupBy(p => p.ProcessName).Select(g => g.First()).ToList();
@@ -59,10 +60,14 @@ namespace prosek.ui
                     continue;
                 }
             }
+
+            toolStripProgressBar.Visible = false;
         }
 
         private void App_Load(object sender, EventArgs e)
         {
+            toolStripProgressBar.Visible = true;
+
             int i = 0;
 
             foreach (Process p in Store.processs)
@@ -78,6 +83,8 @@ namespace prosek.ui
                     continue;
                 }
             }
+
+            toolStripProgressBar.Visible = false;
         }
 
         private void processView_AfterSelect(object sender, TreeViewEventArgs e)
