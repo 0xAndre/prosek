@@ -1,3 +1,4 @@
+using prosek.application;
 using prosek.models;
 using prosek.ui.shared;
 using System.Diagnostics;
@@ -25,7 +26,8 @@ namespace prosek.ui
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            Options options = new Options();
+            options.Show();
         }
 
         private void splitContainer1_SplitterMoved_1(object sender, SplitterEventArgs e)
@@ -90,6 +92,12 @@ namespace prosek.ui
         private void processView_AfterSelect(object sender, TreeViewEventArgs e)
         {
             MessageBox.Show(processView.SelectedNode.Text);
+            string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
+            int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
+            var process = Process.GetProcessById(processId);
+            string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
+
+            DataManager.GetVirusTotalFileData(hash);
         }
     }
 }
