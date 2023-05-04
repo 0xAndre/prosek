@@ -43,6 +43,9 @@
             processView = new TreeView();
             tabControl = new TabControl();
             tabPage1 = new TabPage();
+            listViewDetection = new ListView();
+            Engine = new ColumnHeader();
+            Result = new ColumnHeader();
             tabPage2 = new TabPage();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
@@ -52,6 +55,7 @@
             splitControl.Panel2.SuspendLayout();
             splitControl.SuspendLayout();
             tabControl.SuspendLayout();
+            tabPage1.SuspendLayout();
             SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -159,32 +163,57 @@
             processView.AfterSelect += processView_AfterSelect;
             // 
             // tabControl
-            //
-            tabControl.Dock = DockStyle.Fill;
+            // 
             tabControl.Controls.Add(tabPage1);
             tabControl.Controls.Add(tabPage2);
-            tabControl.Location = new Point(3, 0);
+            tabControl.Dock = DockStyle.Fill;
+            tabControl.Location = new Point(0, 0);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(959, 818);
+            tabControl.Size = new Size(962, 818);
             tabControl.TabIndex = 0;
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(listViewDetection);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(951, 790);
+            tabPage1.Size = new Size(954, 790);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Detection";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // listViewDetection
+            //
+            listViewDetection.Dock = DockStyle.Fill;
+            listViewDetection.AllowColumnReorder = true;
+            listViewDetection.Columns.AddRange(new ColumnHeader[] { Engine, Result });
+            listViewDetection.GridLines = true;
+            listViewDetection.Location = new Point(0, 0);
+            listViewDetection.Name = "listViewDetection";
+            listViewDetection.RightToLeft = RightToLeft.No;
+            listViewDetection.Size = new Size(954, 794);
+            listViewDetection.TabIndex = 0;
+            listViewDetection.UseCompatibleStateImageBehavior = false;
+            listViewDetection.SelectedIndexChanged += listView1_SelectedIndexChanged;
+            // 
+            // Engine
+            // 
+            Engine.Text = "Engine";
+            Engine.Width = 200;
+            // 
+            // Result
+            // 
+            Result.Text = "Result";
+            Result.Width = 180;
             // 
             // tabPage2
             // 
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(951, 790);
+            tabPage2.Size = new Size(954, 790);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Relations";
             tabPage2.UseVisualStyleBackColor = true;
@@ -214,6 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)splitControl).EndInit();
             splitControl.ResumeLayout(false);
             tabControl.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -235,5 +265,8 @@
         private TabControl tabControl;
         private TabPage tabPage1;
         private TabPage tabPage2;
+        private ListView listViewDetection;
+        private ColumnHeader Engine;
+        private ColumnHeader Result;
     }
 }

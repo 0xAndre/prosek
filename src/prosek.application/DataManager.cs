@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using prosek.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +11,7 @@ namespace prosek.application
 {
     public class DataManager
     {
-        public static void GetVirusTotalFileData(string hash)
+        public static string GetVirusTotalFileData(string hash)
         {
             HttpClient httpClient = new HttpClient();
             string xAbuseHeader = File.ReadAllText("xabuseheader.txt");
@@ -20,7 +23,7 @@ namespace prosek.application
 
             var response = httpClient.GetAsync($"https://www.virustotal.com/ui/files/{hash}").Result;
             response.EnsureSuccessStatusCode();
-            string fileInfo = response.Content.ReadAsStringAsync().Result;
+            return response.Content.ReadAsStringAsync().Result;
         }
     }
 }

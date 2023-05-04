@@ -1,7 +1,10 @@
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using prosek.application;
 using prosek.models;
 using prosek.ui.shared;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms.VisualStyles;
 
@@ -91,13 +94,57 @@ namespace prosek.ui
 
         private void processView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            MessageBox.Show(processView.SelectedNode.Text);
+            //MessageBox.Show(processView.SelectedNode.Text);
             string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
             int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
             var process = Process.GetProcessById(processId);
             string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
 
-            DataManager.GetVirusTotalFileData(hash);
+            string fileInfo = DataManager.GetVirusTotalFileData(hash);
+
+            JObject jObject = JObject.Parse(fileInfo);
+            var aR = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jObject["data"]["attributes"]["last_analysis_results"].ToString());
+
+            List<AnalysisResult> analysisResults = new List<AnalysisResult>();
+            ListViewItem row = new ListViewItem();
+
+            listViewDetection.View = View.Details;
+            listViewDetection.Items.Clear();
+
+            foreach (var key in aR.Keys)
+            {
+                analysisResults.Add(aR[key].ToObject<AnalysisResult>());
+                AnalysisResult analysisResult = aR[key].ToObject<AnalysisResult>();
+
+                if(analysisResult.category != "type-unsupported")
+                {
+                    ListViewItem lvi = new ListViewItem(new string[] { analysisResult.engine_name, analysisResult.category });
+                    
+                    if(analysisResult.category == "undetected")
+                    {
+                        lvi.SubItems[1].ForeColor = Color.Green;
+                    }
+
+                    if (analysisResult.category == "detected")
+                    {
+                        lvi.SubItems[1].ForeColor = Color.Red;
+                        
+                    }
+
+                    lvi.UseItemStyleForSubItems = false;
+                    listViewDetection.Items.Add(lvi);
+                }
+                
+
+
+            }
+
+
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
