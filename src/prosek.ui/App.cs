@@ -131,6 +131,13 @@ namespace prosek.ui
                         
                     }
 
+                    if (analysisResult.category == "failure")
+                    {
+                        lvi.SubItems[1].ForeColor = Color.Orange;
+
+                    }
+
+
                     lvi.UseItemStyleForSubItems = false;
                     listViewDetection.Items.Add(lvi);
                 }
