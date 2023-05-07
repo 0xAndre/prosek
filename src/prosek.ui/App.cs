@@ -116,11 +116,11 @@ namespace prosek.ui
                 analysisResults.Add(aR[key].ToObject<AnalysisResult>());
                 AnalysisResult analysisResult = aR[key].ToObject<AnalysisResult>();
 
-                if(analysisResult.category != "type-unsupported")
+                if (analysisResult.category != "type-unsupported")
                 {
                     ListViewItem lvi = new ListViewItem(new string[] { analysisResult.engine_name, analysisResult.category });
-                    
-                    if(analysisResult.category == "undetected")
+
+                    if (analysisResult.category == "undetected")
                     {
                         lvi.SubItems[1].ForeColor = Color.Green;
                     }
@@ -128,7 +128,7 @@ namespace prosek.ui
                     if (analysisResult.category == "detected")
                     {
                         lvi.SubItems[1].ForeColor = Color.Red;
-                        
+
                     }
 
                     if (analysisResult.category == "failure")
@@ -141,7 +141,7 @@ namespace prosek.ui
                     lvi.UseItemStyleForSubItems = false;
                     listViewDetection.Items.Add(lvi);
                 }
-                
+
 
 
             }

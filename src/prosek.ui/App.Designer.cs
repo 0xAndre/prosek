@@ -91,7 +91,7 @@
             menuBar.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, optionsToolStripMenuItem });
             menuBar.Location = new Point(0, 0);
             menuBar.Name = "menuBar";
-            menuBar.Size = new Size(1449, 24);
+            menuBar.Size = new Size(951, 24);
             menuBar.TabIndex = 0;
             menuBar.Text = "menuBar";
             // 
@@ -101,7 +101,7 @@
             toolMenu.Items.AddRange(new ToolStripItem[] { toolMenuPlay });
             toolMenu.Location = new Point(0, 24);
             toolMenu.Name = "toolMenu";
-            toolMenu.Size = new Size(1449, 25);
+            toolMenu.Size = new Size(951, 25);
             toolMenu.TabIndex = 1;
             toolMenu.Text = "toolMenu";
             // 
@@ -118,9 +118,9 @@
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel, toolStripProgressBar });
-            statusStrip1.Location = new Point(0, 867);
+            statusStrip1.Location = new Point(0, 551);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1449, 22);
+            statusStrip1.Size = new Size(951, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -149,8 +149,8 @@
             // splitControl.Panel2
             // 
             splitControl.Panel2.Controls.Add(tabControl);
-            splitControl.Size = new Size(1449, 818);
-            splitControl.SplitterDistance = 483;
+            splitControl.Size = new Size(951, 502);
+            splitControl.SplitterDistance = 317;
             splitControl.TabIndex = 3;
             // 
             // processView
@@ -158,7 +158,7 @@
             processView.Dock = DockStyle.Fill;
             processView.Location = new Point(0, 0);
             processView.Name = "processView";
-            processView.Size = new Size(483, 818);
+            processView.Size = new Size(317, 502);
             processView.TabIndex = 0;
             processView.AfterSelect += processView_AfterSelect;
             // 
@@ -170,7 +170,7 @@
             tabControl.Location = new Point(0, 0);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(962, 818);
+            tabControl.Size = new Size(630, 502);
             tabControl.TabIndex = 0;
             // 
             // tabPage1
@@ -179,21 +179,21 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(954, 790);
+            tabPage1.Size = new Size(622, 474);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Detection";
             tabPage1.UseVisualStyleBackColor = true;
             // 
             // listViewDetection
-            //
-            listViewDetection.Dock = DockStyle.Fill;
+            // 
             listViewDetection.AllowColumnReorder = true;
             listViewDetection.Columns.AddRange(new ColumnHeader[] { Engine, Result });
+            listViewDetection.Dock = DockStyle.Fill;
             listViewDetection.GridLines = true;
-            listViewDetection.Location = new Point(0, 0);
+            listViewDetection.Location = new Point(3, 3);
             listViewDetection.Name = "listViewDetection";
             listViewDetection.RightToLeft = RightToLeft.No;
-            listViewDetection.Size = new Size(954, 794);
+            listViewDetection.Size = new Size(616, 468);
             listViewDetection.TabIndex = 0;
             listViewDetection.UseCompatibleStateImageBehavior = false;
             listViewDetection.SelectedIndexChanged += listView1_SelectedIndexChanged;
@@ -213,7 +213,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(954, 790);
+            tabPage2.Size = new Size(622, 363);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Relations";
             tabPage2.UseVisualStyleBackColor = true;
@@ -222,7 +222,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1449, 889);
+            ClientSize = new Size(951, 573);
             Controls.Add(splitControl);
             Controls.Add(statusStrip1);
             Controls.Add(toolMenu);
