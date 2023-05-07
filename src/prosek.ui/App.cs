@@ -58,7 +58,7 @@ namespace prosek.ui
                 toolStripProgressBar.Value = ((i++ + 1) * 100 / currentProcess.Count);
                 try
                 {
-                    processView.Nodes.Add($"({p.Id}) {p?.MainModule?.FileName}");
+                    processView.Nodes.Add($"({p.Id}) {p?.MainModule?.ModuleName}");
                     toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
                 }
                 catch (Exception)
@@ -72,25 +72,7 @@ namespace prosek.ui
 
         private void App_Load(object sender, EventArgs e)
         {
-            toolStripProgressBar.Visible = true;
-
-            int i = 0;
-
-            foreach (Process p in Store.processs)
-            {
-                toolStripProgressBar.Value = ((i++ + 1) * 100 / Store.processs.Count);
-                try
-                {
-                    processView.Nodes.Add($"({p.Id}) {p?.MainModule?.FileName}");
-                    toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
-                }
-                catch (Exception)
-                {
-                    continue;
-                }
-            }
-
-            toolStripProgressBar.Visible = false;
+            FillTree();
         }
 
         private void processView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -145,11 +127,11 @@ namespace prosek.ui
                     }
                 }
             }
-            catch(NotFoundException ex)
+            catch (NotFoundException ex)
             {
                 MessageBox.Show(ex.Message, "Process not found", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
+
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
