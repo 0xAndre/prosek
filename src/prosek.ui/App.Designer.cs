@@ -43,6 +43,17 @@
             processView = new TreeView();
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
+            groupBoxProperties = new GroupBox();
+            lblTypeValue = new Label();
+            lblType = new Label();
+            lblSHA1Value = new Label();
+            lblSHA1 = new Label();
+            lblSHA256Value = new Label();
+            lblSHA256 = new Label();
+            lblProcessPathValue = new Label();
+            lblProcessPath = new Label();
+            lblProcessNameValue = new Label();
+            lblProcessName = new Label();
             tabPageDetection = new TabPage();
             listViewDetection = new ListView();
             Engine = new ColumnHeader();
@@ -56,6 +67,8 @@
             splitControl.Panel2.SuspendLayout();
             splitControl.SuspendLayout();
             tabControl.SuspendLayout();
+            tabPageDetails.SuspendLayout();
+            groupBoxProperties.SuspendLayout();
             tabPageDetection.SuspendLayout();
             SuspendLayout();
             // 
@@ -151,7 +164,7 @@
             // 
             splitControl.Panel2.Controls.Add(tabControl);
             splitControl.Size = new Size(1084, 740);
-            splitControl.SplitterDistance = 334;
+            splitControl.SplitterDistance = 317;
             splitControl.TabIndex = 3;
             // 
             // processView
@@ -159,7 +172,7 @@
             processView.Dock = DockStyle.Fill;
             processView.Location = new Point(0, 0);
             processView.Name = "processView";
-            processView.Size = new Size(334, 740);
+            processView.Size = new Size(317, 740);
             processView.TabIndex = 0;
             processView.AfterSelect += processView_AfterSelect;
             // 
@@ -172,17 +185,133 @@
             tabControl.Location = new Point(0, 0);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(746, 740);
+            tabControl.Size = new Size(763, 740);
             tabControl.TabIndex = 0;
             // 
             // tabPageDetails
             // 
+            tabPageDetails.Controls.Add(groupBoxProperties);
             tabPageDetails.Location = new Point(4, 24);
             tabPageDetails.Name = "tabPageDetails";
-            tabPageDetails.Size = new Size(738, 712);
+            tabPageDetails.Size = new Size(755, 712);
             tabPageDetails.TabIndex = 2;
             tabPageDetails.Text = "Details";
             tabPageDetails.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxProperties
+            // 
+            groupBoxProperties.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxProperties.Controls.Add(lblTypeValue);
+            groupBoxProperties.Controls.Add(lblType);
+            groupBoxProperties.Controls.Add(lblSHA1Value);
+            groupBoxProperties.Controls.Add(lblSHA1);
+            groupBoxProperties.Controls.Add(lblSHA256Value);
+            groupBoxProperties.Controls.Add(lblSHA256);
+            groupBoxProperties.Controls.Add(lblProcessPathValue);
+            groupBoxProperties.Controls.Add(lblProcessPath);
+            groupBoxProperties.Controls.Add(lblProcessNameValue);
+            groupBoxProperties.Controls.Add(lblProcessName);
+            groupBoxProperties.Location = new Point(14, 15);
+            groupBoxProperties.Name = "groupBoxProperties";
+            groupBoxProperties.Size = new Size(733, 216);
+            groupBoxProperties.TabIndex = 0;
+            groupBoxProperties.TabStop = false;
+            groupBoxProperties.Text = "Properties";
+            // 
+            // lblTypeValue
+            // 
+            lblTypeValue.AutoSize = true;
+            lblTypeValue.Location = new Point(56, 125);
+            lblTypeValue.Name = "lblTypeValue";
+            lblTypeValue.Size = new Size(85, 15);
+            lblTypeValue.TabIndex = 9;
+            lblTypeValue.Text = "ABDY82739273";
+            // 
+            // lblType
+            // 
+            lblType.AutoSize = true;
+            lblType.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblType.Location = new Point(16, 125);
+            lblType.Name = "lblType";
+            lblType.Size = new Size(36, 15);
+            lblType.TabIndex = 8;
+            lblType.Text = "Type:";
+            // 
+            // lblSHA1Value
+            // 
+            lblSHA1Value.AutoSize = true;
+            lblSHA1Value.Location = new Point(56, 101);
+            lblSHA1Value.Name = "lblSHA1Value";
+            lblSHA1Value.Size = new Size(85, 15);
+            lblSHA1Value.TabIndex = 7;
+            lblSHA1Value.Text = "ABDY82739273";
+            // 
+            // lblSHA1
+            // 
+            lblSHA1.AutoSize = true;
+            lblSHA1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSHA1.Location = new Point(16, 101);
+            lblSHA1.Name = "lblSHA1";
+            lblSHA1.Size = new Size(41, 15);
+            lblSHA1.TabIndex = 6;
+            lblSHA1.Text = "SHA1:";
+            // 
+            // lblSHA256Value
+            // 
+            lblSHA256Value.AutoSize = true;
+            lblSHA256Value.Location = new Point(70, 78);
+            lblSHA256Value.Name = "lblSHA256Value";
+            lblSHA256Value.Size = new Size(85, 15);
+            lblSHA256Value.TabIndex = 5;
+            lblSHA256Value.Text = "ABDY82739273";
+            // 
+            // lblSHA256
+            // 
+            lblSHA256.AutoSize = true;
+            lblSHA256.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSHA256.Location = new Point(16, 78);
+            lblSHA256.Name = "lblSHA256";
+            lblSHA256.Size = new Size(55, 15);
+            lblSHA256.TabIndex = 4;
+            lblSHA256.Text = "SHA256:";
+            // 
+            // lblProcessPathValue
+            // 
+            lblProcessPathValue.AutoSize = true;
+            lblProcessPathValue.Location = new Point(96, 54);
+            lblProcessPathValue.Name = "lblProcessPathValue";
+            lblProcessPathValue.Size = new Size(82, 15);
+            lblProcessPathValue.TabIndex = 3;
+            lblProcessPathValue.Text = "c:\\Process.exe";
+            // 
+            // lblProcessPath
+            // 
+            lblProcessPath.AutoSize = true;
+            lblProcessPath.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProcessPath.Location = new Point(16, 54);
+            lblProcessPath.Name = "lblProcessPath";
+            lblProcessPath.Size = new Size(80, 15);
+            lblProcessPath.TabIndex = 2;
+            lblProcessPath.Text = "Process Path:";
+            // 
+            // lblProcessNameValue
+            // 
+            lblProcessNameValue.AutoSize = true;
+            lblProcessNameValue.Location = new Point(104, 32);
+            lblProcessNameValue.Name = "lblProcessNameValue";
+            lblProcessNameValue.Size = new Size(68, 15);
+            lblProcessNameValue.TabIndex = 1;
+            lblProcessNameValue.Text = "Process.exe";
+            // 
+            // lblProcessName
+            // 
+            lblProcessName.AutoSize = true;
+            lblProcessName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProcessName.Location = new Point(16, 32);
+            lblProcessName.Name = "lblProcessName";
+            lblProcessName.Size = new Size(88, 15);
+            lblProcessName.TabIndex = 0;
+            lblProcessName.Text = "Process Name:";
             // 
             // tabPageDetection
             // 
@@ -190,7 +319,7 @@
             tabPageDetection.Location = new Point(4, 24);
             tabPageDetection.Name = "tabPageDetection";
             tabPageDetection.Padding = new Padding(3);
-            tabPageDetection.Size = new Size(738, 712);
+            tabPageDetection.Size = new Size(755, 712);
             tabPageDetection.TabIndex = 0;
             tabPageDetection.Text = "Detection";
             tabPageDetection.UseVisualStyleBackColor = true;
@@ -204,7 +333,7 @@
             listViewDetection.Location = new Point(3, 3);
             listViewDetection.Name = "listViewDetection";
             listViewDetection.RightToLeft = RightToLeft.No;
-            listViewDetection.Size = new Size(732, 706);
+            listViewDetection.Size = new Size(749, 706);
             listViewDetection.TabIndex = 0;
             listViewDetection.UseCompatibleStateImageBehavior = false;
             listViewDetection.SelectedIndexChanged += listView1_SelectedIndexChanged;
@@ -224,7 +353,7 @@
             tabPageRelations.Location = new Point(4, 24);
             tabPageRelations.Name = "tabPageRelations";
             tabPageRelations.Padding = new Padding(3);
-            tabPageRelations.Size = new Size(738, 712);
+            tabPageRelations.Size = new Size(755, 712);
             tabPageRelations.TabIndex = 1;
             tabPageRelations.Text = "Relations";
             tabPageRelations.UseVisualStyleBackColor = true;
@@ -255,6 +384,9 @@
             ((System.ComponentModel.ISupportInitialize)splitControl).EndInit();
             splitControl.ResumeLayout(false);
             tabControl.ResumeLayout(false);
+            tabPageDetails.ResumeLayout(false);
+            groupBoxProperties.ResumeLayout(false);
+            groupBoxProperties.PerformLayout();
             tabPageDetection.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -281,5 +413,16 @@
         private ColumnHeader Engine;
         private ColumnHeader Result;
         private TabPage tabPageDetails;
+        private GroupBox groupBoxProperties;
+        private Label lblProcessNameValue;
+        private Label lblProcessName;
+        private Label lblProcessPathValue;
+        private Label lblProcessPath;
+        private Label lblSHA256Value;
+        private Label lblSHA256;
+        private Label lblSHA1Value;
+        private Label lblSHA1;
+        private Label lblTypeValue;
+        private Label lblType;
     }
 }

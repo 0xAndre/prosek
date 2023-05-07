@@ -81,10 +81,13 @@ namespace prosek.ui
             {
                 string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
                 int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
-                var process = Process.GetProcessById(processId);
+                Process process = Process.GetProcessById(processId);
+
                 string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
 
                 string fileInfo = DataManager.GetVirusTotalFileData(hash, process.MainModule?.ModuleName);
+
+                FillProcessDetails(process, fileInfo);
 
                 JObject jObject = JObject.Parse(fileInfo);
                 var aR = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jObject["data"]["attributes"]["last_analysis_results"].ToString());
@@ -132,6 +135,17 @@ namespace prosek.ui
                 MessageBox.Show(ex.Message, "Process not found", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+        }
+
+        private void FillProcessDetails(Process process, string fileInfo)
+        {
+            JObject jObject = JObject.Parse(fileInfo);
+            lblProcessNameValue.Text = process.MainModule.ModuleName;
+            lblProcessPathValue.Text = process.MainModule.FileName;
+
+            lblSHA256Value.Text = jObject["data"]["attributes"]["sha256"].ToString();
+            lblSHA1Value.Text = jObject["data"]["attributes"]["sha1"].ToString();
+            lblTypeValue.Text = jObject["data"]["attributes"]["type_description"].ToString();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
