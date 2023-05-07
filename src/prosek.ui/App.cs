@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms.VisualStyles;
+using prosek.application.exceptions;
 
 namespace prosek.ui
 {
@@ -94,59 +95,61 @@ namespace prosek.ui
 
         private void processView_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            //MessageBox.Show(processView.SelectedNode.Text);
-            string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
-            int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
-            var process = Process.GetProcessById(processId);
-            string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
-
-            string fileInfo = DataManager.GetVirusTotalFileData(hash);
-
-            JObject jObject = JObject.Parse(fileInfo);
-            var aR = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jObject["data"]["attributes"]["last_analysis_results"].ToString());
-
-            List<AnalysisResult> analysisResults = new List<AnalysisResult>();
-            ListViewItem row = new ListViewItem();
-
-            listViewDetection.View = View.Details;
-            listViewDetection.Items.Clear();
-
-            foreach (var key in aR.Keys)
+            try
             {
-                analysisResults.Add(aR[key].ToObject<AnalysisResult>());
-                AnalysisResult analysisResult = aR[key].ToObject<AnalysisResult>();
+                string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
+                int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
+                var process = Process.GetProcessById(processId);
+                string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
 
-                if (analysisResult.category != "type-unsupported")
+                string fileInfo = DataManager.GetVirusTotalFileData(hash, process.MainModule?.ModuleName);
+
+                JObject jObject = JObject.Parse(fileInfo);
+                var aR = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jObject["data"]["attributes"]["last_analysis_results"].ToString());
+
+                List<AnalysisResult> analysisResults = new List<AnalysisResult>();
+                ListViewItem row = new ListViewItem();
+
+                listViewDetection.View = View.Details;
+                listViewDetection.Items.Clear();
+
+                foreach (var key in aR.Keys)
                 {
-                    ListViewItem lvi = new ListViewItem(new string[] { analysisResult.engine_name, analysisResult.category });
+                    analysisResults.Add(aR[key].ToObject<AnalysisResult>());
+                    AnalysisResult analysisResult = aR[key].ToObject<AnalysisResult>();
 
-                    if (analysisResult.category == "undetected")
+                    if (analysisResult.category != "type-unsupported")
                     {
-                        lvi.SubItems[1].ForeColor = Color.Green;
+                        ListViewItem lvi = new ListViewItem(new string[] { analysisResult.engine_name, analysisResult.category });
+
+                        if (analysisResult.category == "undetected")
+                        {
+                            lvi.SubItems[1].ForeColor = Color.Green;
+                        }
+
+                        if (analysisResult.category == "detected")
+                        {
+                            lvi.SubItems[1].ForeColor = Color.Red;
+
+                        }
+
+                        if (analysisResult.category == "failure")
+                        {
+                            lvi.SubItems[1].ForeColor = Color.Orange;
+
+                        }
+
+
+                        lvi.UseItemStyleForSubItems = false;
+                        listViewDetection.Items.Add(lvi);
                     }
-
-                    if (analysisResult.category == "detected")
-                    {
-                        lvi.SubItems[1].ForeColor = Color.Red;
-
-                    }
-
-                    if (analysisResult.category == "failure")
-                    {
-                        lvi.SubItems[1].ForeColor = Color.Orange;
-
-                    }
-
-
-                    lvi.UseItemStyleForSubItems = false;
-                    listViewDetection.Items.Add(lvi);
                 }
-
-
-
             }
-
-
+            catch(NotFoundException ex)
+            {
+                MessageBox.Show(ex.Message, "Process not found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
