@@ -39,6 +39,13 @@ namespace prosek.application
             
         }
 
+        public static string GetVirusTotalFileMock()
+        {
+            string fileName = @"D:\git\prosek\docs\example.json";
+
+            return File.ReadAllText(fileName);
+        }
+
         private static string GenerateRandomAlphanumericString(int length = 10)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

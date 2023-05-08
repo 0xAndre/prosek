@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(App));
             fileToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
@@ -44,6 +45,8 @@
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
             groupBoxProperties = new GroupBox();
+            lblProcessIdValue = new Label();
+            lblProcessId = new Label();
             lblSizeValue = new Label();
             lblSize = new Label();
             lblVhashValue = new Label();
@@ -65,6 +68,7 @@
             Engine = new ColumnHeader();
             Result = new ColumnHeader();
             tabPageRelations = new TabPage();
+            imageList = new ImageList(components);
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -88,7 +92,7 @@
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(180, 22);
+            exitToolStripMenuItem.Size = new Size(93, 22);
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
@@ -208,6 +212,8 @@
             // groupBoxProperties
             // 
             groupBoxProperties.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxProperties.Controls.Add(lblProcessIdValue);
+            groupBoxProperties.Controls.Add(lblProcessId);
             groupBoxProperties.Controls.Add(lblSizeValue);
             groupBoxProperties.Controls.Add(lblSize);
             groupBoxProperties.Controls.Add(lblVhashValue);
@@ -226,15 +232,34 @@
             groupBoxProperties.Controls.Add(lblProcessName);
             groupBoxProperties.Location = new Point(14, 15);
             groupBoxProperties.Name = "groupBoxProperties";
-            groupBoxProperties.Size = new Size(733, 226);
+            groupBoxProperties.Size = new Size(733, 250);
             groupBoxProperties.TabIndex = 0;
             groupBoxProperties.TabStop = false;
             groupBoxProperties.Text = "Properties";
             // 
+            // lblProcessIdValue
+            // 
+            lblProcessIdValue.AutoSize = true;
+            lblProcessIdValue.Location = new Point(84, 27);
+            lblProcessIdValue.Name = "lblProcessIdValue";
+            lblProcessIdValue.Size = new Size(49, 15);
+            lblProcessIdValue.TabIndex = 17;
+            lblProcessIdValue.Text = "1234567";
+            // 
+            // lblProcessId
+            // 
+            lblProcessId.AutoSize = true;
+            lblProcessId.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProcessId.Location = new Point(20, 27);
+            lblProcessId.Name = "lblProcessId";
+            lblProcessId.Size = new Size(66, 15);
+            lblProcessId.TabIndex = 16;
+            lblProcessId.Text = "Process Id:";
+            // 
             // lblSizeValue
             // 
             lblSizeValue.AutoSize = true;
-            lblSizeValue.Location = new Point(48, 196);
+            lblSizeValue.Location = new Point(52, 210);
             lblSizeValue.Name = "lblSizeValue";
             lblSizeValue.Size = new Size(85, 15);
             lblSizeValue.TabIndex = 15;
@@ -244,7 +269,7 @@
             // 
             lblSize.AutoSize = true;
             lblSize.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSize.Location = new Point(16, 196);
+            lblSize.Location = new Point(20, 210);
             lblSize.Name = "lblSize";
             lblSize.Size = new Size(33, 15);
             lblSize.TabIndex = 14;
@@ -253,7 +278,7 @@
             // lblVhashValue
             // 
             lblVhashValue.AutoSize = true;
-            lblVhashValue.Location = new Point(65, 174);
+            lblVhashValue.Location = new Point(69, 188);
             lblVhashValue.Name = "lblVhashValue";
             lblVhashValue.Size = new Size(85, 15);
             lblVhashValue.TabIndex = 13;
@@ -263,7 +288,7 @@
             // 
             lblVhash.AutoSize = true;
             lblVhash.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblVhash.Location = new Point(16, 174);
+            lblVhash.Location = new Point(20, 188);
             lblVhash.Name = "lblVhash";
             lblVhash.Size = new Size(51, 15);
             lblVhash.TabIndex = 12;
@@ -272,7 +297,7 @@
             // lblTlshValue
             // 
             lblTlshValue.AutoSize = true;
-            lblTlshValue.Location = new Point(54, 150);
+            lblTlshValue.Location = new Point(58, 164);
             lblTlshValue.Name = "lblTlshValue";
             lblTlshValue.Size = new Size(85, 15);
             lblTlshValue.TabIndex = 11;
@@ -282,7 +307,7 @@
             // 
             lblTlsh.AutoSize = true;
             lblTlsh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTlsh.Location = new Point(16, 150);
+            lblTlsh.Location = new Point(20, 164);
             lblTlsh.Name = "lblTlsh";
             lblTlsh.Size = new Size(39, 15);
             lblTlsh.TabIndex = 10;
@@ -291,7 +316,7 @@
             // lblTypeValue
             // 
             lblTypeValue.AutoSize = true;
-            lblTypeValue.Location = new Point(56, 125);
+            lblTypeValue.Location = new Point(60, 139);
             lblTypeValue.Name = "lblTypeValue";
             lblTypeValue.Size = new Size(85, 15);
             lblTypeValue.TabIndex = 9;
@@ -301,7 +326,7 @@
             // 
             lblType.AutoSize = true;
             lblType.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblType.Location = new Point(16, 125);
+            lblType.Location = new Point(20, 139);
             lblType.Name = "lblType";
             lblType.Size = new Size(36, 15);
             lblType.TabIndex = 8;
@@ -310,7 +335,7 @@
             // lblSHA1Value
             // 
             lblSHA1Value.AutoSize = true;
-            lblSHA1Value.Location = new Point(56, 101);
+            lblSHA1Value.Location = new Point(60, 115);
             lblSHA1Value.Name = "lblSHA1Value";
             lblSHA1Value.Size = new Size(85, 15);
             lblSHA1Value.TabIndex = 7;
@@ -320,7 +345,7 @@
             // 
             lblSHA1.AutoSize = true;
             lblSHA1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSHA1.Location = new Point(16, 101);
+            lblSHA1.Location = new Point(20, 115);
             lblSHA1.Name = "lblSHA1";
             lblSHA1.Size = new Size(41, 15);
             lblSHA1.TabIndex = 6;
@@ -329,7 +354,7 @@
             // lblSHA256Value
             // 
             lblSHA256Value.AutoSize = true;
-            lblSHA256Value.Location = new Point(70, 78);
+            lblSHA256Value.Location = new Point(74, 92);
             lblSHA256Value.Name = "lblSHA256Value";
             lblSHA256Value.Size = new Size(85, 15);
             lblSHA256Value.TabIndex = 5;
@@ -339,7 +364,7 @@
             // 
             lblSHA256.AutoSize = true;
             lblSHA256.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSHA256.Location = new Point(16, 78);
+            lblSHA256.Location = new Point(20, 92);
             lblSHA256.Name = "lblSHA256";
             lblSHA256.Size = new Size(55, 15);
             lblSHA256.TabIndex = 4;
@@ -348,7 +373,7 @@
             // lblProcessPathValue
             // 
             lblProcessPathValue.AutoSize = true;
-            lblProcessPathValue.Location = new Point(96, 54);
+            lblProcessPathValue.Location = new Point(100, 68);
             lblProcessPathValue.Name = "lblProcessPathValue";
             lblProcessPathValue.Size = new Size(82, 15);
             lblProcessPathValue.TabIndex = 3;
@@ -358,7 +383,7 @@
             // 
             lblProcessPath.AutoSize = true;
             lblProcessPath.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProcessPath.Location = new Point(16, 54);
+            lblProcessPath.Location = new Point(20, 68);
             lblProcessPath.Name = "lblProcessPath";
             lblProcessPath.Size = new Size(80, 15);
             lblProcessPath.TabIndex = 2;
@@ -367,7 +392,7 @@
             // lblProcessNameValue
             // 
             lblProcessNameValue.AutoSize = true;
-            lblProcessNameValue.Location = new Point(104, 32);
+            lblProcessNameValue.Location = new Point(108, 46);
             lblProcessNameValue.Name = "lblProcessNameValue";
             lblProcessNameValue.Size = new Size(68, 15);
             lblProcessNameValue.TabIndex = 1;
@@ -377,7 +402,7 @@
             // 
             lblProcessName.AutoSize = true;
             lblProcessName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProcessName.Location = new Point(16, 32);
+            lblProcessName.Location = new Point(20, 46);
             lblProcessName.Name = "lblProcessName";
             lblProcessName.Size = new Size(88, 15);
             lblProcessName.TabIndex = 0;
@@ -427,6 +452,12 @@
             tabPageRelations.TabIndex = 1;
             tabPageRelations.Text = "Relations";
             tabPageRelations.UseVisualStyleBackColor = true;
+            // 
+            // imageList
+            // 
+            imageList.ColorDepth = ColorDepth.Depth8Bit;
+            imageList.ImageSize = new Size(16, 16);
+            imageList.TransparentColor = Color.Transparent;
             // 
             // App
             // 
@@ -500,5 +531,8 @@
         private Label lblVhash;
         private Label lblSizeValue;
         private Label lblSize;
+        private Label lblProcessIdValue;
+        private Label lblProcessId;
+        private ImageList imageList;
     }
 }

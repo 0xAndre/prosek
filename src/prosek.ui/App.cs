@@ -8,6 +8,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms.VisualStyles;
 using prosek.application.exceptions;
+using System;
 
 namespace prosek.ui
 {
@@ -53,12 +54,20 @@ namespace prosek.ui
 
             int i = 0;
 
+            processView.ImageList = imageList;
+
             foreach (Process p in currentProcess)
             {
                 toolStripProgressBar.Value = ((i++ + 1) * 100 / currentProcess.Count);
                 try
                 {
                     processView.Nodes.Add($"({p.Id}) {p?.MainModule?.ModuleName}");
+                    
+                    // add icons to list
+                    imageList.Images.Add(p?.MainModule?.ModuleName, Icon.ExtractAssociatedIcon(p?.MainModule?.FileName));
+                    processView.Nodes[processView.Nodes.Count - 1].ImageKey = p?.MainModule?.ModuleName;
+                    processView.Nodes[processView.Nodes.Count - 1].SelectedImageKey = p?.MainModule?.ModuleName;
+                    
                     toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
                 }
                 catch (Exception)
@@ -86,6 +95,7 @@ namespace prosek.ui
                 string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
 
                 string fileInfo = DataManager.GetVirusTotalFileData(hash, process.MainModule?.ModuleName);
+                //string fileInfo = DataManager.GetVirusTotalFileMock();
 
                 FillProcessDetails(process, fileInfo);
 
@@ -102,6 +112,11 @@ namespace prosek.ui
                 {
                     analysisResults.Add(aR[key].ToObject<AnalysisResult>());
                     AnalysisResult analysisResult = aR[key].ToObject<AnalysisResult>();
+
+                    if (analysisResult.category == "timeout")
+                    {
+                        continue;
+                    }
 
                     if (analysisResult.category != "type-unsupported")
                     {
@@ -142,6 +157,7 @@ namespace prosek.ui
             JObject jObject = JObject.Parse(fileInfo);
             lblProcessNameValue.Text = process.MainModule.ModuleName;
             lblProcessPathValue.Text = process.MainModule.FileName;
+            lblProcessIdValue.Text = process.Id.ToString();
 
             lblSHA256Value.Text = jObject["data"]["attributes"]["sha256"].ToString().ToUpper();
             lblSHA1Value.Text = jObject["data"]["attributes"]["sha1"].ToString().ToUpper();
