@@ -44,6 +44,10 @@
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
             groupBoxProperties = new GroupBox();
+            lblSizeValue = new Label();
+            lblSize = new Label();
+            lblVhashValue = new Label();
+            lblVhash = new Label();
             lblTlshValue = new Label();
             lblTlsh = new Label();
             lblTypeValue = new Label();
@@ -84,8 +88,9 @@
             // exitToolStripMenuItem
             // 
             exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            exitToolStripMenuItem.Size = new Size(93, 22);
+            exitToolStripMenuItem.Size = new Size(180, 22);
             exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // optionsToolStripMenuItem
             // 
@@ -203,6 +208,10 @@
             // groupBoxProperties
             // 
             groupBoxProperties.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxProperties.Controls.Add(lblSizeValue);
+            groupBoxProperties.Controls.Add(lblSize);
+            groupBoxProperties.Controls.Add(lblVhashValue);
+            groupBoxProperties.Controls.Add(lblVhash);
             groupBoxProperties.Controls.Add(lblTlshValue);
             groupBoxProperties.Controls.Add(lblTlsh);
             groupBoxProperties.Controls.Add(lblTypeValue);
@@ -217,10 +226,48 @@
             groupBoxProperties.Controls.Add(lblProcessName);
             groupBoxProperties.Location = new Point(14, 15);
             groupBoxProperties.Name = "groupBoxProperties";
-            groupBoxProperties.Size = new Size(733, 216);
+            groupBoxProperties.Size = new Size(733, 226);
             groupBoxProperties.TabIndex = 0;
             groupBoxProperties.TabStop = false;
             groupBoxProperties.Text = "Properties";
+            // 
+            // lblSizeValue
+            // 
+            lblSizeValue.AutoSize = true;
+            lblSizeValue.Location = new Point(48, 196);
+            lblSizeValue.Name = "lblSizeValue";
+            lblSizeValue.Size = new Size(85, 15);
+            lblSizeValue.TabIndex = 15;
+            lblSizeValue.Text = "ABDY82739273";
+            // 
+            // lblSize
+            // 
+            lblSize.AutoSize = true;
+            lblSize.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSize.Location = new Point(16, 196);
+            lblSize.Name = "lblSize";
+            lblSize.Size = new Size(33, 15);
+            lblSize.TabIndex = 14;
+            lblSize.Text = "Size:";
+            // 
+            // lblVhashValue
+            // 
+            lblVhashValue.AutoSize = true;
+            lblVhashValue.Location = new Point(65, 174);
+            lblVhashValue.Name = "lblVhashValue";
+            lblVhashValue.Size = new Size(85, 15);
+            lblVhashValue.TabIndex = 13;
+            lblVhashValue.Text = "ABDY82739273";
+            // 
+            // lblVhash
+            // 
+            lblVhash.AutoSize = true;
+            lblVhash.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblVhash.Location = new Point(16, 174);
+            lblVhash.Name = "lblVhash";
+            lblVhash.Size = new Size(51, 15);
+            lblVhash.TabIndex = 12;
+            lblVhash.Text = "VHASH:";
             // 
             // lblTlshValue
             // 
@@ -449,5 +496,9 @@
         private Label lblType;
         private Label lblTlshValue;
         private Label lblTlsh;
+        private Label lblVhashValue;
+        private Label lblVhash;
+        private Label lblSizeValue;
+        private Label lblSize;
     }
 }

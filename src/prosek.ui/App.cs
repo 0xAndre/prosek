@@ -147,11 +147,18 @@ namespace prosek.ui
             lblSHA1Value.Text = jObject["data"]["attributes"]["sha1"].ToString().ToUpper();
             lblTypeValue.Text = jObject["data"]["attributes"]["type_description"].ToString();
             lblTlshValue.Text = jObject["data"]["attributes"]["tlsh"].ToString();
+            lblVhashValue.Text = jObject["data"]["attributes"]["vhash"].ToString().ToUpper();
+            lblSizeValue.Text = Utils.SizeSuffix(Int64.Parse(jObject["data"]["attributes"]["size"].ToString()));
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
