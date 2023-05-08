@@ -44,6 +44,8 @@
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
             groupBoxProperties = new GroupBox();
+            lblTlshValue = new Label();
+            lblTlsh = new Label();
             lblTypeValue = new Label();
             lblType = new Label();
             lblSHA1Value = new Label();
@@ -200,7 +202,9 @@
             // 
             // groupBoxProperties
             // 
-            groupBoxProperties.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxProperties.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxProperties.Controls.Add(lblTlshValue);
+            groupBoxProperties.Controls.Add(lblTlsh);
             groupBoxProperties.Controls.Add(lblTypeValue);
             groupBoxProperties.Controls.Add(lblType);
             groupBoxProperties.Controls.Add(lblSHA1Value);
@@ -217,6 +221,25 @@
             groupBoxProperties.TabIndex = 0;
             groupBoxProperties.TabStop = false;
             groupBoxProperties.Text = "Properties";
+            // 
+            // lblTlshValue
+            // 
+            lblTlshValue.AutoSize = true;
+            lblTlshValue.Location = new Point(54, 150);
+            lblTlshValue.Name = "lblTlshValue";
+            lblTlshValue.Size = new Size(85, 15);
+            lblTlshValue.TabIndex = 11;
+            lblTlshValue.Text = "ABDY82739273";
+            // 
+            // lblTlsh
+            // 
+            lblTlsh.AutoSize = true;
+            lblTlsh.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTlsh.Location = new Point(16, 150);
+            lblTlsh.Name = "lblTlsh";
+            lblTlsh.Size = new Size(39, 15);
+            lblTlsh.TabIndex = 10;
+            lblTlsh.Text = "TLSH:";
             // 
             // lblTypeValue
             // 
@@ -424,5 +447,7 @@
         private Label lblSHA1;
         private Label lblTypeValue;
         private Label lblType;
+        private Label lblTlshValue;
+        private Label lblTlsh;
     }
 }

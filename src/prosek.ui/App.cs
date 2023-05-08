@@ -143,9 +143,10 @@ namespace prosek.ui
             lblProcessNameValue.Text = process.MainModule.ModuleName;
             lblProcessPathValue.Text = process.MainModule.FileName;
 
-            lblSHA256Value.Text = jObject["data"]["attributes"]["sha256"].ToString();
-            lblSHA1Value.Text = jObject["data"]["attributes"]["sha1"].ToString();
+            lblSHA256Value.Text = jObject["data"]["attributes"]["sha256"].ToString().ToUpper();
+            lblSHA1Value.Text = jObject["data"]["attributes"]["sha1"].ToString().ToUpper();
             lblTypeValue.Text = jObject["data"]["attributes"]["type_description"].ToString();
+            lblTlshValue.Text = jObject["data"]["attributes"]["tlsh"].ToString();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
