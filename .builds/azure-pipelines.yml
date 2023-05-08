@@ -12,25 +12,26 @@ pool:
 
 name: $(major).$(minor).$(patch).$(Rev:r)
 
-steps:
+jobs:
+- job: build
+  steps:
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'build'
+        projects: 'src/pi.scrapper/pi.scrapper.sln'
+        arguments: '-c Release'
+      displayName: build
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'build'
-    projects: 'src/pi.scrapper/pi.scrapper.sln'
-    arguments: '-c Release'
-  displayName: build
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: 'src/_bin/Release/net7.0-windows'
+        Contents: '**'
+        TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      displayName: copy _bin to artifacts folder
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: 'src/_bin/Release/net7.0-windows'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-  displayName: copy _bin to artifacts folder
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-  displayName: publish artifacts
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+      displayName: publish artifacts
