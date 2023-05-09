@@ -41,7 +41,7 @@ namespace prosek.application
 
         public static string GetVirusTotalFileMock()
         {
-            string fileName = @"D:\git\prosek\docs\example.json";
+            string fileName = @"D:\git\prosek\docs\example_malicious.json";
 
             return File.ReadAllText(fileName);
         }

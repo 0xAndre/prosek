@@ -67,6 +67,7 @@
             listViewDetection = new ListView();
             Engine = new ColumnHeader();
             Result = new ColumnHeader();
+            MalwareName = new ColumnHeader();
             tabPageRelations = new TabPage();
             imageList = new ImageList(components);
             menuBar.SuspendLayout();
@@ -422,7 +423,7 @@
             // listViewDetection
             // 
             listViewDetection.AllowColumnReorder = true;
-            listViewDetection.Columns.AddRange(new ColumnHeader[] { Engine, Result });
+            listViewDetection.Columns.AddRange(new ColumnHeader[] { Engine, Result, MalwareName });
             listViewDetection.Dock = DockStyle.Fill;
             listViewDetection.GridLines = true;
             listViewDetection.Location = new Point(3, 3);
@@ -442,6 +443,11 @@
             // 
             Result.Text = "Result";
             Result.Width = 180;
+            // 
+            // MalwareName
+            // 
+            MalwareName.Text = "Malware";
+            MalwareName.Width = 240;
             // 
             // tabPageRelations
             // 
@@ -534,5 +540,6 @@
         private Label lblProcessIdValue;
         private Label lblProcessId;
         private ImageList imageList;
+        private ColumnHeader MalwareName;
     }
 }

@@ -62,12 +62,12 @@ namespace prosek.ui
                 try
                 {
                     processView.Nodes.Add($"({p.Id}) {p?.MainModule?.ModuleName}");
-                    
+
                     // add icons to list
                     imageList.Images.Add(p?.MainModule?.ModuleName, Icon.ExtractAssociatedIcon(p?.MainModule?.FileName));
                     processView.Nodes[processView.Nodes.Count - 1].ImageKey = p?.MainModule?.ModuleName;
                     processView.Nodes[processView.Nodes.Count - 1].SelectedImageKey = p?.MainModule?.ModuleName;
-                    
+
                     toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
                 }
                 catch (Exception)
@@ -94,8 +94,8 @@ namespace prosek.ui
 
                 string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
 
-                string fileInfo = DataManager.GetVirusTotalFileData(hash, process.MainModule?.ModuleName);
-                //string fileInfo = DataManager.GetVirusTotalFileMock();
+                //string fileInfo = DataManager.GetVirusTotalFileData(hash, process.MainModule?.ModuleName);
+                string fileInfo = DataManager.GetVirusTotalFileMock();
 
                 FillProcessDetails(process, fileInfo);
 
@@ -120,16 +120,17 @@ namespace prosek.ui
 
                     if (analysisResult.category != "type-unsupported")
                     {
-                        ListViewItem lvi = new ListViewItem(new string[] { analysisResult.engine_name, analysisResult.category });
+                        ListViewItem lvi = new ListViewItem(new string[] { analysisResult.engine_name, analysisResult.category.ToUpper(), analysisResult.result });
 
                         if (analysisResult.category == "undetected")
                         {
                             lvi.SubItems[1].ForeColor = Color.Green;
                         }
 
-                        if (analysisResult.category == "detected")
+                        if (analysisResult.category == "malicious")
                         {
                             lvi.SubItems[1].ForeColor = Color.Red;
+                            lvi.SubItems[2].ForeColor = Color.Red;
 
                         }
 
