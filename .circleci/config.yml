@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: "Build Application"
-          command: dotnet.exe build --configuration Release
+          command: dotnet.exe build src\prosek.sln --configuration Release
 workflows:
   test_and_build:
     jobs:
