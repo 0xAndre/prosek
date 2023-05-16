@@ -61,7 +61,8 @@ namespace prosek.ui
                 toolStripProgressBar.Value = ((i++ + 1) * 100 / currentProcess.Count);
                 try
                 {
-                    processView.Nodes.Add($"({p.Id}) {p?.MainModule?.ModuleName}");
+                    Guid id = Guid.NewGuid();
+                    processView.Nodes.Add(id.ToString(), $"({p.Id}) {p?.MainModule?.ModuleName}");
 
                     // add icons to list
                     imageList.Images.Add(p?.MainModule?.ModuleName, Icon.ExtractAssociatedIcon(p?.MainModule?.FileName));
@@ -69,6 +70,16 @@ namespace prosek.ui
                     processView.Nodes[processView.Nodes.Count - 1].SelectedImageKey = p?.MainModule?.ModuleName;
 
                     toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
+
+                    
+                    foreach(ProcessModule dll in p.Modules) 
+                    {
+                        if(!dll.FileName.Contains(".exe"))
+                        {
+                            processView.Nodes[id.ToString()].Nodes.Add(dll.FileName);
+                        }
+                        
+                    }
                 }
                 catch (Exception)
                 {
@@ -88,16 +99,34 @@ namespace prosek.ui
         {
             try
             {
-                string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
-                int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
-                Process process = Process.GetProcessById(processId);
+                Process process = null;
+                string moduleName = null, fileName = null, id = null;
+                
+                if(processView.SelectedNode.Text.StartsWith("("))
+                {
+                    string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
+                    int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
+                    process = Process.GetProcessById(processId);
+                    fileName = process.MainModule?.FileName;
+                    moduleName = process.MainModule?.ModuleName;
+                    id = process.Id.ToString();
+                } else
+                {
+                    fileName = processView.SelectedNode.Text;
+                    process = Process.GetProcessesByName(fileName).FirstOrDefault();
+                    var moduleNameParsed = fileName.Split("\\");
+                    moduleName = fileName.Split("\\")[moduleNameParsed.Length - 1];
+                    id = "N/A";
+                }
+                
+                
 
-                string hash = Hash.SHA256CheckSum(process.MainModule?.FileName);
+                string hash = Hash.SHA256CheckSum(fileName);
 
-                //string fileInfo = DataManager.GetVirusTotalFileData(hash, process.MainModule?.ModuleName);
-                string fileInfo = DataManager.GetVirusTotalFileMock();
+                string fileInfo = DataManager.GetVirusTotalFileData(hash, moduleName);
+                //string fileInfo = DataManager.GetVirusTotalFileMock();
 
-                FillProcessDetails(process, fileInfo);
+                FillProcessDetails(id, moduleName, fileName, fileInfo);
 
                 JObject jObject = JObject.Parse(fileInfo);
                 var aR = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jObject["data"]["attributes"]["last_analysis_results"].ToString());
@@ -153,12 +182,12 @@ namespace prosek.ui
 
         }
 
-        private void FillProcessDetails(Process process, string fileInfo)
+        private void FillProcessDetails(string ProcesId, string ModuleName, string FileName, string fileInfo)
         {
             JObject jObject = JObject.Parse(fileInfo);
-            lblProcessNameValue.Text = process.MainModule.ModuleName;
-            lblProcessPathValue.Text = process.MainModule.FileName;
-            lblProcessIdValue.Text = process.Id.ToString();
+            lblProcessNameValue.Text = ModuleName;
+            lblProcessPathValue.Text = FileName;
+            lblProcessIdValue.Text = ProcesId;
 
             lblSHA256Value.Text = jObject["data"]["attributes"]["sha256"].ToString().ToUpper();
             lblSHA1Value.Text = jObject["data"]["attributes"]["sha1"].ToString().ToUpper();
