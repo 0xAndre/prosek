@@ -35,5 +35,11 @@ namespace prosek.application
                 adjustedSize,
                 SizeSuffixes[mag]).Replace(",", ".");
         }
+
+
+        public static bool IsMainProcess(string process)
+        {
+            return process.StartsWith("(");
+        }
     }
 }

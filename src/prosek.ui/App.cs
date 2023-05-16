@@ -102,7 +102,7 @@ namespace prosek.ui
                 Process process = null;
                 string moduleName = null, fileName = null, id = null;
                 
-                if(processView.SelectedNode.Text.StartsWith("("))
+                if(Utils.IsMainProcess(processView.SelectedNode.Text))
                 {
                     string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
                     int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
