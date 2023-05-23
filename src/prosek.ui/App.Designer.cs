@@ -44,6 +44,9 @@
             processView = new TreeView();
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
+            groupBoxFileInfo = new GroupBox();
+            lblFileVersionValue = new Label();
+            lblFileVersion = new Label();
             groupBoxStats = new GroupBox();
             lblStatusMalicious = new Label();
             lblStatusUndetected = new Label();
@@ -73,6 +76,8 @@
             MalwareName = new ColumnHeader();
             tabPageRelations = new TabPage();
             imageList = new ImageList(components);
+            lblDescription = new Label();
+            lblDescriptionValue = new Label();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -82,6 +87,7 @@
             splitControl.SuspendLayout();
             tabControl.SuspendLayout();
             tabPageDetails.SuspendLayout();
+            groupBoxFileInfo.SuspendLayout();
             groupBoxStats.SuspendLayout();
             groupBoxProperties.SuspendLayout();
             tabPageDetection.SuspendLayout();
@@ -206,6 +212,7 @@
             // 
             // tabPageDetails
             // 
+            tabPageDetails.Controls.Add(groupBoxFileInfo);
             tabPageDetails.Controls.Add(groupBoxStats);
             tabPageDetails.Controls.Add(groupBoxProperties);
             tabPageDetails.Location = new Point(4, 24);
@@ -214,6 +221,39 @@
             tabPageDetails.TabIndex = 2;
             tabPageDetails.Text = "Details";
             tabPageDetails.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxFileInfo
+            // 
+            groupBoxFileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxFileInfo.Controls.Add(lblDescriptionValue);
+            groupBoxFileInfo.Controls.Add(lblDescription);
+            groupBoxFileInfo.Controls.Add(lblFileVersionValue);
+            groupBoxFileInfo.Controls.Add(lblFileVersion);
+            groupBoxFileInfo.Location = new Point(14, 453);
+            groupBoxFileInfo.Name = "groupBoxFileInfo";
+            groupBoxFileInfo.Size = new Size(733, 242);
+            groupBoxFileInfo.TabIndex = 2;
+            groupBoxFileInfo.TabStop = false;
+            groupBoxFileInfo.Text = "File Info";
+            // 
+            // lblFileVersionValue
+            // 
+            lblFileVersionValue.AutoSize = true;
+            lblFileVersionValue.Location = new Point(99, 34);
+            lblFileVersionValue.Name = "lblFileVersionValue";
+            lblFileVersionValue.Size = new Size(31, 15);
+            lblFileVersionValue.TabIndex = 1;
+            lblFileVersionValue.Text = "1.0.0";
+            // 
+            // lblFileVersion
+            // 
+            lblFileVersion.AutoSize = true;
+            lblFileVersion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblFileVersion.Location = new Point(27, 34);
+            lblFileVersion.Name = "lblFileVersion";
+            lblFileVersion.Size = new Size(73, 15);
+            lblFileVersion.TabIndex = 0;
+            lblFileVersion.Text = "File Version:";
             // 
             // groupBoxStats
             // 
@@ -432,7 +472,7 @@
             // lblProcessNameValue
             // 
             lblProcessNameValue.AutoSize = true;
-            lblProcessNameValue.Location = new Point(108, 46);
+            lblProcessNameValue.Location = new Point(108, 47);
             lblProcessNameValue.Name = "lblProcessNameValue";
             lblProcessNameValue.Size = new Size(68, 15);
             lblProcessNameValue.TabIndex = 1;
@@ -442,7 +482,7 @@
             // 
             lblProcessName.AutoSize = true;
             lblProcessName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProcessName.Location = new Point(20, 46);
+            lblProcessName.Location = new Point(20, 47);
             lblProcessName.Name = "lblProcessName";
             lblProcessName.Size = new Size(88, 15);
             lblProcessName.TabIndex = 0;
@@ -504,6 +544,25 @@
             imageList.ImageSize = new Size(16, 16);
             imageList.TransparentColor = Color.Transparent;
             // 
+            // lblDescription
+            // 
+            lblDescription.AutoSize = true;
+            lblDescription.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblDescription.Location = new Point(27, 52);
+            lblDescription.Name = "lblDescription";
+            lblDescription.Size = new Size(74, 15);
+            lblDescription.TabIndex = 2;
+            lblDescription.Text = "Description:";
+            // 
+            // lblDescriptionValue
+            // 
+            lblDescriptionValue.AutoSize = true;
+            lblDescriptionValue.Location = new Point(99, 52);
+            lblDescriptionValue.Name = "lblDescriptionValue";
+            lblDescriptionValue.Size = new Size(66, 15);
+            lblDescriptionValue.TabIndex = 3;
+            lblDescriptionValue.Text = "description";
+            // 
             // App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -531,6 +590,8 @@
             splitControl.ResumeLayout(false);
             tabControl.ResumeLayout(false);
             tabPageDetails.ResumeLayout(false);
+            groupBoxFileInfo.ResumeLayout(false);
+            groupBoxFileInfo.PerformLayout();
             groupBoxStats.ResumeLayout(false);
             groupBoxStats.PerformLayout();
             groupBoxProperties.ResumeLayout(false);
@@ -585,5 +646,10 @@
         private GroupBox groupBoxStats;
         private Label lblStatusMalicious;
         private Label lblStatusUndetected;
+        private GroupBox groupBoxFileInfo;
+        private Label lblFileVersionValue;
+        private Label lblFileVersion;
+        private Label lblDescriptionValue;
+        private Label lblDescription;
     }
 }

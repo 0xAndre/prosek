@@ -110,6 +110,8 @@ namespace prosek.ui
                     fileName = process.MainModule?.FileName;
                     moduleName = process.MainModule?.ModuleName;
                     id = process.Id.ToString();
+
+                    FillFileVersion(fileName);
                 }
                 else
                 {
@@ -119,8 +121,7 @@ namespace prosek.ui
                     moduleName = fileName.Split("\\")[moduleNameParsed.Length - 1];
                     id = "n/a";
 
-                    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(fileName);
-                    string version = fvi.FileVersion;
+                    FillFileVersion(fileName);
 
                 }
 
@@ -205,6 +206,13 @@ namespace prosek.ui
             lblTlshValue.Text = jObject["data"]["attributes"]["tlsh"].ToString();
             lblVhashValue.Text = jObject["data"]["attributes"]["vhash"].ToString().ToUpper();
             lblSizeValue.Text = Utils.SizeSuffix(Int64.Parse(jObject["data"]["attributes"]["size"].ToString()));
+        }
+
+        private void FillFileVersion(string FileName)
+        {
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(FileName);
+            lblFileVersionValue.Text = fvi.FileVersion;
+            lblDescriptionValue.Text = fvi.FileDescription;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
