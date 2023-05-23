@@ -74,7 +74,7 @@ namespace prosek.ui
                     
                     foreach(ProcessModule dll in p.Modules) 
                     {
-                        if(!dll.FileName.Contains(".exe"))
+                        if(!dll.FileName.ToUpper().Contains(".EXE"))
                         {
                             processView.Nodes[id.ToString()].Nodes.Add(dll.FileName);
                         }
@@ -116,15 +116,19 @@ namespace prosek.ui
                     process = Process.GetProcessesByName(fileName).FirstOrDefault();
                     var moduleNameParsed = fileName.Split("\\");
                     moduleName = fileName.Split("\\")[moduleNameParsed.Length - 1];
-                    id = "N/A";
+                    id = "n/a";
+
+                    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(fileName);
+                    string version = fvi.FileVersion;
+
                 }
                 
                 
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
-                string fileInfo = DataManager.GetVirusTotalFileData(hash, moduleName);
-                //string fileInfo = DataManager.GetVirusTotalFileMock();
+                //string fileInfo = DataManager.GetVirusTotalFileData(hash, moduleName);
+                string fileInfo = DataManager.GetVirusTotalFileMock();
 
                 FillProcessDetails(id, moduleName, fileName, fileInfo);
 

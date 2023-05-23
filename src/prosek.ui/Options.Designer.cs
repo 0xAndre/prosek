@@ -68,6 +68,7 @@
             Controls.Add(labelAbusHeader);
             Controls.Add(textBoxAbuseHeader);
             Controls.Add(buttonOptionsSave);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Options";
             Text = "Options";
