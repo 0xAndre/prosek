@@ -44,6 +44,9 @@
             processView = new TreeView();
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
+            groupBoxStats = new GroupBox();
+            lblStatusMalicious = new Label();
+            lblStatusUndetected = new Label();
             groupBoxProperties = new GroupBox();
             lblProcessIdValue = new Label();
             lblProcessId = new Label();
@@ -79,6 +82,7 @@
             splitControl.SuspendLayout();
             tabControl.SuspendLayout();
             tabPageDetails.SuspendLayout();
+            groupBoxStats.SuspendLayout();
             groupBoxProperties.SuspendLayout();
             tabPageDetection.SuspendLayout();
             SuspendLayout();
@@ -202,6 +206,7 @@
             // 
             // tabPageDetails
             // 
+            tabPageDetails.Controls.Add(groupBoxStats);
             tabPageDetails.Controls.Add(groupBoxProperties);
             tabPageDetails.Location = new Point(4, 24);
             tabPageDetails.Name = "tabPageDetails";
@@ -209,6 +214,40 @@
             tabPageDetails.TabIndex = 2;
             tabPageDetails.Text = "Details";
             tabPageDetails.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxStats
+            // 
+            groupBoxStats.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxStats.Controls.Add(lblStatusMalicious);
+            groupBoxStats.Controls.Add(lblStatusUndetected);
+            groupBoxStats.Location = new Point(14, 282);
+            groupBoxStats.Name = "groupBoxStats";
+            groupBoxStats.Size = new Size(733, 150);
+            groupBoxStats.TabIndex = 1;
+            groupBoxStats.TabStop = false;
+            groupBoxStats.Text = "Stats";
+            // 
+            // lblStatusMalicious
+            // 
+            lblStatusMalicious.AutoSize = true;
+            lblStatusMalicious.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblStatusMalicious.ForeColor = Color.Red;
+            lblStatusMalicious.Location = new Point(20, 83);
+            lblStatusMalicious.Name = "lblStatusMalicious";
+            lblStatusMalicious.Size = new Size(482, 37);
+            lblStatusMalicious.TabIndex = 1;
+            lblStatusMalicious.Text = "0 vendors detected malware on this file";
+            // 
+            // lblStatusUndetected
+            // 
+            lblStatusUndetected.AutoSize = true;
+            lblStatusUndetected.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            lblStatusUndetected.ForeColor = Color.Green;
+            lblStatusUndetected.Location = new Point(20, 33);
+            lblStatusUndetected.Name = "lblStatusUndetected";
+            lblStatusUndetected.Size = new Size(592, 37);
+            lblStatusUndetected.TabIndex = 0;
+            lblStatusUndetected.Text = "0 vendors have not detected malware on this file";
             // 
             // groupBoxProperties
             // 
@@ -492,6 +531,8 @@
             splitControl.ResumeLayout(false);
             tabControl.ResumeLayout(false);
             tabPageDetails.ResumeLayout(false);
+            groupBoxStats.ResumeLayout(false);
+            groupBoxStats.PerformLayout();
             groupBoxProperties.ResumeLayout(false);
             groupBoxProperties.PerformLayout();
             tabPageDetection.ResumeLayout(false);
@@ -541,5 +582,8 @@
         private Label lblProcessId;
         private ImageList imageList;
         private ColumnHeader MalwareName;
+        private GroupBox groupBoxStats;
+        private Label lblStatusMalicious;
+        private Label lblStatusUndetected;
     }
 }

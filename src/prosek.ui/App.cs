@@ -71,14 +71,14 @@ namespace prosek.ui
 
                     toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
 
-                    
-                    foreach(ProcessModule dll in p.Modules) 
+
+                    foreach (ProcessModule dll in p.Modules)
                     {
-                        if(!dll.FileName.ToUpper().Contains(".EXE"))
+                        if (!dll.FileName.ToUpper().Contains(".EXE"))
                         {
                             processView.Nodes[id.ToString()].Nodes.Add(dll.FileName);
                         }
-                        
+
                     }
                 }
                 catch (Exception)
@@ -101,8 +101,8 @@ namespace prosek.ui
             {
                 Process process = null;
                 string moduleName = null, fileName = null, id = null;
-                
-                if(Utils.IsMainProcess(processView.SelectedNode.Text))
+
+                if (Utils.IsMainProcess(processView.SelectedNode.Text))
                 {
                     string rawProcessId = processView.SelectedNode.Text.Split(" ")[0];
                     int processId = int.Parse(rawProcessId.Substring(1, rawProcessId.Length - 2));
@@ -110,7 +110,8 @@ namespace prosek.ui
                     fileName = process.MainModule?.FileName;
                     moduleName = process.MainModule?.ModuleName;
                     id = process.Id.ToString();
-                } else
+                }
+                else
                 {
                     fileName = processView.SelectedNode.Text;
                     process = Process.GetProcessesByName(fileName).FirstOrDefault();
@@ -122,8 +123,6 @@ namespace prosek.ui
                     string version = fvi.FileVersion;
 
                 }
-                
-                
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
@@ -140,6 +139,8 @@ namespace prosek.ui
 
                 listViewDetection.View = View.Details;
                 listViewDetection.Items.Clear();
+
+                int undetectedVendors = 0, maliciousVendors = 0;
 
                 foreach (var key in aR.Keys)
                 {
@@ -158,12 +159,14 @@ namespace prosek.ui
                         if (analysisResult.category == "undetected")
                         {
                             lvi.SubItems[1].ForeColor = Color.Green;
+                            undetectedVendors++;
                         }
 
                         if (analysisResult.category == "malicious")
                         {
                             lvi.SubItems[1].ForeColor = Color.Red;
                             lvi.SubItems[2].ForeColor = Color.Red;
+                            maliciousVendors++;
 
                         }
 
@@ -176,6 +179,9 @@ namespace prosek.ui
 
                         lvi.UseItemStyleForSubItems = false;
                         listViewDetection.Items.Add(lvi);
+
+                        lblStatusUndetected.Text = $"{undetectedVendors} vendors have not detected malware on this file";
+                        lblStatusMalicious.Text = $"{maliciousVendors} vendors detected malware on this file";
                     }
                 }
             }
