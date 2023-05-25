@@ -214,6 +214,11 @@ namespace prosek.ui
             lblFileVersionValue.Text = fvi.FileVersion;
             lblDescriptionValue.Text = fvi.FileDescription;
             lblCompanyNameValue.Text = fvi.CompanyName;
+            lblCopyrightValue.Text = fvi.LegalCopyright;
+            lblOriginalFilenameValue.Text = fvi.OriginalFilename;
+            lblLanguageValue.Text = fvi.Language;
+            lblProductNameValue.Text = fvi.ProductName;
+            lblProductVersionValue.Text = fvi.ProductVersion;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)

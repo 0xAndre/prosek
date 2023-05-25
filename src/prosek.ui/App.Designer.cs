@@ -45,6 +45,16 @@
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
             groupBoxFileInfo = new GroupBox();
+            lblCopyrightValue = new Label();
+            lblLanguageValue = new Label();
+            lblOriginalFilenameValue = new Label();
+            lblProductVersionValue = new Label();
+            lblProductNameValue = new Label();
+            lblCopyright = new Label();
+            lblLanguage = new Label();
+            lblOriginalFileName = new Label();
+            lblProductName = new Label();
+            lblProductVersion = new Label();
             lblCompanyNameValue = new Label();
             lblCompanyName = new Label();
             lblDescriptionValue = new Label();
@@ -80,8 +90,6 @@
             MalwareName = new ColumnHeader();
             tabPageRelations = new TabPage();
             imageList = new ImageList(components);
-            lblProductVersion = new Label();
-            lblProductName = new Label();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -229,6 +237,14 @@
             // groupBoxFileInfo
             // 
             groupBoxFileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxFileInfo.Controls.Add(lblCopyrightValue);
+            groupBoxFileInfo.Controls.Add(lblLanguageValue);
+            groupBoxFileInfo.Controls.Add(lblOriginalFilenameValue);
+            groupBoxFileInfo.Controls.Add(lblProductVersionValue);
+            groupBoxFileInfo.Controls.Add(lblProductNameValue);
+            groupBoxFileInfo.Controls.Add(lblCopyright);
+            groupBoxFileInfo.Controls.Add(lblLanguage);
+            groupBoxFileInfo.Controls.Add(lblOriginalFileName);
             groupBoxFileInfo.Controls.Add(lblProductName);
             groupBoxFileInfo.Controls.Add(lblProductVersion);
             groupBoxFileInfo.Controls.Add(lblCompanyNameValue);
@@ -242,7 +258,102 @@
             groupBoxFileInfo.Size = new Size(733, 242);
             groupBoxFileInfo.TabIndex = 2;
             groupBoxFileInfo.TabStop = false;
-            groupBoxFileInfo.Text = "File Info";
+            groupBoxFileInfo.Text = "Assembly Info";
+            // 
+            // lblCopyrightValue
+            // 
+            lblCopyrightValue.AutoSize = true;
+            lblCopyrightValue.Location = new Point(90, 153);
+            lblCopyrightValue.Name = "lblCopyrightValue";
+            lblCopyrightValue.Size = new Size(58, 15);
+            lblCopyrightValue.TabIndex = 15;
+            lblCopyrightValue.Text = "copyright";
+            // 
+            // lblLanguageValue
+            // 
+            lblLanguageValue.AutoSize = true;
+            lblLanguageValue.Location = new Point(86, 135);
+            lblLanguageValue.Name = "lblLanguageValue";
+            lblLanguageValue.Size = new Size(56, 15);
+            lblLanguageValue.TabIndex = 14;
+            lblLanguageValue.Text = "language";
+            // 
+            // lblOriginalFilenameValue
+            // 
+            lblOriginalFilenameValue.AutoSize = true;
+            lblOriginalFilenameValue.Location = new Point(131, 118);
+            lblOriginalFilenameValue.Name = "lblOriginalFilenameValue";
+            lblOriginalFilenameValue.Size = new Size(96, 15);
+            lblOriginalFilenameValue.TabIndex = 13;
+            lblOriginalFilenameValue.Text = "original filename";
+            // 
+            // lblProductVersionValue
+            // 
+            lblProductVersionValue.AutoSize = true;
+            lblProductVersionValue.Location = new Point(123, 101);
+            lblProductVersionValue.Name = "lblProductVersionValue";
+            lblProductVersionValue.Size = new Size(90, 15);
+            lblProductVersionValue.TabIndex = 12;
+            lblProductVersionValue.Text = "product version";
+            // 
+            // lblProductNameValue
+            // 
+            lblProductNameValue.AutoSize = true;
+            lblProductNameValue.Location = new Point(115, 83);
+            lblProductNameValue.Name = "lblProductNameValue";
+            lblProductNameValue.Size = new Size(82, 15);
+            lblProductNameValue.TabIndex = 11;
+            lblProductNameValue.Text = "product name";
+            // 
+            // lblCopyright
+            // 
+            lblCopyright.AutoSize = true;
+            lblCopyright.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCopyright.Location = new Point(27, 153);
+            lblCopyright.Name = "lblCopyright";
+            lblCopyright.Size = new Size(64, 15);
+            lblCopyright.TabIndex = 10;
+            lblCopyright.Text = "Copyright:";
+            // 
+            // lblLanguage
+            // 
+            lblLanguage.AutoSize = true;
+            lblLanguage.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLanguage.Location = new Point(27, 135);
+            lblLanguage.Name = "lblLanguage";
+            lblLanguage.Size = new Size(63, 15);
+            lblLanguage.TabIndex = 9;
+            lblLanguage.Text = "Language:";
+            // 
+            // lblOriginalFileName
+            // 
+            lblOriginalFileName.AutoSize = true;
+            lblOriginalFileName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblOriginalFileName.Location = new Point(27, 118);
+            lblOriginalFileName.Name = "lblOriginalFileName";
+            lblOriginalFileName.Size = new Size(106, 15);
+            lblOriginalFileName.TabIndex = 8;
+            lblOriginalFileName.Text = "Original Filename:";
+            // 
+            // lblProductName
+            // 
+            lblProductName.AutoSize = true;
+            lblProductName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProductName.Location = new Point(27, 84);
+            lblProductName.Name = "lblProductName";
+            lblProductName.Size = new Size(90, 15);
+            lblProductName.TabIndex = 7;
+            lblProductName.Text = "Product Name:";
+            // 
+            // lblProductVersion
+            // 
+            lblProductVersion.AutoSize = true;
+            lblProductVersion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProductVersion.Location = new Point(27, 101);
+            lblProductVersion.Name = "lblProductVersion";
+            lblProductVersion.Size = new Size(98, 15);
+            lblProductVersion.TabIndex = 6;
+            lblProductVersion.Text = "Product Version:";
             // 
             // lblCompanyNameValue
             // 
@@ -590,26 +701,6 @@
             imageList.ImageSize = new Size(16, 16);
             imageList.TransparentColor = Color.Transparent;
             // 
-            // lblProductVersion
-            // 
-            lblProductVersion.AutoSize = true;
-            lblProductVersion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProductVersion.Location = new Point(27, 101);
-            lblProductVersion.Name = "lblProductVersion";
-            lblProductVersion.Size = new Size(98, 15);
-            lblProductVersion.TabIndex = 6;
-            lblProductVersion.Text = "Product Version:";
-            // 
-            // lblProductName
-            // 
-            lblProductName.AutoSize = true;
-            lblProductName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProductName.Location = new Point(27, 84);
-            lblProductName.Name = "lblProductName";
-            lblProductName.Size = new Size(90, 15);
-            lblProductName.TabIndex = 7;
-            lblProductName.Text = "Product Name:";
-            // 
             // App
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -702,5 +793,13 @@
         private Label lblCompanyName;
         private Label lblProductName;
         private Label lblProductVersion;
+        private Label lblCopyrightValue;
+        private Label lblLanguageValue;
+        private Label lblOriginalFilenameValue;
+        private Label lblProductVersionValue;
+        private Label lblProductNameValue;
+        private Label lblCopyright;
+        private Label lblLanguage;
+        private Label lblOriginalFileName;
     }
 }
