@@ -45,6 +45,8 @@
             tabControl = new TabControl();
             tabPageDetails = new TabPage();
             groupBoxFileInfo = new GroupBox();
+            lblCompanyNameValue = new Label();
+            lblCompanyName = new Label();
             lblDescriptionValue = new Label();
             lblDescription = new Label();
             lblFileVersionValue = new Label();
@@ -78,8 +80,8 @@
             MalwareName = new ColumnHeader();
             tabPageRelations = new TabPage();
             imageList = new ImageList(components);
-            lblCompanyName = new Label();
-            lblCompanyNameValue = new Label();
+            lblProductVersion = new Label();
+            lblProductName = new Label();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -227,6 +229,8 @@
             // groupBoxFileInfo
             // 
             groupBoxFileInfo.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            groupBoxFileInfo.Controls.Add(lblProductName);
+            groupBoxFileInfo.Controls.Add(lblProductVersion);
             groupBoxFileInfo.Controls.Add(lblCompanyNameValue);
             groupBoxFileInfo.Controls.Add(lblCompanyName);
             groupBoxFileInfo.Controls.Add(lblDescriptionValue);
@@ -239,6 +243,25 @@
             groupBoxFileInfo.TabIndex = 2;
             groupBoxFileInfo.TabStop = false;
             groupBoxFileInfo.Text = "File Info";
+            // 
+            // lblCompanyNameValue
+            // 
+            lblCompanyNameValue.AutoSize = true;
+            lblCompanyNameValue.Location = new Point(123, 68);
+            lblCompanyNameValue.Name = "lblCompanyNameValue";
+            lblCompanyNameValue.Size = new Size(90, 15);
+            lblCompanyNameValue.TabIndex = 5;
+            lblCompanyNameValue.Text = "company name";
+            // 
+            // lblCompanyName
+            // 
+            lblCompanyName.AutoSize = true;
+            lblCompanyName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCompanyName.Location = new Point(27, 68);
+            lblCompanyName.Name = "lblCompanyName";
+            lblCompanyName.Size = new Size(97, 15);
+            lblCompanyName.TabIndex = 4;
+            lblCompanyName.Text = "Company Name:";
             // 
             // lblDescriptionValue
             // 
@@ -567,24 +590,25 @@
             imageList.ImageSize = new Size(16, 16);
             imageList.TransparentColor = Color.Transparent;
             // 
-            // lblCompanyName
+            // lblProductVersion
             // 
-            lblCompanyName.AutoSize = true;
-            lblCompanyName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCompanyName.Location = new Point(27, 70);
-            lblCompanyName.Name = "lblCompanyName";
-            lblCompanyName.Size = new Size(97, 15);
-            lblCompanyName.TabIndex = 4;
-            lblCompanyName.Text = "Company Name:";
+            lblProductVersion.AutoSize = true;
+            lblProductVersion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProductVersion.Location = new Point(27, 101);
+            lblProductVersion.Name = "lblProductVersion";
+            lblProductVersion.Size = new Size(98, 15);
+            lblProductVersion.TabIndex = 6;
+            lblProductVersion.Text = "Product Version:";
             // 
-            // lblCompanyNameValue
+            // lblProductName
             // 
-            lblCompanyNameValue.AutoSize = true;
-            lblCompanyNameValue.Location = new Point(122, 70);
-            lblCompanyNameValue.Name = "lblCompanyNameValue";
-            lblCompanyNameValue.Size = new Size(90, 15);
-            lblCompanyNameValue.TabIndex = 5;
-            lblCompanyNameValue.Text = "company name";
+            lblProductName.AutoSize = true;
+            lblProductName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblProductName.Location = new Point(27, 84);
+            lblProductName.Name = "lblProductName";
+            lblProductName.Size = new Size(90, 15);
+            lblProductName.TabIndex = 7;
+            lblProductName.Text = "Product Name:";
             // 
             // App
             // 
@@ -676,5 +700,7 @@
         private Label lblDescription;
         private Label lblCompanyNameValue;
         private Label lblCompanyName;
+        private Label lblProductName;
+        private Label lblProductVersion;
     }
 }
