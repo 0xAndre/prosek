@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms.VisualStyles;
 using prosek.application.exceptions;
 using System;
+using System.Reflection;
 
 namespace prosek.ui
 {
@@ -56,6 +57,8 @@ namespace prosek.ui
 
             processView.ImageList = imageList;
 
+            imageList.Images.Add("dll", Image.FromFile($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\images\\dll.png"));
+
             foreach (Process p in currentProcess)
             {
                 toolStripProgressBar.Value = ((i++ + 1) * 100 / currentProcess.Count);
@@ -77,6 +80,10 @@ namespace prosek.ui
                         if (!dll.FileName.ToUpper().Contains(".EXE"))
                         {
                             processView.Nodes[id.ToString()].Nodes.Add(dll.FileName);
+                            var last = processView.Nodes[id.ToString()].Nodes[0];
+                            last.ImageKey = "dll";
+                            last.SelectedImageKey = "dll";
+ 
                         }
 
                     }
