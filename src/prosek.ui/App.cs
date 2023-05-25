@@ -213,6 +213,7 @@ namespace prosek.ui
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(FileName);
             lblFileVersionValue.Text = fvi.FileVersion;
             lblDescriptionValue.Text = fvi.FileDescription;
+            lblCompanyNameValue.Text = fvi.CompanyName;
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
