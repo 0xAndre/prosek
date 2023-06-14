@@ -17,16 +17,17 @@ jobs:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
-        projects: 'src/pi.scrapper/pi.scrapper.sln'
+        projects: 'src/prosek.sln'
         arguments: '-c Release'
       displayName: build
 
-    - task: CopyFiles@2
+    - task: ArchiveFiles@2
       inputs:
-        SourceFolder: 'src/_bin/Release/net7.0-windows'
-        Contents: '**'
-        TargetFolder: '$(Build.ArtifactStagingDirectory)'
-      displayName: copy _bin to artifacts folder
+        rootFolderOrFile: 'src/_bin/Release/net7.0-windows'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/prosek.zip'
+        replaceExistingArchive: true
 
     - task: PublishBuildArtifacts@1
       inputs:
