@@ -667,7 +667,6 @@
             listViewDetection.Size = new Size(749, 706);
             listViewDetection.TabIndex = 0;
             listViewDetection.UseCompatibleStateImageBehavior = false;
-            listViewDetection.SelectedIndexChanged += listView1_SelectedIndexChanged;
             // 
             // Engine
             // 

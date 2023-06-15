@@ -218,11 +218,6 @@ namespace prosek.ui
             lblProductVersionValue.Text = fvi.ProductVersion;
         }
 
-        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
