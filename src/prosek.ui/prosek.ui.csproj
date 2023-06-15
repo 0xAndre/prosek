@@ -7,7 +7,13 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <BaseOutputPath>..\_bin</BaseOutputPath>
+    <ApplicationIcon>shield.ico</ApplicationIcon>
+    <AssemblyName>prosek</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="shield.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\prosek.application\prosek.application.csproj" />
