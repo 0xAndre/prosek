@@ -2,7 +2,6 @@ using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using prosek.application;
 using prosek.models;
-using prosek.ui.shared;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -19,15 +18,6 @@ namespace prosek.ui
         public App()
         {
             InitializeComponent();
-        }
-
-        private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-        }
-
-        private void toolStripStatusLabel1_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

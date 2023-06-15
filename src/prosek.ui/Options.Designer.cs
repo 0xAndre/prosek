@@ -71,6 +71,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Options";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Options";
             Load += Options_Load;
             ResumeLayout(false);

@@ -177,7 +177,6 @@
             toolStripStatusLabel.Name = "toolStripStatusLabel";
             toolStripStatusLabel.Size = new Size(42, 17);
             toolStripStatusLabel.Text = "Prosek";
-            toolStripStatusLabel.Click += toolStripStatusLabel1_Click;
             // 
             // toolStripProgressBar
             // 

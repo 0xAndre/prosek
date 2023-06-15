@@ -1,8 +1,8 @@
-﻿using prosek.ui.shared;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,8 +21,8 @@ namespace prosek.ui
 
         private void Loading_Load(object sender, EventArgs e)
         {
+            this.Show();
             loadingLabel.Text = "Loading Process...";
-            Store.GetAllProcess();
             loadingLabel.Text = "Process Loaded";
 
             this.Opacity = 0.0f;
