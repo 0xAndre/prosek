@@ -11,6 +11,7 @@ namespace prosek.application
 {
     public class Hash
     {
+
         public static string SHA256CheckSum(string filePath)
         {
             using (SHA256 SHA256 = System.Security.Cryptography.SHA256.Create())

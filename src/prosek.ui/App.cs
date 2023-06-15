@@ -9,6 +9,8 @@ using System.Windows.Forms.VisualStyles;
 using prosek.application.exceptions;
 using System;
 using System.Reflection;
+using prosek.application.provider;
+using prosek.application.provider.virustotal;
 
 namespace prosek.ui
 {
@@ -33,10 +35,10 @@ namespace prosek.ui
 
         private void toolMenuPlay_Click(object sender, EventArgs e)
         {
-            FillTree();
+            LoadProcesses();
         }
 
-        private void FillTree()
+        private void LoadProcesses()
         {
             toolStripProgressBar.Visible = true;
             processView.Nodes.Clear();
@@ -89,7 +91,7 @@ namespace prosek.ui
 
         private void App_Load(object sender, EventArgs e)
         {
-            FillTree();
+            LoadProcesses();
         }
 
         private void processView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -98,6 +100,7 @@ namespace prosek.ui
             {
                 Process process = null;
                 string moduleName = null, fileName = null, id = null;
+                IProvider virusTotal = new VirusTotalProvider();
 
                 if (Utils.IsMainProcess(processView.SelectedNode.Text))
                 {
@@ -124,8 +127,8 @@ namespace prosek.ui
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
-                //string fileInfo = DataManager.GetVirusTotalFileData(hash, moduleName);
-                string fileInfo = DataManager.GetVirusTotalFileMock();
+                //string fileInfo = virusTotal.GetProcessData(hash, moduleName);
+                string fileInfo = virusTotal.GetMockedProcessData();
 
                 FillProcessDetails(id, moduleName, fileName, fileInfo);
 
