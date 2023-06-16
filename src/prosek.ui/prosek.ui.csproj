@@ -14,7 +14,8 @@
 	<Product>Prosek</Product>
 	<Copyright>Copyright © 2023 Prosek</Copyright>
 	<NeutralLanguage>en-US</NeutralLanguage>
-	<FileVersion>1.0.0.0214</FileVersion>
+	<FileVersion>1.0.0.1</FileVersion>
+	<Title>Prosek</Title>
   </PropertyGroup>
 
   <ItemGroup>
