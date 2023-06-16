@@ -75,7 +75,7 @@ namespace prosek.ui
                             var last = processView.Nodes[id.ToString()].Nodes[0];
                             last.ImageKey = "dll";
                             last.SelectedImageKey = "dll";
- 
+
                         }
 
                     }

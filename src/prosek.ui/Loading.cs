@@ -32,7 +32,7 @@ namespace prosek.ui
             app.Closed += (s, args) => this.Close();
             app.Show();
 
-            
+
         }
     }
 }

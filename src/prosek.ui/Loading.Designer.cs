@@ -59,7 +59,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.SeaGreen;
+            BackColor = Color.DarkSeaGreen;
             ClientSize = new Size(359, 381);
             Controls.Add(loadingLabel);
             Controls.Add(pictureBox);

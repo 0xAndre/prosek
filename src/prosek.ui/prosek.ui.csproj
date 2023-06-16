@@ -16,6 +16,7 @@
 	<NeutralLanguage>en-US</NeutralLanguage>
 	<FileVersion>1.0.0.1</FileVersion>
 	<Title>Prosek</Title>
+	<PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>

@@ -24,7 +24,7 @@ namespace prosek.ui
         /// </summary>
         private void Options_Load(object sender, EventArgs e)
         {
-            using (StreamWriter w = File.AppendText(_X_HEADER_FILENAME));
+            using (StreamWriter w = File.AppendText(_X_HEADER_FILENAME)) ;
 
             string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
 
@@ -43,12 +43,12 @@ namespace prosek.ui
             {
                 File.WriteAllText(_X_HEADER_FILENAME, textBoxAbuseHeader.Text);
                 this.Close();
-            } 
-            catch(Exception)
+            }
+            catch (Exception)
             {
                 MessageBox.Show("An error occurred while trying to write the x-abuser-header");
             }
-            
+
         }
     }
 }
