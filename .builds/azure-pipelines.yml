@@ -14,13 +14,32 @@ name: $(major).$(minor).$(patch).$(Rev:r)
 jobs:
 - job: build
   steps:
+  
+    - task: Assembly-Info-NetCore@3
+      inputs:
+        Path: '$(Build.SourcesDirectory)'
+        FileNames: '**/*.csproj'
+        InsertAttributes: false
+        FileEncoding: 'auto'
+        WriteBOM: false
+        PackageId: 'Prosek'
+        Authors: 'Prosek Team'
+        Company: 'Prosek'
+        Product: 'Prosek'
+        Description: 'Computer Process Analyzer'
+        Copyright: 'Copyright © 2023 Prosek'
+        VersionNumber: '$(Build.BuildNumber)'
+        FileVersionNumber: '$(Build.BuildNumber)'
+        LogLevel: 'verbose'
+        FailOnWarning: false
+        DisableTelemetry: false
+
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
         projects: 'src/prosek.sln'
         arguments: '-c Release'
       displayName: build
-
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: 'src/_bin/Release/net7.0-windows'
