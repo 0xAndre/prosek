@@ -1,5 +1,7 @@
 # Prosek
 
+[![Build Status](https://dev.azure.com/xtres/Prosek/_apis/build/status%2Fprosek.app?branchName=main)](https://dev.azure.com/xtres/Prosek/_build/latest?definitionId=12&branchName=main)
+
 Prosek is designed to analyze running processes and their dependencies using VirusTotal. <br>
 
 Prosek offers a comprehensive solution for monitoring and assessing the activities taking place within your system. By leveraging the capabilities of VirusTotal, a leading online virus scanning service, Prosek provides real-time analysis of processes and their associated dependencies, ensuring a robust and secure computing environment. <br>
