@@ -5,6 +5,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <BaseOutputPath>..\_bin</BaseOutputPath>
+	<Authors>Prosek Team</Authors>
+	<Company>Prosek Team.</Company>
+	<Product>Prosek</Product>
+	<Copyright>Copyright © 2023 Prosek</Copyright>
+	<NeutralLanguage>en-US</NeutralLanguage>
+	<FileVersion>1.0.0.0214</FileVersion>
   </PropertyGroup>
 
 </Project>
