@@ -1,4 +1,4 @@
-﻿namespace prosek.models
+﻿namespace prosek.models.relations.Process
 {
     public class Proc
     {

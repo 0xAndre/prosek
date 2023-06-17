@@ -89,6 +89,12 @@
             Result = new ColumnHeader();
             MalwareName = new ColumnHeader();
             tabPageRelations = new TabPage();
+            lstViewExecutionParents = new ListView();
+            Sanned = new ColumnHeader();
+            Detect = new ColumnHeader();
+            Type = new ColumnHeader();
+            ExecName = new ColumnHeader();
+            lblExecutionParents = new Label();
             lblContactedIPs = new Label();
             lstViewContactedIps = new ListView();
             IP = new ColumnHeader();
@@ -693,6 +699,8 @@
             // 
             // tabPageRelations
             // 
+            tabPageRelations.Controls.Add(lstViewExecutionParents);
+            tabPageRelations.Controls.Add(lblExecutionParents);
             tabPageRelations.Controls.Add(lblContactedIPs);
             tabPageRelations.Controls.Add(lstViewContactedIps);
             tabPageRelations.Location = new Point(4, 24);
@@ -703,12 +711,52 @@
             tabPageRelations.Text = "Relations";
             tabPageRelations.UseVisualStyleBackColor = true;
             // 
+            // lstViewExecutionParents
+            // 
+            lstViewExecutionParents.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lstViewExecutionParents.Columns.AddRange(new ColumnHeader[] { Sanned, Detect, Type, ExecName });
+            lstViewExecutionParents.Location = new Point(0, 249);
+            lstViewExecutionParents.Name = "lstViewExecutionParents";
+            lstViewExecutionParents.Size = new Size(755, 135);
+            lstViewExecutionParents.TabIndex = 3;
+            lstViewExecutionParents.UseCompatibleStateImageBehavior = false;
+            // 
+            // Sanned
+            // 
+            Sanned.Text = "Scanned";
+            Sanned.Width = 100;
+            // 
+            // Detect
+            // 
+            Detect.Text = "Detections";
+            Detect.Width = 100;
+            // 
+            // Type
+            // 
+            Type.Text = "Type";
+            // 
+            // ExecName
+            // 
+            ExecName.Text = "Name";
+            ExecName.Width = 300;
+            // 
+            // lblExecutionParents
+            // 
+            lblExecutionParents.AutoSize = true;
+            lblExecutionParents.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblExecutionParents.Location = new Point(3, 231);
+            lblExecutionParents.Name = "lblExecutionParents";
+            lblExecutionParents.Size = new Size(107, 15);
+            lblExecutionParents.TabIndex = 2;
+            lblExecutionParents.Text = "Execution Parents";
+            // 
             // lblContactedIPs
             // 
             lblContactedIPs.AutoSize = true;
+            lblContactedIPs.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             lblContactedIPs.Location = new Point(3, 15);
             lblContactedIPs.Name = "lblContactedIPs";
-            lblContactedIPs.Size = new Size(136, 15);
+            lblContactedIPs.Size = new Size(142, 15);
             lblContactedIPs.TabIndex = 1;
             lblContactedIPs.Text = "Contacted IPs Addresses";
             // 
@@ -718,7 +766,7 @@
             lstViewContactedIps.Columns.AddRange(new ColumnHeader[] { IP, Detections, Country, Owner, LAD });
             lstViewContactedIps.Location = new Point(0, 33);
             lstViewContactedIps.Name = "lstViewContactedIps";
-            lstViewContactedIps.Size = new Size(755, 175);
+            lstViewContactedIps.Size = new Size(755, 181);
             lstViewContactedIps.TabIndex = 0;
             lstViewContactedIps.UseCompatibleStateImageBehavior = false;
             // 
@@ -861,5 +909,11 @@
         private ColumnHeader Country;
         private ColumnHeader Owner;
         private ColumnHeader LAD;
+        private Label lblExecutionParents;
+        private ListView lstViewExecutionParents;
+        private ColumnHeader Sanned;
+        private ColumnHeader Detect;
+        private ColumnHeader Type;
+        private ColumnHeader ExecName;
     }
 }

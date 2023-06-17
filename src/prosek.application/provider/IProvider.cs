@@ -1,5 +1,6 @@
-﻿using prosek.models;
-using prosek.models.relations;
+﻿using prosek.models.relations.IPs;
+using prosek.models.relations.Parents;
+using prosek.models.relations.Process;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +26,9 @@ namespace prosek.application.provider
         public ContactedIps GetMockedContactedIpsData();
 
         public ContactedIps GetContactedIPsData(string hash);
+
+        public ExecutionParents GetMockedExecutionParentsData();
+
+        public ExecutionParents GetExecutionParentsData(string hash);
     }
 }

@@ -3,8 +3,9 @@ using prosek.application;
 using prosek.application.exceptions;
 using prosek.application.provider;
 using prosek.application.provider.virustotal;
-using prosek.models;
-using prosek.models.relations;
+using prosek.models.relations.IPs;
+using prosek.models.relations.Parents;
+using prosek.models.relations.Process;
 using System;
 using System.Diagnostics;
 using System.Reflection;
@@ -123,17 +124,14 @@ namespace prosek.ui
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
-                //Analysis fileInfo = virusTotal.GetProcessData(hash, moduleName);
-                Analysis fileInfo = virusTotal.GetMockedProcessData();
+                Analysis fileInfo = virusTotal.GetProcessData(hash, moduleName);
+                //Analysis fileInfo = virusTotal.GetMockedProcessData();
 
                 GetRelations(hash);
 
                 FillProcessDetails(id, moduleName, fileName, fileInfo);
 
                 var analysisResults = fileInfo.data.attributes.last_analysis_results;
-
-
-                //List<AnalysisResult> analysisResults = new List<AnalysisResult>();
 
                 listViewDetection.View = View.Details;
                 listViewDetection.Items.Clear();
@@ -230,12 +228,18 @@ namespace prosek.ui
 
         private void GetRelations(string hash)
         {
-            ContactedIps contectedIps = virusTotal.GetMockedContactedIpsData();
+            GetContactedIPs(hash);
+            GetExecutionParents(hash);
+        }
+
+        private void GetContactedIPs(string hash)
+        {
+            ContactedIps contectedIps = virusTotal.GetContactedIPsData(hash);
 
             lstViewContactedIps.View = View.Details;
             lstViewContactedIps.Items.Clear();
 
-            foreach (Datum ip in contectedIps.data)
+            foreach (var ip in contectedIps.data)
             {
                 int totalAnalysis = ip.attributes.last_analysis_stats.malicious
                         + ip.attributes.last_analysis_stats.harmless
@@ -251,7 +255,31 @@ namespace prosek.ui
                 lvi.UseItemStyleForSubItems = false;
                 lstViewContactedIps.Items.Add(lvi);
             }
+        }
 
+        private void GetExecutionParents(string hash)
+        {
+            ExecutionParents executionParents = virusTotal.GetExecutionParentsData(hash);
+
+            lstViewExecutionParents.View = View.Details;
+            lstViewExecutionParents.Items.Clear();
+
+            foreach (var executionParent in executionParents.data)
+            {
+                int totalAnalysis = executionParent.attributes.last_analysis_stats.malicious
+                        + executionParent.attributes.last_analysis_stats.harmless
+                        + executionParent.attributes.last_analysis_stats.undetected
+                        + executionParent.attributes.last_analysis_stats.suspicious
+                        + executionParent.attributes.last_analysis_stats.timeout;
+
+                DateTimeOffset dateTimeOffset2 = DateTimeOffset.FromUnixTimeSeconds(executionParent.attributes.last_analysis_date);
+                DateTime lastAnalysisDate = dateTimeOffset2.DateTime;
+
+                ListViewItem lvi = new ListViewItem(new string[] { lastAnalysisDate.ToString(), $"{executionParent.attributes.last_analysis_stats.malicious}/{totalAnalysis}", executionParent.attributes.type_extension, executionParent.attributes.meaningful_name });
+
+                lvi.UseItemStyleForSubItems = false;
+                lstViewExecutionParents.Items.Add(lvi);
+            }
         }
     }
 }

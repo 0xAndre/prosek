@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
 using prosek.application.exceptions;
-using prosek.models;
-using prosek.models.relations;
+using prosek.models.relations.IPs;
+using prosek.models.relations.Parents;
+using prosek.models.relations.Process;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,6 +43,18 @@ namespace prosek.application.provider.virustotal
             string file = File.ReadAllText(fileName);
 
             ContactedIps analysisResults = JsonConvert.DeserializeObject<ContactedIps>(file);
+
+            return analysisResults;
+        }
+
+        /// <inheritdoc/>
+        public ExecutionParents GetMockedExecutionParentsData()
+        {
+            string fileName = @"D:\git\prosek\docs\executionparents.json";
+
+            string file = File.ReadAllText(fileName);
+
+            ExecutionParents analysisResults = JsonConvert.DeserializeObject<ExecutionParents>(file);
 
             return analysisResults;
         }
@@ -106,6 +119,35 @@ namespace prosek.application.provider.virustotal
                 throw;
             }
         }
+
+        /// <inheritdoc/>
+        public ExecutionParents GetExecutionParentsData(string hash)
+        {
+            try
+            {
+                // get custom x-header
+                string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
+
+                if (string.IsNullOrEmpty(xAbuseHeader))
+                {
+                    xAbuseHeader = GenerateRandomAlphanumericString(16);
+                }
+
+                using (HttpClient client = GetHttpClient())
+                {
+                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/execution_parents")).Result;
+
+                    string result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<ExecutionParents>(result);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
         private HttpClient GetHttpClient()
         {
