@@ -1,4 +1,6 @@
-﻿using prosek.application.exceptions;
+﻿using Newtonsoft.Json;
+using prosek.application.exceptions;
+using prosek.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +20,19 @@ namespace prosek.application.provider.virustotal
         public VirusTotalProvider() { }
 
         /// <inheritdoc/>
-        public string GetMockedProcessData()
+        public Analysis GetMockedProcessData()
         {
-            string fileName = @"D:\git\prosek\docs\example_malicious.json";
+            string fileName = @"D:\git\prosek\docs\example.json";
 
-            return File.ReadAllText(fileName);
+            string file = File.ReadAllText(fileName);
+
+            Analysis analysisResults = JsonConvert.DeserializeObject<Analysis>(file);
+
+            return analysisResults;
         }
 
         /// <inheritdoc/>
-        public string GetProcessData(string hash, string processName)
+        public Analysis GetProcessData(string hash, string processName)
         {
             try
             {
@@ -52,7 +58,9 @@ namespace prosek.application.provider.virustotal
                         throw new NotFoundException($"Process: {processName} not found on VirusTotal.");
                     }
 
-                    return response.Content.ReadAsStringAsync().Result;
+                    string result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<Analysis>(result);
                 }
             }
             catch (Exception)

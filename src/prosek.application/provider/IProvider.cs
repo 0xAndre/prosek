@@ -1,4 +1,5 @@
-﻿using System;
+﻿using prosek.models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,11 +14,11 @@ namespace prosek.application.provider
         /// </summary>
         /// <param name="hash">File Hash.</param>
         /// <param name="processName">Process Name.</param>
-        public string GetProcessData(string hash, string processName);
+        public Analysis GetProcessData(string hash, string processName);
 
         /// <summary>
         /// Get a Process Information from Mocked File.
         /// </summary>
-        public string GetMockedProcessData();
+        public Analysis GetMockedProcessData();
     }
 }

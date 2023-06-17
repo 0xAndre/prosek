@@ -75,7 +75,6 @@ namespace prosek.ui
                             var last = processView.Nodes[id.ToString()].Nodes[0];
                             last.ImageKey = "dll";
                             last.SelectedImageKey = "dll";
-
                         }
 
                     }
@@ -127,15 +126,15 @@ namespace prosek.ui
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
-                //string fileInfo = virusTotal.GetProcessData(hash, moduleName);
-                string fileInfo = virusTotal.GetMockedProcessData();
+                //Analysis fileInfo = virusTotal.GetProcessData(hash, moduleName);
+                Analysis fileInfo = virusTotal.GetMockedProcessData();
 
                 FillProcessDetails(id, moduleName, fileName, fileInfo);
 
-                JObject jObject = JObject.Parse(fileInfo);
-                var aR = JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(jObject["data"]["attributes"]["last_analysis_results"].ToString());
+                var analysisResults = fileInfo.data.attributes.last_analysis_results;
 
-                List<AnalysisResult> analysisResults = new List<AnalysisResult>();
+
+                //List<AnalysisResult> analysisResults = new List<AnalysisResult>();
                 ListViewItem row = new ListViewItem();
 
                 listViewDetection.View = View.Details;
@@ -143,10 +142,17 @@ namespace prosek.ui
 
                 int undetectedVendors = 0, maliciousVendors = 0;
 
-                foreach (var key in aR.Keys)
+
+                foreach(var prop in analysisResults.GetType().GetProperties())
                 {
-                    analysisResults.Add(aR[key].ToObject<AnalysisResult>());
-                    AnalysisResult analysisResult = aR[key].ToObject<AnalysisResult>();
+                    object obj = prop.GetValue(analysisResults, null);
+
+                    if(obj == null)
+                    {
+                        continue;
+                    }
+
+                    AnalysisResult analysisResult = JsonConvert.DeserializeObject<AnalysisResult>(JsonConvert.SerializeObject(obj));
 
                     if (analysisResult.category == "timeout")
                     {
@@ -193,19 +199,18 @@ namespace prosek.ui
 
         }
 
-        private void FillProcessDetails(string ProcesId, string ModuleName, string FileName, string fileInfo)
+        private void FillProcessDetails(string ProcesId, string ModuleName, string FileName, Analysis fileInfo)
         {
-            JObject jObject = JObject.Parse(fileInfo);
             lblProcessNameValue.Text = ModuleName;
             lblProcessPathValue.Text = FileName;
             lblProcessIdValue.Text = ProcesId;
 
-            lblSHA256Value.Text = jObject["data"]["attributes"]["sha256"].ToString().ToUpper();
-            lblSHA1Value.Text = jObject["data"]["attributes"]["sha1"].ToString().ToUpper();
-            lblTypeValue.Text = jObject["data"]["attributes"]["type_description"].ToString();
-            lblTlshValue.Text = jObject["data"]["attributes"]["tlsh"].ToString();
-            lblVhashValue.Text = jObject["data"]["attributes"]["vhash"].ToString().ToUpper();
-            lblSizeValue.Text = Utils.SizeSuffix(Int64.Parse(jObject["data"]["attributes"]["size"].ToString()));
+            lblSHA256Value.Text = fileInfo.data.attributes.sha256.ToUpper();
+            lblSHA1Value.Text = fileInfo.data.attributes.sha1.ToUpper();
+            lblTypeValue.Text = fileInfo.data.attributes.type_description.ToUpper();
+            lblTlshValue.Text = fileInfo.data.attributes.tlsh.ToUpper();
+            lblVhashValue.Text = fileInfo.data.attributes.vhash.ToUpper();
+            lblSizeValue.Text = Utils.SizeSuffix(Int64.Parse(fileInfo.data.attributes.size.ToString()));
         }
 
         private void FillFileVersion(string FileName)
