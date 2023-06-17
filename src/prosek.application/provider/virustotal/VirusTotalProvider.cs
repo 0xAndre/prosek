@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using prosek.application.exceptions;
 using prosek.models;
+using prosek.models.relations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,18 @@ namespace prosek.application.provider.virustotal
             string file = File.ReadAllText(fileName);
 
             Analysis analysisResults = JsonConvert.DeserializeObject<Analysis>(file);
+
+            return analysisResults;
+        }
+
+        /// <inheritdoc/>
+        public ContactedIps GetMockedContactedIpsData()
+        {
+            string fileName = @"D:\git\prosek\docs\contactedips.json";
+
+            string file = File.ReadAllText(fileName);
+
+            ContactedIps analysisResults = JsonConvert.DeserializeObject<ContactedIps>(file);
 
             return analysisResults;
         }
@@ -61,6 +74,39 @@ namespace prosek.application.provider.virustotal
                     string result = response.Content.ReadAsStringAsync().Result;
 
                     return JsonConvert.DeserializeObject<Analysis>(result);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc/>
+        public ContactedIps GetContactedIPsData(string hash)
+        {
+            try
+            {
+                // get custom x-header
+                string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
+
+                if (string.IsNullOrEmpty(xAbuseHeader))
+                {
+                    xAbuseHeader = GenerateRandomAlphanumericString(16);
+                }
+
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    httpClient.DefaultRequestHeaders.Add("X-VT-Anti-Abuse-Header", xAbuseHeader);
+                    httpClient.DefaultRequestHeaders.Add("X-Tool", "vt-ui-main");
+                    httpClient.DefaultRequestHeaders.Add("Accept-Ianguage", "en-US,en;q=0.9,es;q=0.8");
+                    httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0");
+
+                    HttpResponseMessage response = httpClient.GetAsync($"https://www.virustotal.com/ui/files/{hash}/contacted_ips").Result;
+
+                    string result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<ContactedIps>(result);
                 }
             }
             catch (Exception)

@@ -89,6 +89,12 @@
             Result = new ColumnHeader();
             MalwareName = new ColumnHeader();
             tabPageRelations = new TabPage();
+            lblContactedIPs = new Label();
+            lstViewContactedIps = new ListView();
+            IP = new ColumnHeader();
+            Detections = new ColumnHeader();
+            Country = new ColumnHeader();
+            Owner = new ColumnHeader();
             imageList = new ImageList(components);
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
@@ -103,6 +109,7 @@
             groupBoxStats.SuspendLayout();
             groupBoxProperties.SuspendLayout();
             tabPageDetection.SuspendLayout();
+            tabPageRelations.SuspendLayout();
             SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -685,6 +692,8 @@
             // 
             // tabPageRelations
             // 
+            tabPageRelations.Controls.Add(lblContactedIPs);
+            tabPageRelations.Controls.Add(lstViewContactedIps);
             tabPageRelations.Location = new Point(4, 24);
             tabPageRelations.Name = "tabPageRelations";
             tabPageRelations.Padding = new Padding(3);
@@ -692,6 +701,44 @@
             tabPageRelations.TabIndex = 1;
             tabPageRelations.Text = "Relations";
             tabPageRelations.UseVisualStyleBackColor = true;
+            // 
+            // lblContactedIPs
+            // 
+            lblContactedIPs.AutoSize = true;
+            lblContactedIPs.Location = new Point(3, 15);
+            lblContactedIPs.Name = "lblContactedIPs";
+            lblContactedIPs.Size = new Size(136, 15);
+            lblContactedIPs.TabIndex = 1;
+            lblContactedIPs.Text = "Contacted IPs Addresses";
+            // 
+            // lstViewContactedIps
+            // 
+            lstViewContactedIps.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lstViewContactedIps.Columns.AddRange(new ColumnHeader[] { IP, Detections, Country, Owner });
+            lstViewContactedIps.Location = new Point(0, 33);
+            lstViewContactedIps.Name = "lstViewContactedIps";
+            lstViewContactedIps.Size = new Size(755, 175);
+            lstViewContactedIps.TabIndex = 0;
+            lstViewContactedIps.UseCompatibleStateImageBehavior = false;
+            // 
+            // IP
+            // 
+            IP.Text = "IP";
+            IP.Width = 100;
+            // 
+            // Detections
+            // 
+            Detections.Text = "Detections";
+            Detections.Width = 100;
+            // 
+            // Country
+            // 
+            Country.Text = "Country";
+            // 
+            // Owner
+            // 
+            Owner.Text = "Owner";
+            Owner.Width = 200;
             // 
             // imageList
             // 
@@ -733,6 +780,8 @@
             groupBoxProperties.ResumeLayout(false);
             groupBoxProperties.PerformLayout();
             tabPageDetection.ResumeLayout(false);
+            tabPageRelations.ResumeLayout(false);
+            tabPageRelations.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -799,5 +848,11 @@
         private Label lblCopyright;
         private Label lblLanguage;
         private Label lblOriginalFileName;
+        private Label lblContactedIPs;
+        private ListView lstViewContactedIps;
+        private ColumnHeader IP;
+        private ColumnHeader Detections;
+        private ColumnHeader Country;
+        private ColumnHeader Owner;
     }
 }

@@ -11,11 +11,14 @@ using System;
 using System.Reflection;
 using prosek.application.provider;
 using prosek.application.provider.virustotal;
+using prosek.models.relations;
 
 namespace prosek.ui
 {
     public partial class App : Form
     {
+
+        IProvider virusTotal = new VirusTotalProvider();
 
         public App()
         {
@@ -99,7 +102,6 @@ namespace prosek.ui
             {
                 Process process = null;
                 string moduleName = null, fileName = null, id = null;
-                IProvider virusTotal = new VirusTotalProvider();
 
                 if (Utils.IsMainProcess(processView.SelectedNode.Text))
                 {
@@ -110,7 +112,7 @@ namespace prosek.ui
                     moduleName = process.MainModule?.ModuleName;
                     id = process.Id.ToString();
 
-                    FillFileVersion(fileName);
+                    FillFileAssemblyInfo(fileName);
                 }
                 else
                 {
@@ -120,8 +122,7 @@ namespace prosek.ui
                     moduleName = fileName.Split("\\")[moduleNameParsed.Length - 1];
                     id = "n/a";
 
-                    FillFileVersion(fileName);
-
+                    FillFileAssemblyInfo(fileName);
                 }
 
                 string hash = Hash.SHA256CheckSum(fileName);
@@ -129,30 +130,30 @@ namespace prosek.ui
                 //Analysis fileInfo = virusTotal.GetProcessData(hash, moduleName);
                 Analysis fileInfo = virusTotal.GetMockedProcessData();
 
+                GetRelations(hash);
+
                 FillProcessDetails(id, moduleName, fileName, fileInfo);
 
                 var analysisResults = fileInfo.data.attributes.last_analysis_results;
 
 
                 //List<AnalysisResult> analysisResults = new List<AnalysisResult>();
-                ListViewItem row = new ListViewItem();
 
                 listViewDetection.View = View.Details;
                 listViewDetection.Items.Clear();
 
                 int undetectedVendors = 0, maliciousVendors = 0;
 
-
-                foreach(var prop in analysisResults.GetType().GetProperties())
+                foreach (var prop in analysisResults.GetType().GetProperties())
                 {
                     object obj = prop.GetValue(analysisResults, null);
 
-                    if(obj == null)
+                    if (obj == null)
                     {
                         continue;
                     }
 
-                    AnalysisResult analysisResult = JsonConvert.DeserializeObject<AnalysisResult>(JsonConvert.SerializeObject(obj));
+                    AnalysisResult analysisResult = JsonConvert.DeserializeObject<AnalysisResult>(JsonConvert.SerializeObject(obj)) ?? throw new NotFoundException();
 
                     if (analysisResult.category == "timeout")
                     {
@@ -213,7 +214,7 @@ namespace prosek.ui
             lblSizeValue.Text = Utils.SizeSuffix(Int64.Parse(fileInfo.data.attributes.size.ToString()));
         }
 
-        private void FillFileVersion(string FileName)
+        private void FillFileAssemblyInfo(string FileName)
         {
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(FileName);
             lblFileVersionValue.Text = fvi.FileVersion;
@@ -229,6 +230,29 @@ namespace prosek.ui
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void GetRelations(string hash)
+        {
+            ContactedIps contectedIps = virusTotal.GetMockedContactedIpsData();
+
+            lstViewContactedIps.View = View.Details;
+            lstViewContactedIps.Items.Clear();
+
+            foreach (Datum ip in contectedIps.data)
+            {
+                int totalAnalysis = ip.attributes.last_analysis_stats.malicious 
+                        + ip.attributes.last_analysis_stats.harmless 
+                        + ip.attributes.last_analysis_stats.undetected 
+                        + ip.attributes.last_analysis_stats.suspicious
+                        + ip.attributes.last_analysis_stats.timeout;
+
+                ListViewItem lvi = new ListViewItem(new string[] { ip.id, $"{ip.attributes.last_analysis_stats.malicious}/{totalAnalysis}", ip.attributes.country, ip.attributes.as_owner });
+
+                lvi.UseItemStyleForSubItems = false;
+                lstViewContactedIps.Items.Add(lvi);
+            }
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using prosek.models;
+using prosek.models.relations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,5 +21,9 @@ namespace prosek.application.provider
         /// Get a Process Information from Mocked File.
         /// </summary>
         public Analysis GetMockedProcessData();
+
+        public ContactedIps GetMockedContactedIpsData();
+
+        public ContactedIps GetContactedIPsData(string hash);
     }
 }
