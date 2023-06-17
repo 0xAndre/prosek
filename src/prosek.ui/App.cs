@@ -1,17 +1,13 @@
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using prosek.application;
-using prosek.models;
-using System.Diagnostics;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Windows.Forms.VisualStyles;
 using prosek.application.exceptions;
-using System;
-using System.Reflection;
 using prosek.application.provider;
 using prosek.application.provider.virustotal;
+using prosek.models;
 using prosek.models.relations;
+using System;
+using System.Diagnostics;
+using System.Reflection;
 
 namespace prosek.ui
 {
@@ -241,13 +237,16 @@ namespace prosek.ui
 
             foreach (Datum ip in contectedIps.data)
             {
-                int totalAnalysis = ip.attributes.last_analysis_stats.malicious 
-                        + ip.attributes.last_analysis_stats.harmless 
-                        + ip.attributes.last_analysis_stats.undetected 
+                int totalAnalysis = ip.attributes.last_analysis_stats.malicious
+                        + ip.attributes.last_analysis_stats.harmless
+                        + ip.attributes.last_analysis_stats.undetected
                         + ip.attributes.last_analysis_stats.suspicious
                         + ip.attributes.last_analysis_stats.timeout;
 
-                ListViewItem lvi = new ListViewItem(new string[] { ip.id, $"{ip.attributes.last_analysis_stats.malicious}/{totalAnalysis}", ip.attributes.country, ip.attributes.as_owner });
+                DateTimeOffset dateTimeOffset2 = DateTimeOffset.FromUnixTimeSeconds(ip.attributes.last_analysis_date);
+                DateTime lastAnalysisDate = dateTimeOffset2.DateTime;
+
+                ListViewItem lvi = new ListViewItem(new string[] { ip.id, $"{ip.attributes.last_analysis_stats.malicious}/{totalAnalysis}", ip.attributes.country, ip.attributes.as_owner, lastAnalysisDate.ToString() });
 
                 lvi.UseItemStyleForSubItems = false;
                 lstViewContactedIps.Items.Add(lvi);

@@ -15,6 +15,8 @@ namespace prosek.application.provider.virustotal
 
         private string _X_HEADER_FILENAME = "xabuseheader.txt";
 
+        private string BaseUrl = "https://www.virustotal.com/ui/files/";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="VirusTotalProvider"/> class.
         /// </summary>
@@ -57,14 +59,9 @@ namespace prosek.application.provider.virustotal
                     xAbuseHeader = GenerateRandomAlphanumericString(16);
                 }
 
-                using (HttpClient httpClient = new HttpClient())
+                using (HttpClient client = GetHttpClient())
                 {
-                    httpClient.DefaultRequestHeaders.Add("X-VT-Anti-Abuse-Header", xAbuseHeader);
-                    httpClient.DefaultRequestHeaders.Add("X-Tool", "vt-ui-main");
-                    httpClient.DefaultRequestHeaders.Add("Accept-Ianguage", "en-US,en;q=0.9,es;q=0.8");
-                    httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0");
-
-                    HttpResponseMessage response = httpClient.GetAsync($"https://www.virustotal.com/ui/files/{hash}").Result;
+                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress,hash)).Result;
 
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
@@ -95,14 +92,9 @@ namespace prosek.application.provider.virustotal
                     xAbuseHeader = GenerateRandomAlphanumericString(16);
                 }
 
-                using (HttpClient httpClient = new HttpClient())
+                using (HttpClient client = GetHttpClient())
                 {
-                    httpClient.DefaultRequestHeaders.Add("X-VT-Anti-Abuse-Header", xAbuseHeader);
-                    httpClient.DefaultRequestHeaders.Add("X-Tool", "vt-ui-main");
-                    httpClient.DefaultRequestHeaders.Add("Accept-Ianguage", "en-US,en;q=0.9,es;q=0.8");
-                    httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0");
-
-                    HttpResponseMessage response = httpClient.GetAsync($"https://www.virustotal.com/ui/files/{hash}/contacted_ips").Result;
+                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/contacted_ips")).Result;
 
                     string result = response.Content.ReadAsStringAsync().Result;
 
@@ -113,6 +105,29 @@ namespace prosek.application.provider.virustotal
             {
                 throw;
             }
+        }
+
+        private HttpClient GetHttpClient()
+        {
+            HttpClient httpClient = new HttpClient
+            {
+                BaseAddress = new Uri(this.BaseUrl)
+            };
+
+            // get custom x-header
+            string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
+
+            if (string.IsNullOrEmpty(xAbuseHeader))
+            {
+                xAbuseHeader = GenerateRandomAlphanumericString(16);
+            }
+
+            httpClient.DefaultRequestHeaders.Add("X-VT-Anti-Abuse-Header", xAbuseHeader);
+            httpClient.DefaultRequestHeaders.Add("X-Tool", "vt-ui-main");
+            httpClient.DefaultRequestHeaders.Add("Accept-Ianguage", "en-US,en;q=0.9,es;q=0.8");
+            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0");
+
+            return httpClient;
         }
 
         /// <summary>

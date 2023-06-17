@@ -95,6 +95,7 @@
             Detections = new ColumnHeader();
             Country = new ColumnHeader();
             Owner = new ColumnHeader();
+            LAD = new ColumnHeader();
             imageList = new ImageList(components);
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
@@ -714,7 +715,7 @@
             // lstViewContactedIps
             // 
             lstViewContactedIps.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            lstViewContactedIps.Columns.AddRange(new ColumnHeader[] { IP, Detections, Country, Owner });
+            lstViewContactedIps.Columns.AddRange(new ColumnHeader[] { IP, Detections, Country, Owner, LAD });
             lstViewContactedIps.Location = new Point(0, 33);
             lstViewContactedIps.Name = "lstViewContactedIps";
             lstViewContactedIps.Size = new Size(755, 175);
@@ -738,7 +739,12 @@
             // Owner
             // 
             Owner.Text = "Owner";
-            Owner.Width = 200;
+            Owner.Width = 250;
+            // 
+            // LAD
+            // 
+            LAD.Text = "Last Analysis";
+            LAD.Width = 120;
             // 
             // imageList
             // 
@@ -854,5 +860,6 @@
         private ColumnHeader Detections;
         private ColumnHeader Country;
         private ColumnHeader Owner;
+        private ColumnHeader LAD;
     }
 }
