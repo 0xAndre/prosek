@@ -8,6 +8,7 @@ using prosek.models.relations.Parents;
 using prosek.models.relations.Process;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Reflection;
 
 namespace prosek.ui
@@ -15,7 +16,9 @@ namespace prosek.ui
     public partial class App : Form
     {
 
-        IProvider virusTotal = new VirusTotalProvider();
+        IProvider VirusTotal = new VirusTotalProvider();
+
+        private string DefaultLoadingValue = "Loading...";
 
         public App()
         {
@@ -97,6 +100,7 @@ namespace prosek.ui
         {
             try
             {
+                StartLoadingFields();
                 Process process = null;
                 string moduleName = null, fileName = null, id = null;
 
@@ -124,8 +128,8 @@ namespace prosek.ui
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
-                //Analysis fileInfo = virusTotal.GetProcessData(hash, moduleName);
-                Analysis fileInfo = virusTotal.GetMockedProcessData();
+                Analysis fileInfo = this.VirusTotal.GetProcessData(hash, moduleName);
+                //Analysis fileInfo = virusTotal.GetMockedProcessData();
 
                 GetRelations(hash);
 
@@ -234,7 +238,7 @@ namespace prosek.ui
 
         private void GetContactedIPs(string hash)
         {
-            ContactedIps contectedIps = virusTotal.GetMockedContactedIpsData();
+            ContactedIps contectedIps = this.VirusTotal.GetContactedIPsData(hash);
 
             lstViewContactedIps.View = View.Details;
             lstViewContactedIps.Items.Clear();
@@ -259,7 +263,7 @@ namespace prosek.ui
 
         private void GetExecutionParents(string hash)
         {
-            ExecutionParents executionParents = virusTotal.GetMockedExecutionParentsData();
+            ExecutionParents executionParents = this.VirusTotal.GetExecutionParentsData(hash);
 
             lstViewExecutionParents.View = View.Details;
             lstViewExecutionParents.Items.Clear();
@@ -280,6 +284,47 @@ namespace prosek.ui
                 lvi.UseItemStyleForSubItems = false;
                 lstViewExecutionParents.Items.Add(lvi);
             }
+        }
+
+        private void StartLoadingFields()
+        {
+            lblProcessNameValue.Text = this.DefaultLoadingValue;
+            lblProcessPathValue.Text = this.DefaultLoadingValue;
+            lblProcessIdValue.Text = this.DefaultLoadingValue;
+
+            lblSHA256Value.Text = this.DefaultLoadingValue;
+            lblSHA1Value.Text = this.DefaultLoadingValue;
+            lblTypeValue.Text = this.DefaultLoadingValue;
+            lblTlshValue.Text = this.DefaultLoadingValue;
+            lblVhashValue.Text = this.DefaultLoadingValue;
+            lblSizeValue.Text = this.DefaultLoadingValue;
+
+            lblFileVersionValue.Text = this.DefaultLoadingValue;
+            lblDescriptionValue.Text = this.DefaultLoadingValue;
+            lblCompanyNameValue.Text = this.DefaultLoadingValue;
+            lblCopyrightValue.Text = this.DefaultLoadingValue;
+            lblOriginalFilenameValue.Text = this.DefaultLoadingValue;
+            lblLanguageValue.Text = this.DefaultLoadingValue;
+            lblProductNameValue.Text = this.DefaultLoadingValue;
+            lblProductVersionValue.Text = this.DefaultLoadingValue;
+
+            lblStatusUndetected.Text = $"0 vendors have not detected malware on this file";
+            lblStatusMalicious.Text = $"0 vendors detected malware on this file";
+
+            ListViewItem lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            lvi.UseItemStyleForSubItems = false;
+            listViewDetection.Items.Clear();
+            listViewDetection.Items.Add(lvi);
+
+            lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            lvi.UseItemStyleForSubItems = false;
+            lstViewContactedIps.Items.Clear();
+            lstViewContactedIps.Items.Add(lvi);
+
+            lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            lvi.UseItemStyleForSubItems = false;
+            lstViewExecutionParents.Items.Clear();
+            lstViewExecutionParents.Items.Add(lvi);
         }
     }
 }
