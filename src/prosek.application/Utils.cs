@@ -8,6 +8,11 @@ namespace prosek.application
 {
     public static class Utils
     {
+        /// <summary>
+        /// File Size to Quantity.
+        /// </summary>
+        /// <param name="value">Value.</param>
+        /// <param name="decimalPlaces">Decimal Places.</param>
         public static string SizeSuffix(Int64 value, int decimalPlaces = 1)
         {
             string[] SizeSuffixes =

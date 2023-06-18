@@ -17,9 +17,14 @@ namespace prosek.ui
 {
     public partial class App : Form
     {
-
+        /// <summary>
+        /// Gets or sets VirusTotal Provider.
+        /// </summary>
         IProvider VirusTotal = new VirusTotalProvider();
 
+        /// <summary>
+        /// Label and ListViews Reset State.
+        /// </summary>
         private string DefaultLoadingValue = "Loading...";
 
         public App()
@@ -33,11 +38,6 @@ namespace prosek.ui
             options.Show();
         }
 
-        private void splitContainer1_SplitterMoved_1(object sender, SplitterEventArgs e)
-        {
-
-        }
-
         private void toolMenuPlay_Click(object sender, EventArgs e)
         {
             LoadProcesses();
@@ -45,8 +45,6 @@ namespace prosek.ui
 
         private void LoadProcesses()
         {
-
-            StartLoadingFields();
 
             toolStripProgressBar.Visible = true;
             processView.Nodes.Clear();
@@ -342,6 +340,9 @@ namespace prosek.ui
             }
         }
 
+        /// <summary>
+        /// Reset all Labels and ListViews to Initial State.
+        /// </summary>
         private void StartLoadingFields()
         {
             lblProcessNameValue.Text = this.DefaultLoadingValue;

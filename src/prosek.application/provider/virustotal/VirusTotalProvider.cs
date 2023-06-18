@@ -26,66 +26,6 @@ namespace prosek.application.provider.virustotal
         public VirusTotalProvider() { }
 
         /// <inheritdoc/>
-        public Analysis GetMockedProcessData()
-        {
-            string fileName = @"D:\git\prosek\docs\example.json";
-
-            string file = File.ReadAllText(fileName);
-
-            Analysis analysisResults = JsonConvert.DeserializeObject<Analysis>(file);
-
-            return analysisResults;
-        }
-
-        /// <inheritdoc/>
-        public ContactedIps GetMockedContactedIpsData()
-        {
-            string fileName = @"D:\git\prosek\docs\contactedips.json";
-
-            string file = File.ReadAllText(fileName);
-
-            ContactedIps analysisResults = JsonConvert.DeserializeObject<ContactedIps>(file);
-
-            return analysisResults;
-        }
-
-        /// <inheritdoc/>
-        public ExecutionParents GetMockedExecutionParentsData()
-        {
-            string fileName = @"D:\git\prosek\docs\executionparents.json";
-
-            string file = File.ReadAllText(fileName);
-
-            ExecutionParents analysisResults = JsonConvert.DeserializeObject<ExecutionParents>(file);
-
-            return analysisResults;
-        }
-
-        /// <inheritdoc/>
-        public ContactedDomains GetMockedContactedDomainsData()
-        {
-            string fileName = @"D:\git\prosek\docs\contacteddomains.json";
-
-            string file = File.ReadAllText(fileName);
-
-            ContactedDomains analysisResults = JsonConvert.DeserializeObject<ContactedDomains>(file);
-
-            return analysisResults;
-        }
-
-        /// <inheritdoc/>
-        public PEResourceChildren GetMockedPEResourceChildrenData()
-        {
-            string fileName = @"D:\git\prosek\docs\peresourcechildren.json";
-
-            string file = File.ReadAllText(fileName);
-
-            PEResourceChildren analysisResults = JsonConvert.DeserializeObject<PEResourceChildren>(file);
-
-            return analysisResults;
-        }
-
-        /// <inheritdoc/>
         public Analysis GetProcessData(string hash, string processName)
         {
             try
@@ -230,7 +170,10 @@ namespace prosek.application.provider.virustotal
             }
         }
 
-
+        /// <summary>
+        /// Http client.
+        /// </summary>
+        /// <returns>Http client.</returns>
         private HttpClient GetHttpClient()
         {
             HttpClient httpClient = new HttpClient
