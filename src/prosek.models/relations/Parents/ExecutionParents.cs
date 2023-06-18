@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace prosek.models.relations.Parents
 {
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class Acronis
     {
         public string category { get; set; }

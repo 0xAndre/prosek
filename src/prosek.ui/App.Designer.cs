@@ -89,6 +89,18 @@
             Result = new ColumnHeader();
             MalwareName = new ColumnHeader();
             tabPageRelations = new TabPage();
+            lstViewPEResourceChildren = new ListView();
+            columnHeader5 = new ColumnHeader();
+            columnHeader6 = new ColumnHeader();
+            columnHeader7 = new ColumnHeader();
+            columnHeader8 = new ColumnHeader();
+            lvlPEResourceChildren = new Label();
+            lstViewContactedDomains = new ListView();
+            columnHeader1 = new ColumnHeader();
+            columnHeader2 = new ColumnHeader();
+            columnHeader3 = new ColumnHeader();
+            columnHeader4 = new ColumnHeader();
+            lblContactedDomains = new Label();
             lstViewExecutionParents = new ListView();
             Sanned = new ColumnHeader();
             Detect = new ColumnHeader();
@@ -699,6 +711,10 @@
             // 
             // tabPageRelations
             // 
+            tabPageRelations.Controls.Add(lstViewPEResourceChildren);
+            tabPageRelations.Controls.Add(lvlPEResourceChildren);
+            tabPageRelations.Controls.Add(lstViewContactedDomains);
+            tabPageRelations.Controls.Add(lblContactedDomains);
             tabPageRelations.Controls.Add(lstViewExecutionParents);
             tabPageRelations.Controls.Add(lblExecutionParents);
             tabPageRelations.Controls.Add(lblContactedIPs);
@@ -711,13 +727,92 @@
             tabPageRelations.Text = "Relations";
             tabPageRelations.UseVisualStyleBackColor = true;
             // 
+            // lstViewPEResourceChildren
+            // 
+            lstViewPEResourceChildren.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lstViewPEResourceChildren.Columns.AddRange(new ColumnHeader[] { columnHeader5, columnHeader6, columnHeader7, columnHeader8 });
+            lstViewPEResourceChildren.Location = new Point(0, 561);
+            lstViewPEResourceChildren.Name = "lstViewPEResourceChildren";
+            lstViewPEResourceChildren.Size = new Size(755, 150);
+            lstViewPEResourceChildren.TabIndex = 7;
+            lstViewPEResourceChildren.UseCompatibleStateImageBehavior = false;
+            // 
+            // columnHeader5
+            // 
+            columnHeader5.Text = "Scanned";
+            columnHeader5.Width = 120;
+            // 
+            // columnHeader6
+            // 
+            columnHeader6.Text = "Detections";
+            columnHeader6.Width = 100;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Type";
+            // 
+            // columnHeader8
+            // 
+            columnHeader8.Text = "SHA256";
+            columnHeader8.Width = 400;
+            // 
+            // lvlPEResourceChildren
+            // 
+            lvlPEResourceChildren.AutoSize = true;
+            lvlPEResourceChildren.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lvlPEResourceChildren.Location = new Point(0, 543);
+            lvlPEResourceChildren.Name = "lvlPEResourceChildren";
+            lvlPEResourceChildren.Size = new Size(124, 15);
+            lvlPEResourceChildren.TabIndex = 6;
+            lvlPEResourceChildren.Text = "PE Resource Children";
+            // 
+            // lstViewContactedDomains
+            // 
+            lstViewContactedDomains.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            lstViewContactedDomains.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4 });
+            lstViewContactedDomains.Location = new Point(0, 376);
+            lstViewContactedDomains.Name = "lstViewContactedDomains";
+            lstViewContactedDomains.Size = new Size(755, 150);
+            lstViewContactedDomains.TabIndex = 5;
+            lstViewContactedDomains.UseCompatibleStateImageBehavior = false;
+            // 
+            // columnHeader1
+            // 
+            columnHeader1.Text = "Scanned";
+            columnHeader1.Width = 200;
+            // 
+            // columnHeader2
+            // 
+            columnHeader2.Text = "Detections";
+            columnHeader2.Width = 120;
+            // 
+            // columnHeader3
+            // 
+            columnHeader3.Text = "Created";
+            columnHeader3.Width = 120;
+            // 
+            // columnHeader4
+            // 
+            columnHeader4.Text = "Registrar";
+            columnHeader4.Width = 250;
+            // 
+            // lblContactedDomains
+            // 
+            lblContactedDomains.AutoSize = true;
+            lblContactedDomains.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblContactedDomains.Location = new Point(0, 358);
+            lblContactedDomains.Name = "lblContactedDomains";
+            lblContactedDomains.Size = new Size(115, 15);
+            lblContactedDomains.TabIndex = 4;
+            lblContactedDomains.Text = "Contacted Domains";
+            // 
             // lstViewExecutionParents
             // 
             lstViewExecutionParents.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lstViewExecutionParents.Columns.AddRange(new ColumnHeader[] { Sanned, Detect, Type, ExecName });
-            lstViewExecutionParents.Location = new Point(0, 249);
+            lstViewExecutionParents.Location = new Point(1, 198);
             lstViewExecutionParents.Name = "lstViewExecutionParents";
-            lstViewExecutionParents.Size = new Size(755, 135);
+            lstViewExecutionParents.Size = new Size(754, 143);
             lstViewExecutionParents.TabIndex = 3;
             lstViewExecutionParents.UseCompatibleStateImageBehavior = false;
             // 
@@ -744,7 +839,7 @@
             // 
             lblExecutionParents.AutoSize = true;
             lblExecutionParents.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblExecutionParents.Location = new Point(3, 231);
+            lblExecutionParents.Location = new Point(3, 180);
             lblExecutionParents.Name = "lblExecutionParents";
             lblExecutionParents.Size = new Size(107, 15);
             lblExecutionParents.TabIndex = 2;
@@ -766,7 +861,7 @@
             lstViewContactedIps.Columns.AddRange(new ColumnHeader[] { IP, Detections, Country, Owner, LAD });
             lstViewContactedIps.Location = new Point(0, 33);
             lstViewContactedIps.Name = "lstViewContactedIps";
-            lstViewContactedIps.Size = new Size(755, 181);
+            lstViewContactedIps.Size = new Size(755, 126);
             lstViewContactedIps.TabIndex = 0;
             lstViewContactedIps.UseCompatibleStateImageBehavior = false;
             // 
@@ -915,5 +1010,17 @@
         private ColumnHeader Detect;
         private ColumnHeader Type;
         private ColumnHeader ExecName;
+        private ListView lstViewContactedDomains;
+        private ColumnHeader columnHeader1;
+        private ColumnHeader columnHeader2;
+        private ColumnHeader columnHeader3;
+        private ColumnHeader columnHeader4;
+        private Label lblContactedDomains;
+        private ListView lstViewPEResourceChildren;
+        private ColumnHeader columnHeader5;
+        private ColumnHeader columnHeader6;
+        private ColumnHeader columnHeader7;
+        private ColumnHeader columnHeader8;
+        private Label lvlPEResourceChildren;
     }
 }

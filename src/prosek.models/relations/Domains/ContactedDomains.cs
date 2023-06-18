@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace prosek.models.relations.IPs
+namespace prosek.models.relations.Domains
 {
     public class _0xSIF33d
     {
@@ -89,24 +89,25 @@ namespace prosek.models.relations.IPs
 
     public class Attributes
     {
-        public string regional_internet_registry { get; set; }
+        public List<LastDnsRecord> last_dns_records { get; set; }
         public string jarm { get; set; }
-        public string network { get; set; }
-        public int last_https_certificate_date { get; set; }
-        public List<string> tags { get; set; }
-        public string country { get; set; }
-        public int last_analysis_date { get; set; }
-        public string as_owner { get; set; }
-        public LastAnalysisStats last_analysis_stats { get; set; }
-        public int asn { get; set; }
-        public int whois_date { get; set; }
-        public LastAnalysisResults last_analysis_results { get; set; }
-        public int reputation { get; set; }
-        public int last_modification_date { get; set; }
-        public TotalVotes total_votes { get; set; }
-        public LastHttpsCertificate last_https_certificate { get; set; }
-        public string continent { get; set; }
         public string whois { get; set; }
+        public int last_https_certificate_date { get; set; }
+        public List<object> tags { get; set; }
+        public PopularityRanks popularity_ranks { get; set; }
+        public int last_analysis_date { get; set; }
+        public int last_dns_records_date { get; set; }
+        public LastAnalysisStats last_analysis_stats { get; set; }
+        public int creation_date { get; set; }
+        public int reputation { get; set; }
+        public string registrar { get; set; }
+        public LastAnalysisResults last_analysis_results { get; set; }
+        public int last_update_date { get; set; }
+        public int last_modification_date { get; set; }
+        public string tld { get; set; }
+        public LastHttpsCertificate last_https_certificate { get; set; }
+        public Categories categories { get; set; }
+        public TotalVotes total_votes { get; set; }
     }
 
     public class AuthorityKeyIdentifier
@@ -177,6 +178,15 @@ namespace prosek.models.relations.IPs
         public string OCSP { get; set; }
     }
 
+    public class Categories
+    {
+        [JsonProperty("Forcepoint ThreatSeeker")]
+        public string ForcepointThreatSeeker { get; set; }
+
+        [JsonProperty("Xcitium Verdict Cloud")]
+        public string XcitiumVerdictCloud { get; set; }
+    }
+
     public class Certego
     {
         public string category { get; set; }
@@ -187,8 +197,8 @@ namespace prosek.models.relations.IPs
 
     public class CertSignature
     {
-        public string signature { get; set; }
         public string signature_algorithm { get; set; }
+        public string signature { get; set; }
     }
 
     public class ChongLuaDao
@@ -205,6 +215,12 @@ namespace prosek.models.relations.IPs
         public string result { get; set; }
         public string method { get; set; }
         public string engine_name { get; set; }
+    }
+
+    public class CiscoUmbrella
+    {
+        public int timestamp { get; set; }
+        public int rank { get; set; }
     }
 
     public class Cluster25
@@ -303,12 +319,6 @@ namespace prosek.models.relations.IPs
         public string engine_name { get; set; }
     }
 
-    public class Ec
-    {
-        public string oid { get; set; }
-        public string pub { get; set; }
-    }
-
     public class EmergingThreats
     {
         public string category { get; set; }
@@ -347,6 +357,7 @@ namespace prosek.models.relations.IPs
         public List<string> extended_key_usage { get; set; }
         public AuthorityKeyIdentifier authority_key_identifier { get; set; }
         public List<string> subject_alternative_name { get; set; }
+        public CaInformationAccess ca_information_access { get; set; }
         public string subject_key_identifier { get; set; }
         public List<string> crl_distribution_points { get; set; }
         public List<string> key_usage { get; set; }
@@ -354,14 +365,6 @@ namespace prosek.models.relations.IPs
         [JsonProperty("1.3.6.1.4.1.11129.2.4.2")]
         public string _13614111129242 { get; set; }
         public bool CA { get; set; }
-        public CaInformationAccess ca_information_access { get; set; }
-        public List<object> tags { get; set; }
-
-        [JsonProperty("1.3.6.1.4.1.311.21.7")]
-        public string _136141311217 { get; set; }
-
-        [JsonProperty("1.3.6.1.4.1.311.21.10")]
-        public string _1361413112110 { get; set; }
     }
 
     public class ForcepointThreatSeeker
@@ -607,21 +610,26 @@ namespace prosek.models.relations.IPs
         public int timeout { get; set; }
     }
 
+    public class LastDnsRecord
+    {
+        public string type { get; set; }
+        public string value { get; set; }
+        public int ttl { get; set; }
+    }
+
     public class LastHttpsCertificate
     {
-        public int size { get; set; }
         public PublicKey public_key { get; set; }
         public string thumbprint_sha256 { get; set; }
-        public CertSignature cert_signature { get; set; }
+        public string thumbprint { get; set; }
+        public Subject subject { get; set; }
         public Validity validity { get; set; }
         public string version { get; set; }
         public Extensions extensions { get; set; }
-        public string thumbprint { get; set; }
+        public CertSignature cert_signature { get; set; }
         public string serial_number { get; set; }
         public Issuer issuer { get; set; }
-        public Subject subject { get; set; }
-        public List<object> tags { get; set; }
-        public string signature_algorithm { get; set; }
+        public int size { get; set; }
     }
 
     public class Links
@@ -722,6 +730,12 @@ namespace prosek.models.relations.IPs
         public string engine_name { get; set; }
     }
 
+    public class PopularityRanks
+    {
+        [JsonProperty("Cisco Umbrella")]
+        public CiscoUmbrella CiscoUmbrella { get; set; }
+    }
+
     public class PREBYTES
     {
         public string category { get; set; }
@@ -740,9 +754,8 @@ namespace prosek.models.relations.IPs
 
     public class PublicKey
     {
-        public Ec ec { get; set; }
-        public string algorithm { get; set; }
         public Rsa rsa { get; set; }
+        public string algorithm { get; set; }
     }
 
     public class QuickHeal
@@ -761,7 +774,7 @@ namespace prosek.models.relations.IPs
         public string engine_name { get; set; }
     }
 
-    public class ContactedIps
+    public class ContactedDomains
     {
         public Meta meta { get; set; }
         public List<Datum> data { get; set; }
@@ -874,10 +887,10 @@ namespace prosek.models.relations.IPs
     public class Subject
     {
         public string C { get; set; }
-        public string L { get; set; }
-        public string CN { get; set; }
-        public string O { get; set; }
         public string ST { get; set; }
+        public string L { get; set; }
+        public string O { get; set; }
+        public string CN { get; set; }
     }
 
     public class SucuriSiteCheck

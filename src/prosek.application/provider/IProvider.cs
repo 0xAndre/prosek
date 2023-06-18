@@ -1,5 +1,7 @@
-﻿using prosek.models.relations.IPs;
+﻿using prosek.models.relations.Domains;
+using prosek.models.relations.IPs;
 using prosek.models.relations.Parents;
+using prosek.models.relations.PE;
 using prosek.models.relations.Process;
 using System;
 using System.Collections.Generic;
@@ -30,5 +32,13 @@ namespace prosek.application.provider
         public ExecutionParents GetMockedExecutionParentsData();
 
         public ExecutionParents GetExecutionParentsData(string hash);
+
+        public ContactedDomains GetMockedContactedDomainsData();
+
+        public PEResourceChildren GetMockedPEResourceChildrenData();
+
+        public ContactedDomains GetContactedDomainsData(string hash);
+
+        public PEResourceChildren GetPEResourceChildrenData(string hash);
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
 using prosek.application.exceptions;
+using prosek.models.relations.Domains;
 using prosek.models.relations.IPs;
 using prosek.models.relations.Parents;
+using prosek.models.relations.PE;
 using prosek.models.relations.Process;
 using System;
 using System.Collections.Generic;
@@ -60,6 +62,30 @@ namespace prosek.application.provider.virustotal
         }
 
         /// <inheritdoc/>
+        public ContactedDomains GetMockedContactedDomainsData()
+        {
+            string fileName = @"D:\git\prosek\docs\contacteddomains.json";
+
+            string file = File.ReadAllText(fileName);
+
+            ContactedDomains analysisResults = JsonConvert.DeserializeObject<ContactedDomains>(file);
+
+            return analysisResults;
+        }
+
+        /// <inheritdoc/>
+        public PEResourceChildren GetMockedPEResourceChildrenData()
+        {
+            string fileName = @"D:\git\prosek\docs\peresourcechildren.json";
+
+            string file = File.ReadAllText(fileName);
+
+            PEResourceChildren analysisResults = JsonConvert.DeserializeObject<PEResourceChildren>(file);
+
+            return analysisResults;
+        }
+
+        /// <inheritdoc/>
         public Analysis GetProcessData(string hash, string processName)
         {
             try
@@ -112,6 +138,62 @@ namespace prosek.application.provider.virustotal
                     string result = response.Content.ReadAsStringAsync().Result;
 
                     return JsonConvert.DeserializeObject<ContactedIps>(result);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc/>
+        public ContactedDomains GetContactedDomainsData(string hash)
+        {
+            try
+            {
+                // get custom x-header
+                string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
+
+                if (string.IsNullOrEmpty(xAbuseHeader))
+                {
+                    xAbuseHeader = GenerateRandomAlphanumericString(16);
+                }
+
+                using (HttpClient client = GetHttpClient())
+                {
+                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/contacted_domains")).Result;
+
+                    string result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<ContactedDomains>(result);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc/>
+        public PEResourceChildren GetPEResourceChildrenData(string hash)
+        {
+            try
+            {
+                // get custom x-header
+                string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
+
+                if (string.IsNullOrEmpty(xAbuseHeader))
+                {
+                    xAbuseHeader = GenerateRandomAlphanumericString(16);
+                }
+
+                using (HttpClient client = GetHttpClient())
+                {
+                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/pe_resource_children")).Result;
+
+                    string result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<PEResourceChildren>(result);
                 }
             }
             catch (Exception)
