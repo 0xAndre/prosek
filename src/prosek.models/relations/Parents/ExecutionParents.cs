@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace prosek.models.relations.Parents
 {
@@ -1123,6 +1118,4 @@ namespace prosek.models.relations.Parents
         public string method { get; set; }
         public string engine_update { get; set; }
     }
-
-
 }

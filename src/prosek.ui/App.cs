@@ -8,10 +8,8 @@ using prosek.models.relations.IPs;
 using prosek.models.relations.Parents;
 using prosek.models.relations.PE;
 using prosek.models.relations.Process;
-using System;
+using prosek.ui.Properties;
 using System.Diagnostics;
-using System.IO;
-using System.Reflection;
 
 namespace prosek.ui
 {
@@ -45,17 +43,20 @@ namespace prosek.ui
 
         private void LoadProcesses()
         {
-
             toolStripProgressBar.Visible = true;
             processView.Nodes.Clear();
 
-            var currentProcess = Process.GetProcesses().GroupBy(p => p.ProcessName).Select(g => g.First()).ToList();
+            var currentProcess = Process
+                .GetProcesses()
+                .GroupBy(p => p.ProcessName)
+                .Select(g => g.First())
+                .ToList();
 
             int i = 0;
 
             processView.ImageList = imageList;
 
-            imageList.Images.Add("dll", Image.FromFile($"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\images\\dll.png"));
+            imageList.Images.Add("dll", Resources.dll);
 
             foreach (Process p in currentProcess)
             {
@@ -66,12 +67,16 @@ namespace prosek.ui
                     processView.Nodes.Add(id.ToString(), $"({p.Id}) {p?.MainModule?.ModuleName}");
 
                     // add icons to list
-                    imageList.Images.Add(p?.MainModule?.ModuleName, Icon.ExtractAssociatedIcon(p?.MainModule?.FileName));
-                    processView.Nodes[processView.Nodes.Count - 1].ImageKey = p?.MainModule?.ModuleName;
-                    processView.Nodes[processView.Nodes.Count - 1].SelectedImageKey = p?.MainModule?.ModuleName;
+                    imageList.Images.Add(
+                        p?.MainModule?.ModuleName,
+                        Icon.ExtractAssociatedIcon(p?.MainModule?.FileName)
+                    );
+                    processView.Nodes[processView.Nodes.Count - 1].ImageKey =
+                        p?.MainModule?.ModuleName;
+                    processView.Nodes[processView.Nodes.Count - 1].SelectedImageKey =
+                        p?.MainModule?.ModuleName;
 
                     toolStripStatusLabel.Text = $"Prosek - Processes ({processView.Nodes.Count})";
-
 
                     foreach (ProcessModule dll in p.Modules)
                     {
@@ -82,7 +87,6 @@ namespace prosek.ui
                             last.ImageKey = "dll";
                             last.SelectedImageKey = "dll";
                         }
-
                     }
                 }
                 catch (Exception)
@@ -105,7 +109,9 @@ namespace prosek.ui
             {
                 StartLoadingFields();
                 Process process = null;
-                string moduleName = null, fileName = null, id = null;
+                string moduleName = null,
+                    fileName = null,
+                    id = null;
 
                 if (Utils.IsMainProcess(processView.SelectedNode.Text))
                 {
@@ -142,7 +148,8 @@ namespace prosek.ui
                 listViewDetection.View = View.Details;
                 listViewDetection.Items.Clear();
 
-                int undetectedVendors = 0, maliciousVendors = 0;
+                int undetectedVendors = 0,
+                    maliciousVendors = 0;
 
                 foreach (var prop in analysisResults.GetType().GetProperties())
                 {
@@ -153,7 +160,10 @@ namespace prosek.ui
                         continue;
                     }
 
-                    AnalysisResult analysisResult = JsonConvert.DeserializeObject<AnalysisResult>(JsonConvert.SerializeObject(obj)) ?? throw new NotFoundException();
+                    AnalysisResult analysisResult =
+                        JsonConvert.DeserializeObject<AnalysisResult>(
+                            JsonConvert.SerializeObject(obj)
+                        ) ?? throw new NotFoundException();
 
                     if (analysisResult.category == "timeout")
                     {
@@ -162,7 +172,14 @@ namespace prosek.ui
 
                     if (analysisResult.category != "type-unsupported")
                     {
-                        ListViewItem lvi = new ListViewItem(new string[] { analysisResult.engine_name, analysisResult.category.ToUpper(), analysisResult.result });
+                        ListViewItem lvi = new ListViewItem(
+                            new string[]
+                            {
+                                analysisResult.engine_name,
+                                analysisResult.category.ToUpper(),
+                                analysisResult.result
+                            }
+                        );
 
                         if (analysisResult.category == "undetected")
                         {
@@ -175,32 +192,40 @@ namespace prosek.ui
                             lvi.SubItems[1].ForeColor = Color.Red;
                             lvi.SubItems[2].ForeColor = Color.Red;
                             maliciousVendors++;
-
                         }
 
                         if (analysisResult.category == "failure")
                         {
                             lvi.SubItems[1].ForeColor = Color.Orange;
-
                         }
-
 
                         lvi.UseItemStyleForSubItems = false;
                         listViewDetection.Items.Add(lvi);
 
-                        lblStatusUndetected.Text = $"{undetectedVendors} vendors have not detected malware on this file";
-                        lblStatusMalicious.Text = $"{maliciousVendors} vendors detected malware on this file";
+                        lblStatusUndetected.Text =
+                            $"{undetectedVendors} vendors have not detected malware on this file";
+                        lblStatusMalicious.Text =
+                            $"{maliciousVendors} vendors detected malware on this file";
                     }
                 }
             }
             catch (NotFoundException ex)
             {
-                MessageBox.Show(ex.Message, "Process not found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    ex.Message,
+                    "Process not found",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
-
         }
 
-        private void FillProcessDetails(string ProcesId, string ModuleName, string FileName, Analysis fileInfo)
+        private void FillProcessDetails(
+            string ProcesId,
+            string ModuleName,
+            string FileName,
+            Analysis fileInfo
+        )
         {
             lblProcessNameValue.Text = ModuleName;
             lblProcessPathValue.Text = FileName;
@@ -211,7 +236,9 @@ namespace prosek.ui
             lblTypeValue.Text = fileInfo.data.attributes.type_description.ToUpper();
             lblTlshValue.Text = fileInfo.data.attributes.tlsh.ToUpper();
             lblVhashValue.Text = fileInfo.data.attributes.vhash.ToUpper();
-            lblSizeValue.Text = Utils.SizeSuffix(Int64.Parse(fileInfo.data.attributes.size.ToString()));
+            lblSizeValue.Text = Utils.SizeSuffix(
+                Int64.Parse(fileInfo.data.attributes.size.ToString())
+            );
         }
 
         private void FillFileAssemblyInfo(string FileName)
@@ -249,16 +276,28 @@ namespace prosek.ui
 
             foreach (var ip in contectedIps.data)
             {
-                int totalAnalysis = ip.attributes.last_analysis_stats.malicious
-                        + ip.attributes.last_analysis_stats.harmless
-                        + ip.attributes.last_analysis_stats.undetected
-                        + ip.attributes.last_analysis_stats.suspicious
-                        + ip.attributes.last_analysis_stats.timeout;
+                int totalAnalysis =
+                    ip.attributes.last_analysis_stats.malicious
+                    + ip.attributes.last_analysis_stats.harmless
+                    + ip.attributes.last_analysis_stats.undetected
+                    + ip.attributes.last_analysis_stats.suspicious
+                    + ip.attributes.last_analysis_stats.timeout;
 
-                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(ip.attributes.last_analysis_date);
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(
+                    ip.attributes.last_analysis_date
+                );
                 DateTime lastAnalysisDate = dateTimeOffset.DateTime;
 
-                ListViewItem lvi = new ListViewItem(new string[] { ip.id, $"{ip.attributes.last_analysis_stats.malicious}/{totalAnalysis}", ip.attributes.country, ip.attributes.as_owner, lastAnalysisDate.ToString() });
+                ListViewItem lvi = new ListViewItem(
+                    new string[]
+                    {
+                        ip.id,
+                        $"{ip.attributes.last_analysis_stats.malicious}/{totalAnalysis}",
+                        ip.attributes.country,
+                        ip.attributes.as_owner,
+                        lastAnalysisDate.ToString()
+                    }
+                );
 
                 lvi.UseItemStyleForSubItems = false;
                 lstViewContactedIps.Items.Add(lvi);
@@ -274,16 +313,27 @@ namespace prosek.ui
 
             foreach (var executionParent in executionParents.data)
             {
-                int totalAnalysis = executionParent.attributes.last_analysis_stats.malicious
-                        + executionParent.attributes.last_analysis_stats.harmless
-                        + executionParent.attributes.last_analysis_stats.undetected
-                        + executionParent.attributes.last_analysis_stats.suspicious
-                        + executionParent.attributes.last_analysis_stats.timeout;
+                int totalAnalysis =
+                    executionParent.attributes.last_analysis_stats.malicious
+                    + executionParent.attributes.last_analysis_stats.harmless
+                    + executionParent.attributes.last_analysis_stats.undetected
+                    + executionParent.attributes.last_analysis_stats.suspicious
+                    + executionParent.attributes.last_analysis_stats.timeout;
 
-                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(executionParent.attributes.last_analysis_date);
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(
+                    executionParent.attributes.last_analysis_date
+                );
                 DateTime lastAnalysisDate = dateTimeOffset.DateTime;
 
-                ListViewItem lvi = new ListViewItem(new string[] { lastAnalysisDate.ToString(), $"{executionParent.attributes.last_analysis_stats.malicious}/{totalAnalysis}", executionParent.attributes.type_extension, executionParent.attributes.meaningful_name });
+                ListViewItem lvi = new ListViewItem(
+                    new string[]
+                    {
+                        lastAnalysisDate.ToString(),
+                        $"{executionParent.attributes.last_analysis_stats.malicious}/{totalAnalysis}",
+                        executionParent.attributes.type_extension,
+                        executionParent.attributes.meaningful_name
+                    }
+                );
 
                 lvi.UseItemStyleForSubItems = false;
                 lstViewExecutionParents.Items.Add(lvi);
@@ -299,16 +349,27 @@ namespace prosek.ui
 
             foreach (var contactedDomain in contactedDomains.data)
             {
-                int totalAnalysis = contactedDomain.attributes.last_analysis_stats.malicious
-                        + contactedDomain.attributes.last_analysis_stats.harmless
-                        + contactedDomain.attributes.last_analysis_stats.undetected
-                        + contactedDomain.attributes.last_analysis_stats.suspicious
-                        + contactedDomain.attributes.last_analysis_stats.timeout;
+                int totalAnalysis =
+                    contactedDomain.attributes.last_analysis_stats.malicious
+                    + contactedDomain.attributes.last_analysis_stats.harmless
+                    + contactedDomain.attributes.last_analysis_stats.undetected
+                    + contactedDomain.attributes.last_analysis_stats.suspicious
+                    + contactedDomain.attributes.last_analysis_stats.timeout;
 
-                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(contactedDomain.attributes.creation_date);
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(
+                    contactedDomain.attributes.creation_date
+                );
                 DateTime creationDate = dateTimeOffset.DateTime;
 
-                ListViewItem lvi = new ListViewItem(new string[] { contactedDomain.id, $"{contactedDomain.attributes.last_analysis_stats.malicious}/{totalAnalysis}", creationDate.ToString(), contactedDomain.attributes.registrar });
+                ListViewItem lvi = new ListViewItem(
+                    new string[]
+                    {
+                        contactedDomain.id,
+                        $"{contactedDomain.attributes.last_analysis_stats.malicious}/{totalAnalysis}",
+                        creationDate.ToString(),
+                        contactedDomain.attributes.registrar
+                    }
+                );
 
                 lvi.UseItemStyleForSubItems = false;
                 lstViewContactedDomains.Items.Add(lvi);
@@ -317,23 +378,36 @@ namespace prosek.ui
 
         private void GetPEResourceChildren(string hash)
         {
-            PEResourceChildren peResourceChildrens = this.VirusTotal.GetPEResourceChildrenData(hash);
+            PEResourceChildren peResourceChildrens = this.VirusTotal.GetPEResourceChildrenData(
+                hash
+            );
 
             lstViewPEResourceChildren.View = View.Details;
             lstViewPEResourceChildren.Items.Clear();
 
             foreach (var peResourceChildren in peResourceChildrens.data)
             {
-                int totalAnalysis = peResourceChildren.attributes.last_analysis_stats.malicious
-                        + peResourceChildren.attributes.last_analysis_stats.harmless
-                        + peResourceChildren.attributes.last_analysis_stats.undetected
-                        + peResourceChildren.attributes.last_analysis_stats.suspicious
-                        + peResourceChildren.attributes.last_analysis_stats.timeout;
+                int totalAnalysis =
+                    peResourceChildren.attributes.last_analysis_stats.malicious
+                    + peResourceChildren.attributes.last_analysis_stats.harmless
+                    + peResourceChildren.attributes.last_analysis_stats.undetected
+                    + peResourceChildren.attributes.last_analysis_stats.suspicious
+                    + peResourceChildren.attributes.last_analysis_stats.timeout;
 
-                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(peResourceChildren.attributes.last_analysis_date);
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(
+                    peResourceChildren.attributes.last_analysis_date
+                );
                 DateTime lastAnalysisDate = dateTimeOffset.DateTime;
 
-                ListViewItem lvi = new ListViewItem(new string[] { lastAnalysisDate.ToString(), $"{peResourceChildren.attributes.last_analysis_stats.malicious}/{totalAnalysis}", peResourceChildren.attributes.type_extension, peResourceChildren.attributes.sha256 });
+                ListViewItem lvi = new ListViewItem(
+                    new string[]
+                    {
+                        lastAnalysisDate.ToString(),
+                        $"{peResourceChildren.attributes.last_analysis_stats.malicious}/{totalAnalysis}",
+                        peResourceChildren.attributes.type_extension,
+                        peResourceChildren.attributes.sha256
+                    }
+                );
 
                 lvi.UseItemStyleForSubItems = false;
                 lstViewPEResourceChildren.Items.Add(lvi);
@@ -368,27 +442,67 @@ namespace prosek.ui
             lblStatusUndetected.Text = $"0 vendors have not detected malware on this file";
             lblStatusMalicious.Text = $"0 vendors detected malware on this file";
 
-            ListViewItem lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            ListViewItem lvi = new ListViewItem(
+                new string[]
+                {
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue
+                }
+            );
             lvi.UseItemStyleForSubItems = false;
             listViewDetection.Items.Clear();
             listViewDetection.Items.Add(lvi);
 
-            lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            lvi = new ListViewItem(
+                new string[]
+                {
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue
+                }
+            );
             lvi.UseItemStyleForSubItems = false;
             lstViewContactedIps.Items.Clear();
             lstViewContactedIps.Items.Add(lvi);
 
-            lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            lvi = new ListViewItem(
+                new string[]
+                {
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue
+                }
+            );
             lvi.UseItemStyleForSubItems = false;
             lstViewExecutionParents.Items.Clear();
             lstViewExecutionParents.Items.Add(lvi);
 
-            lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            lvi = new ListViewItem(
+                new string[]
+                {
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue
+                }
+            );
             lvi.UseItemStyleForSubItems = false;
             lstViewContactedDomains.Items.Clear();
             lstViewContactedDomains.Items.Add(lvi);
 
-            lvi = new ListViewItem(new string[] { this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue });
+            lvi = new ListViewItem(
+                new string[]
+                {
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue,
+                    this.DefaultLoadingValue
+                }
+            );
             lvi.UseItemStyleForSubItems = false;
             lstViewPEResourceChildren.Items.Clear();
             lstViewPEResourceChildren.Items.Add(lvi);

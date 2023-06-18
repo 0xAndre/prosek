@@ -31,8 +31,6 @@ namespace prosek.ui
             App app = new App();
             app.Closed += (s, args) => this.Close();
             app.Show();
-
-
         }
     }
 }

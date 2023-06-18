@@ -5,17 +5,11 @@ using prosek.models.relations.IPs;
 using prosek.models.relations.Parents;
 using prosek.models.relations.PE;
 using prosek.models.relations.Process;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace prosek.application.provider.virustotal
 {
     public class VirusTotalProvider : IProvider
     {
-
         private string _X_HEADER_FILENAME = "xabuseheader.txt";
 
         private string BaseUrl = "https://www.virustotal.com/ui/files/";
@@ -23,7 +17,11 @@ namespace prosek.application.provider.virustotal
         /// <summary>
         /// Initializes a new instance of the <see cref="VirusTotalProvider"/> class.
         /// </summary>
-        public VirusTotalProvider() { }
+        public VirusTotalProvider()
+        {
+            // create a file if not exists
+            using (StreamWriter w = File.AppendText(_X_HEADER_FILENAME)) { }
+        }
 
         /// <inheritdoc/>
         public Analysis GetProcessData(string hash, string processName)
@@ -40,11 +38,15 @@ namespace prosek.application.provider.virustotal
 
                 using (HttpClient client = GetHttpClient())
                 {
-                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress,hash)).Result;
+                    HttpResponseMessage response = client
+                        .GetAsync(string.Concat(client.BaseAddress, hash))
+                        .Result;
 
                     if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                     {
-                        throw new NotFoundException($"Process: {processName} not found on VirusTotal.");
+                        throw new NotFoundException(
+                            $"Process: {processName} not found on VirusTotal."
+                        );
                     }
 
                     string result = response.Content.ReadAsStringAsync().Result;
@@ -73,7 +75,9 @@ namespace prosek.application.provider.virustotal
 
                 using (HttpClient client = GetHttpClient())
                 {
-                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/contacted_ips")).Result;
+                    HttpResponseMessage response = client
+                        .GetAsync(string.Concat(client.BaseAddress, hash, "/contacted_ips"))
+                        .Result;
 
                     string result = response.Content.ReadAsStringAsync().Result;
 
@@ -101,7 +105,9 @@ namespace prosek.application.provider.virustotal
 
                 using (HttpClient client = GetHttpClient())
                 {
-                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/contacted_domains")).Result;
+                    HttpResponseMessage response = client
+                        .GetAsync(string.Concat(client.BaseAddress, hash, "/contacted_domains"))
+                        .Result;
 
                     string result = response.Content.ReadAsStringAsync().Result;
 
@@ -129,7 +135,9 @@ namespace prosek.application.provider.virustotal
 
                 using (HttpClient client = GetHttpClient())
                 {
-                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/pe_resource_children")).Result;
+                    HttpResponseMessage response = client
+                        .GetAsync(string.Concat(client.BaseAddress, hash, "/pe_resource_children"))
+                        .Result;
 
                     string result = response.Content.ReadAsStringAsync().Result;
 
@@ -157,7 +165,9 @@ namespace prosek.application.provider.virustotal
 
                 using (HttpClient client = GetHttpClient())
                 {
-                    HttpResponseMessage response = client.GetAsync(string.Concat(client.BaseAddress, hash, "/execution_parents")).Result;
+                    HttpResponseMessage response = client
+                        .GetAsync(string.Concat(client.BaseAddress, hash, "/execution_parents"))
+                        .Result;
 
                     string result = response.Content.ReadAsStringAsync().Result;
 
@@ -176,10 +186,7 @@ namespace prosek.application.provider.virustotal
         /// <returns>Http client.</returns>
         private HttpClient GetHttpClient()
         {
-            HttpClient httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(this.BaseUrl)
-            };
+            HttpClient httpClient = new HttpClient { BaseAddress = new Uri(this.BaseUrl) };
 
             // get custom x-header
             string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
@@ -192,7 +199,10 @@ namespace prosek.application.provider.virustotal
             httpClient.DefaultRequestHeaders.Add("X-VT-Anti-Abuse-Header", xAbuseHeader);
             httpClient.DefaultRequestHeaders.Add("X-Tool", "vt-ui-main");
             httpClient.DefaultRequestHeaders.Add("Accept-Ianguage", "en-US,en;q=0.9,es;q=0.8");
-            httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0");
+            httpClient.DefaultRequestHeaders.Add(
+                "User-Agent",
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0"
+            );
 
             return httpClient;
         }
@@ -206,7 +216,9 @@ namespace prosek.application.provider.virustotal
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
             var random = new Random();
-            var randomString = new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
+            var randomString = new string(
+                Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray()
+            );
             return randomString;
         }
     }

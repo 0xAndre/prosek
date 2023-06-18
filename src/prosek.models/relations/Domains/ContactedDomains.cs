@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace prosek.models.relations.Domains
 {
@@ -1024,6 +1019,4 @@ namespace prosek.models.relations.Domains
         public string method { get; set; }
         public string engine_name { get; set; }
     }
-
-
 }

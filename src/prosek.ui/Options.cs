@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace prosek.ui
+﻿namespace prosek.ui
 {
     public partial class Options : Form
     {
@@ -24,7 +14,8 @@ namespace prosek.ui
         /// </summary>
         private void Options_Load(object sender, EventArgs e)
         {
-            using (StreamWriter w = File.AppendText(_X_HEADER_FILENAME)) ;
+            using (StreamWriter w = File.AppendText(_X_HEADER_FILENAME))
+                ;
 
             string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
 
@@ -48,7 +39,6 @@ namespace prosek.ui
             {
                 MessageBox.Show("An error occurred while trying to write the x-abuser-header");
             }
-
         }
     }
 }
