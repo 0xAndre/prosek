@@ -11,6 +11,7 @@
 	<Copyright>Copyright © 2023 Prosek</Copyright>
 	<NeutralLanguage>en-US</NeutralLanguage>
 	<FileVersion>1.0.0.0214</FileVersion>
+	<AssemblyName>Prosek.Models</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

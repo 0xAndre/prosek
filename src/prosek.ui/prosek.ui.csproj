@@ -8,7 +8,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <BaseOutputPath>..\_bin</BaseOutputPath>
     <ApplicationIcon>shield.ico</ApplicationIcon>
-    <AssemblyName>prosek</AssemblyName>
+    <AssemblyName>Prosek</AssemblyName>
 	<Authors>Prosek Team</Authors>
 	<Company>Prosek Team.</Company>
 	<Product>Prosek</Product>

@@ -111,6 +111,7 @@ namespace prosek.ui
             try
             {
                 StartLoadingFields();
+                
                 Process process = null;
                 string moduleName = null,
                     fileName = null,
@@ -137,6 +138,8 @@ namespace prosek.ui
 
                     FillFileAssemblyInfo(fileName);
                 }
+
+                this.Text = $"Prosek [{moduleName}]";
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
