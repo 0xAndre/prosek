@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using prosek.application.exceptions;
+using prosek.models.relations.Community;
 using prosek.models.relations.Domains;
 using prosek.models.relations.IPs;
 using prosek.models.relations.Parents;
@@ -172,6 +173,36 @@ namespace prosek.application.provider.virustotal
                     string result = response.Content.ReadAsStringAsync().Result;
 
                     return JsonConvert.DeserializeObject<ExecutionParents>(result);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <inheritdoc/>
+        public Comments GetCommunityCommentsData(string hash)
+        {
+            try
+            {
+                // get custom x-header
+                string xAbuseHeader = File.ReadAllText(_X_HEADER_FILENAME);
+
+                if (string.IsNullOrEmpty(xAbuseHeader))
+                {
+                    xAbuseHeader = GenerateRandomAlphanumericString(16);
+                }
+
+                using (HttpClient client = GetHttpClient())
+                {
+                    HttpResponseMessage response = client
+                        .GetAsync(string.Concat(client.BaseAddress, hash, "/comments?relationships=item,author"))
+                        .Result;
+
+                    string result = response.Content.ReadAsStringAsync().Result;
+
+                    return JsonConvert.DeserializeObject<Comments>(result);
                 }
             }
             catch (Exception)

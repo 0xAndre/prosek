@@ -114,7 +114,12 @@
             Country = new ColumnHeader();
             Owner = new ColumnHeader();
             LAD = new ColumnHeader();
+            tabPageCommunity = new TabPage();
+            dataGridComments = new DataGridView();
             imageList = new ImageList(components);
+            Date = new DataGridViewTextBoxColumn();
+            User = new DataGridViewTextBoxColumn();
+            Comment = new DataGridViewTextBoxColumn();
             menuBar.SuspendLayout();
             toolMenu.SuspendLayout();
             statusStrip1.SuspendLayout();
@@ -129,6 +134,8 @@
             groupBoxProperties.SuspendLayout();
             tabPageDetection.SuspendLayout();
             tabPageRelations.SuspendLayout();
+            tabPageCommunity.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridComments).BeginInit();
             SuspendLayout();
             // 
             // fileToolStripMenuItem
@@ -240,6 +247,7 @@
             tabControl.Controls.Add(tabPageDetails);
             tabControl.Controls.Add(tabPageDetection);
             tabControl.Controls.Add(tabPageRelations);
+            tabControl.Controls.Add(tabPageCommunity);
             tabControl.Dock = DockStyle.Fill;
             tabControl.Location = new Point(0, 0);
             tabControl.Name = "tabControl";
@@ -889,11 +897,57 @@
             LAD.Text = "Last Analysis";
             LAD.Width = 120;
             // 
+            // tabPageCommunity
+            // 
+            tabPageCommunity.Controls.Add(dataGridComments);
+            tabPageCommunity.Location = new Point(4, 24);
+            tabPageCommunity.Name = "tabPageCommunity";
+            tabPageCommunity.Size = new Size(755, 712);
+            tabPageCommunity.TabIndex = 3;
+            tabPageCommunity.Text = "Community";
+            tabPageCommunity.UseVisualStyleBackColor = true;
+            // 
+            // dataGridComments
+            // 
+            dataGridComments.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridComments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridComments.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridComments.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridComments.Columns.AddRange(new DataGridViewColumn[] { Date, User, Comment });
+            dataGridComments.Location = new Point(0, 0);
+            dataGridComments.Name = "dataGridComments";
+            dataGridComments.RowTemplate.Height = 25;
+            dataGridComments.Size = new Size(755, 713);
+            dataGridComments.TabIndex = 0;
+            // 
             // imageList
             // 
             imageList.ColorDepth = ColorDepth.Depth8Bit;
             imageList.ImageSize = new Size(16, 16);
             imageList.TransparentColor = Color.Transparent;
+            // 
+            // Date
+            // 
+            Date.FillWeight = 15F;
+            Date.HeaderText = "Date";
+            Date.Name = "Date";
+            Date.ReadOnly = true;
+            // 
+            // User
+            // 
+            User.FillWeight = 20F;
+            User.HeaderText = "User";
+            User.MinimumWidth = 50;
+            User.Name = "User";
+            User.ReadOnly = true;
+            // 
+            // Comment
+            // 
+            Comment.FillWeight = 60F;
+            Comment.HeaderText = "Comment";
+            Comment.MinimumWidth = 200;
+            Comment.Name = "Comment";
+            Comment.ReadOnly = true;
             // 
             // App
             // 
@@ -931,6 +985,8 @@
             tabPageDetection.ResumeLayout(false);
             tabPageRelations.ResumeLayout(false);
             tabPageRelations.PerformLayout();
+            tabPageCommunity.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridComments).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1022,5 +1078,10 @@
         private ColumnHeader columnHeader7;
         private ColumnHeader columnHeader8;
         private Label lvlPEResourceChildren;
+        private TabPage tabPageCommunity;
+        private DataGridView dataGridComments;
+        private DataGridViewTextBoxColumn Date;
+        private DataGridViewTextBoxColumn User;
+        private DataGridViewTextBoxColumn Comment;
     }
 }

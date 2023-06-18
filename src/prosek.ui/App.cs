@@ -3,6 +3,7 @@ using prosek.application;
 using prosek.application.exceptions;
 using prosek.application.provider;
 using prosek.application.provider.virustotal;
+using prosek.models.relations.Community;
 using prosek.models.relations.Domains;
 using prosek.models.relations.IPs;
 using prosek.models.relations.Parents;
@@ -10,6 +11,8 @@ using prosek.models.relations.PE;
 using prosek.models.relations.Process;
 using prosek.ui.Properties;
 using System.Diagnostics;
+using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace prosek.ui
 {
@@ -265,6 +268,7 @@ namespace prosek.ui
             GetExecutionParents(hash);
             GetContactedDomains(hash);
             GetPEResourceChildren(hash);
+            GetCommynityComments(hash);
         }
 
         private void GetContactedIPs(string hash)
@@ -414,11 +418,39 @@ namespace prosek.ui
             }
         }
 
+        private void GetCommynityComments(string hash)
+        {
+            dataGridComments.Rows.Clear();
+            dataGridComments.Refresh();
+
+            Comments comments = this.VirusTotal.GetCommunityCommentsData(
+                hash
+            );
+
+            lstViewPEResourceChildren.View = View.Details;
+            lstViewPEResourceChildren.Items.Clear();
+
+            foreach (var comment in comments.data)
+            {
+
+                DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(
+                    comment.attributes.date
+                );
+
+                DateTime commentDate = dateTimeOffset.DateTime;
+
+                dataGridComments.Rows.Add(commentDate, comment.relationships.author.data.id, comment.attributes.text);
+            }
+        }
+
         /// <summary>
         /// Reset all Labels and ListViews to Initial State.
         /// </summary>
         private void StartLoadingFields()
         {
+            dataGridComments.Rows.Clear();
+            dataGridComments.Refresh();
+
             lblProcessNameValue.Text = this.DefaultLoadingValue;
             lblProcessPathValue.Text = this.DefaultLoadingValue;
             lblProcessIdValue.Text = this.DefaultLoadingValue;
@@ -506,6 +538,8 @@ namespace prosek.ui
             lvi.UseItemStyleForSubItems = false;
             lstViewPEResourceChildren.Items.Clear();
             lstViewPEResourceChildren.Items.Add(lvi);
+
+            dataGridComments.Rows.Add(this.DefaultLoadingValue, this.DefaultLoadingValue, this.DefaultLoadingValue);
         }
     }
 }

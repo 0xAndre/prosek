@@ -1,0 +1,58 @@
+{
+    "meta": {
+        "count": 1
+    },
+    "data": [
+        {
+            "relationships": {
+                "item": {
+                    "meta": {
+                        "count": 1
+                    },
+                    "data": {
+                        "type": "file",
+                        "id": "87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a"
+                    },
+                    "links": {
+                        "self": "https://www.virustotal.com/ui/comments/f-87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a-8523f70a/relationships/item",
+                        "related": "https://www.virustotal.com/ui/comments/f-87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a-8523f70a/item"
+                    }
+                },
+                "author": {
+                    "meta": {
+                        "count": 1
+                    },
+                    "data": {
+                        "type": "user",
+                        "id": "JaffaCakes118"
+                    },
+                    "links": {
+                        "self": "https://www.virustotal.com/ui/comments/f-87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a-8523f70a/relationships/author",
+                        "related": "https://www.virustotal.com/ui/comments/f-87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a-8523f70a/author"
+                    }
+                }
+            },
+            "attributes": {
+                "date": 1686974608,
+                "text": "#safe",
+                "votes": {
+                    "positive": 0,
+                    "abuse": 0,
+                    "negative": 0
+                },
+                "html": "#safe",
+                "tags": [
+                    "safe"
+                ]
+            },
+            "type": "comment",
+            "id": "f-87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a-8523f70a",
+            "links": {
+                "self": "https://www.virustotal.com/ui/comments/f-87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a-8523f70a"
+            }
+        }
+    ],
+    "links": {
+        "self": "https://www.virustotal.com/ui/files/87d0cd59c8e17b9cece911e09e494cefc5d02959d510af08a9e3233ac2f2d58a/comments?relationships=item%2Cauthor&limit=10"
+    }
+}

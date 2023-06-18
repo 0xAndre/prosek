@@ -1,4 +1,5 @@
-﻿using prosek.models.relations.Domains;
+﻿using prosek.models.relations.Community;
+using prosek.models.relations.Domains;
 using prosek.models.relations.IPs;
 using prosek.models.relations.Parents;
 using prosek.models.relations.PE;
@@ -38,5 +39,11 @@ namespace prosek.application.provider
         /// </summary>
         /// <param name="hash">File Hash.</param>
         public PEResourceChildren GetPEResourceChildrenData(string hash);
+
+        /// <summary>
+        /// Get a Process Community Comments from Provider.
+        /// </summary>
+        /// <param name="hash">File Hash.</param>
+        public Comments GetCommunityCommentsData(string hash);
     }
 }
