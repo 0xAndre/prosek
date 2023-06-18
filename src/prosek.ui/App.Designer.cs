@@ -276,7 +276,7 @@
             // lblCopyrightValue
             // 
             lblCopyrightValue.AutoSize = true;
-            lblCopyrightValue.Location = new Point(90, 153);
+            lblCopyrightValue.Location = new Point(90, 157);
             lblCopyrightValue.Name = "lblCopyrightValue";
             lblCopyrightValue.Size = new Size(59, 15);
             lblCopyrightValue.TabIndex = 15;
@@ -285,7 +285,7 @@
             // lblLanguageValue
             // 
             lblLanguageValue.AutoSize = true;
-            lblLanguageValue.Location = new Point(86, 136);
+            lblLanguageValue.Location = new Point(86, 140);
             lblLanguageValue.Name = "lblLanguageValue";
             lblLanguageValue.Size = new Size(59, 15);
             lblLanguageValue.TabIndex = 14;
@@ -294,7 +294,7 @@
             // lblOriginalFilenameValue
             // 
             lblOriginalFilenameValue.AutoSize = true;
-            lblOriginalFilenameValue.Location = new Point(131, 120);
+            lblOriginalFilenameValue.Location = new Point(131, 124);
             lblOriginalFilenameValue.Name = "lblOriginalFilenameValue";
             lblOriginalFilenameValue.Size = new Size(59, 15);
             lblOriginalFilenameValue.TabIndex = 13;
@@ -303,7 +303,7 @@
             // lblProductVersionValue
             // 
             lblProductVersionValue.AutoSize = true;
-            lblProductVersionValue.Location = new Point(123, 103);
+            lblProductVersionValue.Location = new Point(123, 107);
             lblProductVersionValue.Name = "lblProductVersionValue";
             lblProductVersionValue.Size = new Size(59, 15);
             lblProductVersionValue.TabIndex = 12;
@@ -312,7 +312,7 @@
             // lblProductNameValue
             // 
             lblProductNameValue.AutoSize = true;
-            lblProductNameValue.Location = new Point(115, 86);
+            lblProductNameValue.Location = new Point(115, 90);
             lblProductNameValue.Name = "lblProductNameValue";
             lblProductNameValue.Size = new Size(59, 15);
             lblProductNameValue.TabIndex = 11;
@@ -322,7 +322,7 @@
             // 
             lblCopyright.AutoSize = true;
             lblCopyright.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCopyright.Location = new Point(27, 153);
+            lblCopyright.Location = new Point(27, 157);
             lblCopyright.Name = "lblCopyright";
             lblCopyright.Size = new Size(64, 15);
             lblCopyright.TabIndex = 10;
@@ -332,7 +332,7 @@
             // 
             lblLanguage.AutoSize = true;
             lblLanguage.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblLanguage.Location = new Point(27, 136);
+            lblLanguage.Location = new Point(27, 140);
             lblLanguage.Name = "lblLanguage";
             lblLanguage.Size = new Size(63, 15);
             lblLanguage.TabIndex = 9;
@@ -342,7 +342,7 @@
             // 
             lblOriginalFileName.AutoSize = true;
             lblOriginalFileName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblOriginalFileName.Location = new Point(27, 120);
+            lblOriginalFileName.Location = new Point(27, 124);
             lblOriginalFileName.Name = "lblOriginalFileName";
             lblOriginalFileName.Size = new Size(106, 15);
             lblOriginalFileName.TabIndex = 8;
@@ -352,7 +352,7 @@
             // 
             lblProductName.AutoSize = true;
             lblProductName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProductName.Location = new Point(27, 87);
+            lblProductName.Location = new Point(27, 91);
             lblProductName.Name = "lblProductName";
             lblProductName.Size = new Size(90, 15);
             lblProductName.TabIndex = 7;
@@ -362,7 +362,7 @@
             // 
             lblProductVersion.AutoSize = true;
             lblProductVersion.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblProductVersion.Location = new Point(27, 103);
+            lblProductVersion.Location = new Point(27, 107);
             lblProductVersion.Name = "lblProductVersion";
             lblProductVersion.Size = new Size(98, 15);
             lblProductVersion.TabIndex = 6;
@@ -371,7 +371,7 @@
             // lblCompanyNameValue
             // 
             lblCompanyNameValue.AutoSize = true;
-            lblCompanyNameValue.Location = new Point(123, 71);
+            lblCompanyNameValue.Location = new Point(123, 75);
             lblCompanyNameValue.Name = "lblCompanyNameValue";
             lblCompanyNameValue.Size = new Size(59, 15);
             lblCompanyNameValue.TabIndex = 5;
@@ -381,7 +381,7 @@
             // 
             lblCompanyName.AutoSize = true;
             lblCompanyName.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblCompanyName.Location = new Point(27, 71);
+            lblCompanyName.Location = new Point(27, 75);
             lblCompanyName.Name = "lblCompanyName";
             lblCompanyName.Size = new Size(97, 15);
             lblCompanyName.TabIndex = 4;
@@ -390,7 +390,7 @@
             // lblDescriptionValue
             // 
             lblDescriptionValue.AutoSize = true;
-            lblDescriptionValue.Location = new Point(99, 55);
+            lblDescriptionValue.Location = new Point(99, 59);
             lblDescriptionValue.Name = "lblDescriptionValue";
             lblDescriptionValue.Size = new Size(59, 15);
             lblDescriptionValue.TabIndex = 3;
@@ -400,7 +400,7 @@
             // 
             lblDescription.AutoSize = true;
             lblDescription.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDescription.Location = new Point(27, 55);
+            lblDescription.Location = new Point(27, 59);
             lblDescription.Name = "lblDescription";
             lblDescription.Size = new Size(74, 15);
             lblDescription.TabIndex = 2;
