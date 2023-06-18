@@ -133,8 +133,7 @@ namespace prosek.ui
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
-                //Analysis fileInfo = this.VirusTotal.GetProcessData(hash, moduleName);
-                Analysis fileInfo = this.VirusTotal.GetMockedProcessData();
+                Analysis fileInfo = this.VirusTotal.GetProcessData(hash, moduleName);
 
                 GetRelations(hash);
 
@@ -245,7 +244,7 @@ namespace prosek.ui
 
         private void GetContactedIPs(string hash)
         {
-            ContactedIps contectedIps = this.VirusTotal.GetMockedContactedIpsData();
+            ContactedIps contectedIps = this.VirusTotal.GetContactedIPsData(hash);
 
             lstViewContactedIps.View = View.Details;
             lstViewContactedIps.Items.Clear();
@@ -270,7 +269,7 @@ namespace prosek.ui
 
         private void GetExecutionParents(string hash)
         {
-            ExecutionParents executionParents = this.VirusTotal.GetMockedExecutionParentsData();
+            ExecutionParents executionParents = this.VirusTotal.GetExecutionParentsData(hash);
 
             lstViewExecutionParents.View = View.Details;
             lstViewExecutionParents.Items.Clear();
@@ -295,7 +294,7 @@ namespace prosek.ui
 
         private void GetContactedDomains(string hash)
         {
-            ContactedDomains contactedDomains = this.VirusTotal.GetMockedContactedDomainsData();
+            ContactedDomains contactedDomains = this.VirusTotal.GetContactedDomainsData(hash);
 
             lstViewContactedDomains.View = View.Details;
             lstViewContactedDomains.Items.Clear();
@@ -320,7 +319,7 @@ namespace prosek.ui
 
         private void GetPEResourceChildren(string hash)
         {
-            PEResourceChildren peResourceChildrens = this.VirusTotal.GetMockedPEResourceChildrenData();
+            PEResourceChildren peResourceChildrens = this.VirusTotal.GetPEResourceChildrenData(hash);
 
             lstViewPEResourceChildren.View = View.Details;
             lstViewPEResourceChildren.Items.Clear();

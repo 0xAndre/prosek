@@ -754,7 +754,7 @@
             // columnHeader8
             // 
             columnHeader8.Text = "SHA256";
-            columnHeader8.Width = 400;
+            columnHeader8.Width = 420;
             // 
             // lvlPEResourceChildren
             // 
@@ -833,7 +833,7 @@
             // ExecName
             // 
             ExecName.Text = "Name";
-            ExecName.Width = 300;
+            ExecName.Width = 350;
             // 
             // lblExecutionParents
             // 
