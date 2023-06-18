@@ -278,45 +278,45 @@
             lblCopyrightValue.AutoSize = true;
             lblCopyrightValue.Location = new Point(90, 153);
             lblCopyrightValue.Name = "lblCopyrightValue";
-            lblCopyrightValue.Size = new Size(58, 15);
+            lblCopyrightValue.Size = new Size(59, 15);
             lblCopyrightValue.TabIndex = 15;
-            lblCopyrightValue.Text = "copyright";
+            lblCopyrightValue.Text = "Loading...";
             // 
             // lblLanguageValue
             // 
             lblLanguageValue.AutoSize = true;
             lblLanguageValue.Location = new Point(86, 136);
             lblLanguageValue.Name = "lblLanguageValue";
-            lblLanguageValue.Size = new Size(56, 15);
+            lblLanguageValue.Size = new Size(59, 15);
             lblLanguageValue.TabIndex = 14;
-            lblLanguageValue.Text = "language";
+            lblLanguageValue.Text = "Loading...";
             // 
             // lblOriginalFilenameValue
             // 
             lblOriginalFilenameValue.AutoSize = true;
             lblOriginalFilenameValue.Location = new Point(131, 120);
             lblOriginalFilenameValue.Name = "lblOriginalFilenameValue";
-            lblOriginalFilenameValue.Size = new Size(96, 15);
+            lblOriginalFilenameValue.Size = new Size(59, 15);
             lblOriginalFilenameValue.TabIndex = 13;
-            lblOriginalFilenameValue.Text = "original filename";
+            lblOriginalFilenameValue.Text = "Loading...";
             // 
             // lblProductVersionValue
             // 
             lblProductVersionValue.AutoSize = true;
             lblProductVersionValue.Location = new Point(123, 103);
             lblProductVersionValue.Name = "lblProductVersionValue";
-            lblProductVersionValue.Size = new Size(90, 15);
+            lblProductVersionValue.Size = new Size(59, 15);
             lblProductVersionValue.TabIndex = 12;
-            lblProductVersionValue.Text = "product version";
+            lblProductVersionValue.Text = "Loading...";
             // 
             // lblProductNameValue
             // 
             lblProductNameValue.AutoSize = true;
             lblProductNameValue.Location = new Point(115, 86);
             lblProductNameValue.Name = "lblProductNameValue";
-            lblProductNameValue.Size = new Size(82, 15);
+            lblProductNameValue.Size = new Size(59, 15);
             lblProductNameValue.TabIndex = 11;
-            lblProductNameValue.Text = "product name";
+            lblProductNameValue.Text = "Loading...";
             // 
             // lblCopyright
             // 
@@ -373,9 +373,9 @@
             lblCompanyNameValue.AutoSize = true;
             lblCompanyNameValue.Location = new Point(123, 71);
             lblCompanyNameValue.Name = "lblCompanyNameValue";
-            lblCompanyNameValue.Size = new Size(90, 15);
+            lblCompanyNameValue.Size = new Size(59, 15);
             lblCompanyNameValue.TabIndex = 5;
-            lblCompanyNameValue.Text = "company name";
+            lblCompanyNameValue.Text = "Loading...";
             // 
             // lblCompanyName
             // 
@@ -392,9 +392,9 @@
             lblDescriptionValue.AutoSize = true;
             lblDescriptionValue.Location = new Point(99, 55);
             lblDescriptionValue.Name = "lblDescriptionValue";
-            lblDescriptionValue.Size = new Size(66, 15);
+            lblDescriptionValue.Size = new Size(59, 15);
             lblDescriptionValue.TabIndex = 3;
-            lblDescriptionValue.Text = "description";
+            lblDescriptionValue.Text = "Loading...";
             // 
             // lblDescription
             // 
@@ -411,9 +411,9 @@
             lblFileVersionValue.AutoSize = true;
             lblFileVersionValue.Location = new Point(99, 39);
             lblFileVersionValue.Name = "lblFileVersionValue";
-            lblFileVersionValue.Size = new Size(31, 15);
+            lblFileVersionValue.Size = new Size(59, 15);
             lblFileVersionValue.TabIndex = 1;
-            lblFileVersionValue.Text = "1.0.0";
+            lblFileVersionValue.Text = "Loading...";
             // 
             // lblFileVersion
             // 
@@ -492,9 +492,9 @@
             lblProcessIdValue.AutoSize = true;
             lblProcessIdValue.Location = new Point(84, 27);
             lblProcessIdValue.Name = "lblProcessIdValue";
-            lblProcessIdValue.Size = new Size(49, 15);
+            lblProcessIdValue.Size = new Size(59, 15);
             lblProcessIdValue.TabIndex = 17;
-            lblProcessIdValue.Text = "1234567";
+            lblProcessIdValue.Text = "Loading...";
             // 
             // lblProcessId
             // 
@@ -511,9 +511,9 @@
             lblSizeValue.AutoSize = true;
             lblSizeValue.Location = new Point(52, 210);
             lblSizeValue.Name = "lblSizeValue";
-            lblSizeValue.Size = new Size(85, 15);
+            lblSizeValue.Size = new Size(59, 15);
             lblSizeValue.TabIndex = 15;
-            lblSizeValue.Text = "ABDY82739273";
+            lblSizeValue.Text = "Loading...";
             // 
             // lblSize
             // 
@@ -530,9 +530,9 @@
             lblVhashValue.AutoSize = true;
             lblVhashValue.Location = new Point(69, 188);
             lblVhashValue.Name = "lblVhashValue";
-            lblVhashValue.Size = new Size(85, 15);
+            lblVhashValue.Size = new Size(59, 15);
             lblVhashValue.TabIndex = 13;
-            lblVhashValue.Text = "ABDY82739273";
+            lblVhashValue.Text = "Loading...";
             // 
             // lblVhash
             // 
@@ -549,9 +549,9 @@
             lblTlshValue.AutoSize = true;
             lblTlshValue.Location = new Point(58, 164);
             lblTlshValue.Name = "lblTlshValue";
-            lblTlshValue.Size = new Size(85, 15);
+            lblTlshValue.Size = new Size(59, 15);
             lblTlshValue.TabIndex = 11;
-            lblTlshValue.Text = "ABDY82739273";
+            lblTlshValue.Text = "Loading...";
             // 
             // lblTlsh
             // 
@@ -568,9 +568,9 @@
             lblTypeValue.AutoSize = true;
             lblTypeValue.Location = new Point(60, 139);
             lblTypeValue.Name = "lblTypeValue";
-            lblTypeValue.Size = new Size(85, 15);
+            lblTypeValue.Size = new Size(59, 15);
             lblTypeValue.TabIndex = 9;
-            lblTypeValue.Text = "ABDY82739273";
+            lblTypeValue.Text = "Loading...";
             // 
             // lblType
             // 
@@ -587,9 +587,9 @@
             lblSHA1Value.AutoSize = true;
             lblSHA1Value.Location = new Point(60, 115);
             lblSHA1Value.Name = "lblSHA1Value";
-            lblSHA1Value.Size = new Size(85, 15);
+            lblSHA1Value.Size = new Size(59, 15);
             lblSHA1Value.TabIndex = 7;
-            lblSHA1Value.Text = "ABDY82739273";
+            lblSHA1Value.Text = "Loading...";
             // 
             // lblSHA1
             // 
@@ -606,9 +606,9 @@
             lblSHA256Value.AutoSize = true;
             lblSHA256Value.Location = new Point(74, 92);
             lblSHA256Value.Name = "lblSHA256Value";
-            lblSHA256Value.Size = new Size(85, 15);
+            lblSHA256Value.Size = new Size(59, 15);
             lblSHA256Value.TabIndex = 5;
-            lblSHA256Value.Text = "ABDY82739273";
+            lblSHA256Value.Text = "Loading...";
             // 
             // lblSHA256
             // 
@@ -625,9 +625,9 @@
             lblProcessPathValue.AutoSize = true;
             lblProcessPathValue.Location = new Point(100, 68);
             lblProcessPathValue.Name = "lblProcessPathValue";
-            lblProcessPathValue.Size = new Size(82, 15);
+            lblProcessPathValue.Size = new Size(59, 15);
             lblProcessPathValue.TabIndex = 3;
-            lblProcessPathValue.Text = "c:\\Process.exe";
+            lblProcessPathValue.Text = "Loading...";
             // 
             // lblProcessPath
             // 
@@ -644,9 +644,9 @@
             lblProcessNameValue.AutoSize = true;
             lblProcessNameValue.Location = new Point(108, 47);
             lblProcessNameValue.Name = "lblProcessNameValue";
-            lblProcessNameValue.Size = new Size(68, 15);
+            lblProcessNameValue.Size = new Size(59, 15);
             lblProcessNameValue.TabIndex = 1;
-            lblProcessNameValue.Text = "Process.exe";
+            lblProcessNameValue.Text = "Loading...";
             // 
             // lblProcessName
             // 

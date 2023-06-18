@@ -124,8 +124,8 @@ namespace prosek.ui
 
                 string hash = Hash.SHA256CheckSum(fileName);
 
-                Analysis fileInfo = virusTotal.GetProcessData(hash, moduleName);
-                //Analysis fileInfo = virusTotal.GetMockedProcessData();
+                //Analysis fileInfo = virusTotal.GetProcessData(hash, moduleName);
+                Analysis fileInfo = virusTotal.GetMockedProcessData();
 
                 GetRelations(hash);
 
@@ -234,7 +234,7 @@ namespace prosek.ui
 
         private void GetContactedIPs(string hash)
         {
-            ContactedIps contectedIps = virusTotal.GetContactedIPsData(hash);
+            ContactedIps contectedIps = virusTotal.GetMockedContactedIpsData();
 
             lstViewContactedIps.View = View.Details;
             lstViewContactedIps.Items.Clear();
@@ -259,7 +259,7 @@ namespace prosek.ui
 
         private void GetExecutionParents(string hash)
         {
-            ExecutionParents executionParents = virusTotal.GetExecutionParentsData(hash);
+            ExecutionParents executionParents = virusTotal.GetMockedExecutionParentsData();
 
             lstViewExecutionParents.View = View.Details;
             lstViewExecutionParents.Items.Clear();
