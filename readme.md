@@ -15,6 +15,7 @@ Prosek goes beyond process analysis by examining their dependencies. It identifi
 <img src="/docs/images/main.png" align="center">
 <img src="/docs/images/detection.png" align="center">
 <img src="/docs/images/relations.png" align="center">
+<img src="/docs/images/comments.png" align="center">
 
 <hr>
 
